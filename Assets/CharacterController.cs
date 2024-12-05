@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,16 +20,18 @@ public class CharacterController : MonoBehaviour
     [Space(10)]
     public bool IsGrounded;
     public string[] GroundTags;
-    [Header("Etrafa bakınma")]
     [Space(10)]
+    [Header("Etrafa bakınma")]
     public float Sensitivity;
     public Camera Cam;
     public GameObject Player;
+    [Space(10)]
+    [Header("Animatör")]
+    public Animator AlexAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
-
         rb = transform.GetComponent<Rigidbody>();
     }
 
@@ -41,6 +44,7 @@ public class CharacterController : MonoBehaviour
     }
     public void Move()
     {
+
         rb.angularDamping = float.PositiveInfinity;
 
         var z = Input.GetAxis("Horizontal");
@@ -53,14 +57,48 @@ public class CharacterController : MonoBehaviour
         if (!IsRunning && !IsCrouched)
         {
             Multplier = 1;
+            if (x != 0 || z != 0)
+            {
+                AlexAnimator.SetBool("IsWalking", true);
+                AlexAnimator.SetBool("IsRunning", false);
+            }
+            else if (x == 0 && z == 0)
+            {
+                AlexAnimator.SetBool("IsWalking", false);
+                AlexAnimator.SetBool("IsRunning", false);
+            }
+
         }
         else if (IsRunning)
         {
             Multplier = RunMultiplier;
+            if (x != 0 || z != 0)
+            {
+                AlexAnimator.SetBool("IsWalking", false);
+                AlexAnimator.SetBool("IsRunning", true);
+            }
+            else if (x == 0 && z == 0)
+            {
+                AlexAnimator.SetBool("IsWalking", false);
+                AlexAnimator.SetBool("IsRunning", false);
+            }
         }
         else if (IsCrouched)
         {
             Multplier = CrouchMultplier;
+            if (x != 0 || z != 0)
+            {
+                AlexAnimator.SetBool("IsWalking", false);
+                AlexAnimator.SetBool("IsAttacking", false);
+                AlexAnimator.SetBool("IsJumping", false);
+                AlexAnimator.SetBool("IsCrouching", true);
+            }
+            else if (x == 0 && z == 0)
+            {
+                AlexAnimator.SetBool("IsAttacking", false);
+                AlexAnimator.SetBool("IsJumping", false);
+                AlexAnimator.SetBool("IsCrouching", false);
+            }
         }
 
         // Apply movement velocity
@@ -80,11 +118,11 @@ public class CharacterController : MonoBehaviour
         Cam.transform.eulerAngles += new Vector3(-y * Sensitivity, 0, 0);
         Player.transform.eulerAngles += new Vector3(0, x * Sensitivity, 0);
 
-        Mathf.Clamp(Cam.transform.eulerAngles.x, -90, 90);
+        //Mathf.Clamp(Cam.transform.eulerAngles.x, -90, 90);
     }
     public void CrouchAndRun()
     {
-        if (Input.GetKeyUp(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.RightAlt))
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
         {
             IsCrouched = !IsCrouched;
         }
@@ -102,8 +140,14 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void SetAnimator(string paramname, bool value)
+    {
+        AlexAnimator.SetBool(paramname, value);
+    }
+
     public void OnCollisionEnter(Collision other)
     {
+        AlexAnimator.SetBool("IsJumping", false);
         foreach (var tag in GroundTags)
         {
             if (other.gameObject.CompareTag(tag))
@@ -116,6 +160,9 @@ public class CharacterController : MonoBehaviour
 
     public void OnCollisionExit(Collision other)
     {
+        AlexAnimator.SetBool("IsWalking", false);
+        AlexAnimator.SetBool("IsAttacking", false);
+        AlexAnimator.SetBool("IsJumping", true);
         foreach (var tag in GroundTags)
         {
             if (other.gameObject.CompareTag(tag))
