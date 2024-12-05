@@ -41,7 +41,7 @@ public class CharacterController : MonoBehaviour
     }
     public void Move()
     {
-        rb.angularDrag = float.PositiveInfinity;
+        rb.angularDamping = float.PositiveInfinity;
 
         var z = Input.GetAxis("Horizontal");
         var x = Input.GetAxis("Vertical");
@@ -67,10 +67,10 @@ public class CharacterController : MonoBehaviour
         transform.position += ((moveDirection * MoveSpeed * Time.fixedDeltaTime) * Multplier);
         if (IsGrounded)
         {
-          rb.velocity = jumpDirection * JumpPower * Time.fixedDeltaTime;
+          rb.linearVelocity = jumpDirection * JumpPower * Time.fixedDeltaTime;
         }
 
-        rb.velocity = new Vector3(0, rb.velocity.y - AdditionalGravity * Time.fixedDeltaTime, 0);
+        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y - AdditionalGravity * Time.fixedDeltaTime, 0);
     }
     public void Look()
     {
