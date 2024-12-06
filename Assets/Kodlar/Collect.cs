@@ -9,6 +9,8 @@ public class Collect : MonoBehaviour
     public int HealthPrize;
     public int FoodPrize;
     public int WaterPrize;
+    [Header("Animatör")]
+    public Animator AlexAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class Collect : MonoBehaviour
         resourcesManager.Health += HealthPrize;
         resourcesManager.Food += FoodPrize;
         resourcesManager.Water += WaterPrize;
+        AlexAnimator.SetBool("Take item", true);
         Destroy(gameObject);
     }
 }
