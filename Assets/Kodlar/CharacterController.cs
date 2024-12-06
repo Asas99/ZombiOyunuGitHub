@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,9 @@ public class CharacterController : MonoBehaviour
     public float MoveSpeed;
     public float MoveSpeedInAir;
     public float JumpPower;
+    public float WaitForJumpTime,JumpTime;
+    [SerializeField]
+    private bool JumpTriggered;
     public float AdditionalGravity;
     public float CrouchMultplier;
     public float RunMultiplier;
@@ -41,18 +45,16 @@ public class CharacterController : MonoBehaviour
         Move();
         Look();
         CrouchAndRun();
+        Jump();
     }
     public void Move()
     {
-
         rb.angularDamping = float.PositiveInfinity;
 
         var z = Input.GetAxis("Horizontal");
         var x = Input.GetAxis("Vertical");
-        var y = Input.GetAxis("Jump");
 
         Vector3 moveDirection = transform.TransformDirection(new Vector3(z, 0, x));
-        Vector3 jumpDirection = transform.TransformDirection(new Vector3(0, y, 0));
 
         if (!IsRunning && !IsCrouched)
         {
@@ -103,12 +105,6 @@ public class CharacterController : MonoBehaviour
 
         // Apply movement velocity
         transform.position += ((moveDirection * MoveSpeed * Time.fixedDeltaTime) * Multplier);
-        if (IsGrounded)
-        {
-          rb.linearVelocity = jumpDirection * JumpPower * Time.fixedDeltaTime;
-        }
-
-        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y - AdditionalGravity * Time.fixedDeltaTime, 0);
     }
     public void Look()
     {
@@ -139,6 +135,31 @@ public class CharacterController : MonoBehaviour
             IsCrouched = false;
         }
     }
+    public void Jump()
+    {
+        if (IsGrounded)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                AlexAnimator.SetBool("IsJumping", true);
+                AlexAnimator.SetBool("IsWalking", false);
+                AlexAnimator.SetBool("IsAttacking", false);
+                JumpTriggered = true;
+                JumpTime = WaitForJumpTime;
+            }
+        }
+        if (JumpTriggered)
+        {
+            JumpTime -= Time.deltaTime;
+        }
+        if (JumpTime <= 0)
+        {
+            JumpTriggered = false;
+            JumpTime = WaitForJumpTime;
+            rb.linearVelocity = new Vector3(0, JumpPower * Time.fixedDeltaTime, 0);
+        }
+        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y - AdditionalGravity * Time.fixedDeltaTime, 0);
+    }
 
     public void SetAnimator(string paramname, bool value)
     {
@@ -160,9 +181,6 @@ public class CharacterController : MonoBehaviour
 
     public void OnCollisionExit(Collision other)
     {
-        AlexAnimator.SetBool("IsWalking", false);
-        AlexAnimator.SetBool("IsAttacking", false);
-        AlexAnimator.SetBool("IsJumping", true);
         foreach (var tag in GroundTags)
         {
             if (other.gameObject.CompareTag(tag))

@@ -914,7 +914,10 @@ MonoBehaviour:
   rb: {fileID: 1333018613}
   MoveSpeed: 2
   MoveSpeedInAir: 1
-  JumpPower: 100
+  JumpPower: 500
+  WaitForJumpTime: 0.2
+  JumpTime: 0.2
+  JumpTriggered: 0
   AdditionalGravity: 0
   CrouchMultplier: 0.5
   RunMultiplier: 1.5
@@ -973,8 +976,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7394171, y: 1.8242023, z: 0.5291214}
-  m_Center: {x: 0.006857395, y: 0.8739971, z: -0.07085991}
+  m_Size: {x: 0.7394171, y: 1.7982998, z: 0.5291214}
+  m_Center: {x: 0.006857395, y: 0.88694835, z: -0.07085991}
 --- !u!1001 &1574585945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1001,22 +1004,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.991445
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.13052553
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
@@ -1026,7 +1029,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
