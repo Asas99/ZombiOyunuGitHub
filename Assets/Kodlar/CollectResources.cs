@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Collect : MonoBehaviour
+public class CollectResources : MonoBehaviour
 {
-    public ResourcesManager resourcesManager;
+    public PlayerStatus playerStatus;
     public int HealthPrize;
     public int FoodPrize;
     public int WaterPrize;
@@ -25,9 +25,9 @@ public class Collect : MonoBehaviour
 
     public void OnMouseDown()
     {
-        resourcesManager.Health += HealthPrize;
-        resourcesManager.Food += FoodPrize;
-        resourcesManager.Water += WaterPrize;
+        playerStatus.Health += HealthPrize;
+        playerStatus.Food += FoodPrize;
+        playerStatus.Water += WaterPrize;
         AlexAnimator.SetBool("Take item", true);
         Destroy(gameObject);
     }
