@@ -20,6 +20,18 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+    }
+    //Bu kod baþka kodlarda kullanýlacaktýr ve GetComponent ile hangi scripting çaðýrýlacaðý belirlenecektir. Örnek: Obj.GetComponent<DialogueManager>().StartDialogue();
+    public void StartDialogue()
+    {
+        IsTalking = true;
+        GeneralPanel.SetActive(IsTalking);
+        ElementIndex = 0;
+    }
+    public void SetDialoguePart()
+    {
         if (IsTalking)
         {
             GeneralPanel.SetActive(IsTalking);
@@ -39,14 +51,6 @@ public class DialogueManager : MonoBehaviour
                 ElementIndex++;
             }
         }
-
-    }
-    //Bu kod baþka kodlarda kullanýlacaktýr ve GetComponent ile hangi scripting çaðýrýlacaðý belirlenecektir. Örnek: Obj.GetComponent<DialogueManager>().StartDialogue();
-    public void StartDialogue()
-    {
-        IsTalking = true;
-        GeneralPanel.SetActive(IsTalking);
-        ElementIndex = 0;
     }
     //Bu kod diyaloðu bitirir ve yeni bir diyaloðun baþlamasýna zemin hazýrlar.
     public void EndDialogue()
