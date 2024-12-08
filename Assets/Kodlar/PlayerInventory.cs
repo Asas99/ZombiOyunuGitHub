@@ -24,6 +24,7 @@ public class PlayerInventory : MonoBehaviour
 public class ItemInfo
 {
     public string Name;
+    public bool IsCurrentlyHaving;
     public int Quantity;
     public int MaxQuantity;
 }
