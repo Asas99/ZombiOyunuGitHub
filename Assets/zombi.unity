@@ -2653,6 +2653,32 @@ MonoBehaviour:
   Health: 0
   Water: 0
   Food: 0
+--- !u!114 &1333018617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333018609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143d9e2439dfd704a9386fe87b4d6141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GetToTheVillage: 0
+  InspectWeirdBehaviours: 0
+  NeutrializeFirstZombie: 0
+  GetToHome: 0
+  CollectGoodsFromTheVillage: 0
+  EarnSarahsTrust: 0
+  EarnMarksTrust: 0
+  FollowDrBrooksSignal: 0
+  SaveDrBrooks: 0
+  TraceAlphaZombie: 0
+  FindVirusDocuments: 0
+  DodgeAlphaZombie: 0
+  NeutrializeAlphaZombie: 0
+  SaveTheRestOfTheGroup: 0
 --- !u!1 &1413127416
 GameObject:
   m_ObjectHideFlags: 0
@@ -3397,6 +3423,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1333018616}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03240e1cc27e94b4681b0b30170dfefe,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1333018617}
   m_SourcePrefab: {fileID: 100100000, guid: 03240e1cc27e94b4681b0b30170dfefe, type: 3}
 --- !u!1 &1579835261
 GameObject:
