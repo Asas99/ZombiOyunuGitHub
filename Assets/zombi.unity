@@ -2561,7 +2561,7 @@ MonoBehaviour:
   IsGrounded: 0
   GroundTags:
   - zemin
-  Sensitivity: 0
+  Sensitivity: 4
   Cam: {fileID: 302869158}
   Player: {fileID: 1333018609}
   AlexAnimator: {fileID: 1333018610}
