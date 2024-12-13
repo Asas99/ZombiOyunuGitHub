@@ -70,6 +70,10 @@ public class CollectItems : MonoBehaviour
                     Destroy(gameObject);
                 }
                 break;
+
+            case "virüs belgeleri":
+                GameObject.FindObjectOfType<MissionManager>().FindVirusDocuments = true;
+                break;
         }
     }
 }
