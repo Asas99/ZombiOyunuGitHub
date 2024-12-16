@@ -9,11 +9,18 @@ public class CollectItems : MonoBehaviour
     public PlayerInventory playerInventory;
     [Header("Animatör")]
     public Animator AlexAnimator;
+    public float Dist, MaxCollectDist;
+    public GameObject Text;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         TagName = transform.tag;
         playerInventory = FindAnyObjectByType<PlayerInventory>();
+        if (Text != null)
+        {
+            Text.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
@@ -26,6 +33,7 @@ public class CollectItems : MonoBehaviour
                 AlexAnimator.SetBool("Take item", false);
             }
         }
+        Dist = Vector3.Distance(transform.position, GameObject.FindAnyObjectByType<PlayerInventory>().gameObject.transform.position);
 
         foreach (var item in playerInventory.ItemInfos)
         {
@@ -34,9 +42,29 @@ public class CollectItems : MonoBehaviour
                 playerInventory.ItemInfos[0].Quantity = playerInventory.ItemInfos[0].MaxQuantity;
             }
         }
+        if (Dist < MaxCollectDist)
+        {
+            if (Text != null)
+            {
+                Text.SetActive(true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Collect();
+
+            }
+        }
+        else
+        {
+            if(Text != null)
+            {
+                Text.SetActive(false);
+            }
+        }
     }
 
-    public void OnMouseDown()
+    public void Collect()
     {
 
         switch (TagName)

@@ -32,6 +32,7 @@ public class CharacterController : MonoBehaviour
     [Space(10)]
     [Header("Animatör")]
     public Animator AlexAnimator;
+    private bool HasPistolBool;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class CharacterController : MonoBehaviour
         Look();
         CrouchAndRun();
         Jump();
+        ADSPosAndShoot();
     }
     public void Move()
     {
@@ -63,11 +65,15 @@ public class CharacterController : MonoBehaviour
             {
                 AlexAnimator.SetBool("IsWalking", true);
                 AlexAnimator.SetBool("IsRunning", false);
+                AlexAnimator.SetBool("Has a pistol", false);
+                AlexAnimator.SetBool("Shoot", false);
             }
             else if (x == 0 && z == 0)
             {
                 AlexAnimator.SetBool("IsWalking", false);
                 AlexAnimator.SetBool("IsRunning", false);
+                AlexAnimator.SetBool("Has a pistol", false);
+                AlexAnimator.SetBool("Shoot", false);
             }
 
         }
@@ -78,11 +84,15 @@ public class CharacterController : MonoBehaviour
             {
                 AlexAnimator.SetBool("IsWalking", false);
                 AlexAnimator.SetBool("IsRunning", true);
+                AlexAnimator.SetBool("Has a pistol", false);
+                AlexAnimator.SetBool("Shoot", false);
             }
             else if (x == 0 && z == 0)
             {
                 AlexAnimator.SetBool("IsWalking", false);
                 AlexAnimator.SetBool("IsRunning", false);
+                AlexAnimator.SetBool("Has a pistol", false);
+                AlexAnimator.SetBool("Shoot", false);
             }
         }
         else if (IsCrouched)
@@ -94,12 +104,16 @@ public class CharacterController : MonoBehaviour
                 AlexAnimator.SetBool("IsAttacking", false);
                 AlexAnimator.SetBool("IsJumping", false);
                 AlexAnimator.SetBool("IsCrouching", true);
+                AlexAnimator.SetBool("Has a pistol", false);
+                AlexAnimator.SetBool("Shoot", false);
             }
             else if (x == 0 && z == 0)
             {
                 AlexAnimator.SetBool("IsAttacking", false);
                 AlexAnimator.SetBool("IsJumping", false);
                 AlexAnimator.SetBool("IsCrouching", false);
+                AlexAnimator.SetBool("Has a pistol", false);
+                AlexAnimator.SetBool("Shoot", false);
             }
         }
 
@@ -144,6 +158,7 @@ public class CharacterController : MonoBehaviour
                 AlexAnimator.SetBool("IsJumping", true);
                 AlexAnimator.SetBool("IsWalking", false);
                 AlexAnimator.SetBool("IsAttacking", false);
+                AlexAnimator.SetBool("Has a pistol", false);
                 JumpTriggered = true;
                 JumpTime = WaitForJumpTime;
             }
@@ -160,6 +175,25 @@ public class CharacterController : MonoBehaviour
         }
         rb.linearVelocity = new Vector3(0, rb.linearVelocity.y - AdditionalGravity * Time.fixedDeltaTime, 0);
     }
+    //Nişan alacak
+    public void ADSPosAndShoot()
+    {
+        if(gameObject.GetComponent<PlayerInventory>() != null)
+        {
+            if(gameObject.GetComponent<PlayerInventory>().ItemInfos[0].Quantity > 0)
+            {
+                if (Input.GetMouseButton(1))
+                {
+                    AlexAnimator.SetBool("Has a pistol", true);
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                        AlexAnimator.SetBool("Shoot", true);
+                }
+            }
+        }
+
+    }
 
     public void SetAnimator(string paramname, bool value)
     {
@@ -169,6 +203,7 @@ public class CharacterController : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         AlexAnimator.SetBool("IsJumping", false);
+        AlexAnimator.SetBool("Shoot", false);
         foreach (var tag in GroundTags)
         {
             if (other.gameObject.CompareTag(tag))
