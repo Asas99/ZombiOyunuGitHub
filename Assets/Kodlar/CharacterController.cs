@@ -195,11 +195,6 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    public void SetAnimator(string paramname, bool value)
-    {
-        AlexAnimator.SetBool(paramname, value);
-    }
-
     public void OnCollisionEnter(Collision other)
     {
         AlexAnimator.SetBool("IsJumping", false);
