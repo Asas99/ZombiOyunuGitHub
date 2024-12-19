@@ -103,15 +103,16 @@ public class CharacterController : MonoBehaviour
                 AlexAnimator.SetBool("IsWalking", false);
                 AlexAnimator.SetBool("IsAttacking", false);
                 AlexAnimator.SetBool("IsJumping", false);
-                AlexAnimator.SetBool("IsCrouching", true);
+                AlexAnimator.SetBool("Crawl", true);
                 AlexAnimator.SetBool("Has a pistol", false);
                 AlexAnimator.SetBool("Shoot", false);
+                print("cds");
             }
             else if (x == 0 && z == 0)
             {
                 AlexAnimator.SetBool("IsAttacking", false);
                 AlexAnimator.SetBool("IsJumping", false);
-                AlexAnimator.SetBool("IsCrouching", false);
+                AlexAnimator.SetBool("Crawl", false);
                 AlexAnimator.SetBool("Has a pistol", false);
                 AlexAnimator.SetBool("Shoot", false);
             }
