@@ -3,12 +3,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CollectItems : MonoBehaviour
+public class CollectItems : AnimatorManager
 {
     public string TagName;
     public PlayerInventory playerInventory;
     [Header("Animatör")]
-    public Animator AlexAnimator;
     public float Dist, MaxCollectDist;
     public GameObject Text;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,7 +73,7 @@ public class CollectItems : MonoBehaviour
                 {
                     playerInventory.ItemInfos[0].Quantity++;
                     //playerInventory.ItemInfos[0].IsCurrentlyHaving = true;
-                    AlexAnimator.SetBool("Take item", true);
+                    SetAllAnimatorBools("Take item");
                     Destroy(gameObject);
                 }
                 break;
@@ -84,7 +83,7 @@ public class CollectItems : MonoBehaviour
                 {
                     playerInventory.ItemInfos[1].Quantity++;
                     //playerInventory.ItemInfos[1].IsCurrentlyHaving = true;
-                    AlexAnimator.SetBool("Take item", true);
+                    SetAllAnimatorBools("Take item");
                     Destroy(gameObject);
                 }
                 break;
@@ -94,7 +93,7 @@ public class CollectItems : MonoBehaviour
                 {
                     playerInventory.ItemInfos[2].Quantity += 5;
                     //playerInventory.ItemInfos[2].IsCurrentlyHaving = true;
-                    AlexAnimator.SetBool("Take item", true);
+                    SetAllAnimatorBools("Take item");
                     Destroy(gameObject);
                 }
                 break;

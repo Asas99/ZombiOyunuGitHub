@@ -1439,9 +1439,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
-  AlexAnimator: {fileID: 1333018610}
   Dist: 0
   MaxCollectDist: 1.7
   Text: {fileID: 339322737}
@@ -1767,9 +1767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
-  AlexAnimator: {fileID: 1333018610}
   Dist: 0
   MaxCollectDist: 1.7
   Text: {fileID: 628767077}
@@ -6118,9 +6118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
-  AlexAnimator: {fileID: 1333018610}
   Dist: 0
   MaxCollectDist: 0
   Text: {fileID: 0}
@@ -9188,6 +9188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7506f7a5d1fb14eb0ff8d163630a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlexAnimator: {fileID: 1333018610}
   rb: {fileID: 1333018613}
   MoveSpeed: 2
   MoveSpeedInAir: 1
@@ -9206,7 +9207,6 @@ MonoBehaviour:
   Sensitivity: 4
   Cam: {fileID: 302869158}
   Player: {fileID: 1333018609}
-  AlexAnimator: {fileID: 1333018610}
 --- !u!54 &1333018613
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9321,6 +9321,20 @@ MonoBehaviour:
   DodgeAlphaZombie: 0
   NeutrializeAlphaZombie: 0
   SaveTheRestOfTheGroup: 0
+--- !u!114 &1333018618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333018609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a2338fa5b6f6f4b840bdb33c83b90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1333018609}
+  Sensitivity: 6
 --- !u!1 &1365996760
 GameObject:
   m_ObjectHideFlags: 0
@@ -11179,6 +11193,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1333018618}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03240e1cc27e94b4681b0b30170dfefe,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1333018616}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03240e1cc27e94b4681b0b30170dfefe,
         type: 3}
@@ -11428,9 +11446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
-  AlexAnimator: {fileID: 1333018610}
   Dist: 0
   MaxCollectDist: 1.7
   Text: {fileID: 60168705}
@@ -13523,9 +13541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 1333018615}
-  AlexAnimator: {fileID: 1333018610}
   Dist: 0
   MaxCollectDist: 2
   Text: {fileID: 1289328774}
