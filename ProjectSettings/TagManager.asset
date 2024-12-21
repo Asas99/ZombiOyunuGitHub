@@ -11,6 +11,7 @@ TagManager:
   - ev
   - kasaba
   - "vir\xFCs belgeleri"
+  - zombi
   layers:
   - Default
   - TransparentFX

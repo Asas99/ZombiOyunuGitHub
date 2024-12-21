@@ -21,9 +21,23 @@ public class Shooting : MonoBehaviour
 
     public void Shoot()
     {
+
         if (Input.GetMouseButtonUp(0))
         {
-            Instantiate(Bullet, Spawnpoint.transform.position, Spawnpoint.transform.rotation);
+            //Burada kurþun olmayacaðý için ateþ etme sesi ve silahtan çýkan ateþle bir þeyler yapacaðýz. 
+            Ray ray = new Ray(transform.position, transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                print("Görüyor: " + hit.collider.name);
+                if (hit.collider.CompareTag("zombi"))
+                {
+                    //Zombinin canýný falan azalt.
+                }
+            }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward* 1000f);
     }
 }

@@ -4,11 +4,13 @@ using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 using Unity.VisualScripting;
 
-public class ZombieManager : MonoBehaviour
+public class ZombieManager : ZombieStats
 {
+    [Header("Oyuncuya doðru gidecek")]
     public GameObject TargetObj;
     public Vector3 Target;
-
+    [Space(10)]
+    [Header("Algýlama parametreleri")]
     public float viewRadius;
     [Range(0, 360)]
     public float viewAngle;
@@ -95,11 +97,31 @@ public class ZombieManager : MonoBehaviour
     {
         Target = new Vector3(TargetObj.transform.position.x, gameObject.transform.position.y, TargetObj.transform.position.z);
 
+        Die();
+
         if (CanSeeTarget())
         {
             transform.LookAt(Target);
             MoveTowardsPlayer();
         }
-        print(CanSeeTarget());
+        //print(CanSeeTarget());
+    }
+}
+
+public class ZombieStats : MonoBehaviour, ICombat
+{
+    public float Health;
+    public float Damage;
+
+    public void Die()
+    {
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void Attack()
+    {
+        
     }
 }
