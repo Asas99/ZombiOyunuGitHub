@@ -73,7 +73,7 @@ public class CollectItems : AnimatorManager
                 {
                     playerInventory.ItemInfos[0].Quantity++;
                     //playerInventory.ItemInfos[0].IsCurrentlyHaving = true;
-                    SetAllAnimatorBools("Take item");
+                    SetAllAnimatorBools(AlexAnimator, "Take item");
                     Destroy(gameObject);
                 }
                 break;
@@ -83,7 +83,7 @@ public class CollectItems : AnimatorManager
                 {
                     playerInventory.ItemInfos[1].Quantity++;
                     //playerInventory.ItemInfos[1].IsCurrentlyHaving = true;
-                    SetAllAnimatorBools("Take item");
+                    SetAllAnimatorBools(AlexAnimator, "Take item");
                     Destroy(gameObject);
                 }
                 break;
@@ -93,7 +93,7 @@ public class CollectItems : AnimatorManager
                 {
                     playerInventory.ItemInfos[2].Quantity += 5;
                     //playerInventory.ItemInfos[2].IsCurrentlyHaving = true;
-                    SetAllAnimatorBools("Take item");
+                    SetAllAnimatorBools(AlexAnimator, "Take item");
                     Destroy(gameObject);
                 }
                 break;

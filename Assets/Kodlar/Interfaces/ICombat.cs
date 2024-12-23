@@ -11,3 +11,8 @@ public interface ICombatADS
 {
     public void ADS();
 }
+
+public interface ITakeDamage
+{
+    public void TakeDamage();
+}

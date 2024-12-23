@@ -14,9 +14,12 @@ public class ZombieManager : ZombieStats
     public float viewRadius;
     [Range(0, 360)]
     public float viewAngle;
+    [SerializeField]
+    private ZombieAnimator zombieAnimator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        zombieAnimator = gameObject.GetComponent<ZombieAnimator>();
     }
 
     void OnDrawGizmos()
@@ -89,39 +92,74 @@ public class ZombieManager : ZombieStats
 
     public void MoveTowardsPlayer()
     {
-        gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(Target.x,gameObject.transform.position.y,Target.z));
+        zombieAnimator.PlayWalk();
+        gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(Target.x, gameObject.transform.position.y, Target.z));
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Health <= 0)
+        {
+            zombieAnimator.PlayDie();
+        }
+        DestroyObj();
+
         Target = new Vector3(TargetObj.transform.position.x, gameObject.transform.position.y, TargetObj.transform.position.z);
 
-        Die();
-
-        if (CanSeeTarget())
+        if (Health > 0)
         {
-            transform.LookAt(Target);
-            MoveTowardsPlayer();
+            if (CanSeeTarget())
+            {
+                if (gameObject.GetComponent<NavMeshAgent>().stoppingDistance < Vector3.Distance(gameObject.transform.position, TargetObj.transform.position))
+                {
+                    transform.LookAt(Target);
+                    MoveTowardsPlayer();
+                }
+                else {
+                    zombieAnimator.PlayNeckBite();
+                }
+
+
+            }
+            else
+            {
+                zombieAnimator.PlayIdle();
+            }
         }
-        //print(CanSeeTarget());
+
+        print(CanSeeTarget());
     }
+
+    #region Hasar alma
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("mermi"))
+        {
+            Health -= other.GetComponent<BulletPush>().Damage;
+            Destroy(other.gameObject);
+        }
+    }
+    #endregion
 }
 
-public class ZombieStats : MonoBehaviour, ICombat
+public class ZombieStats : MonoBehaviour
 {
     public float Health;
     public float Damage;
+    [Header("Oyun objesini yok etme")]
+    public float DestroyCounter;
 
-    public void Die()
+    public void DestroyObj()
     {
         if (Health <= 0)
         {
-            Destroy(gameObject);
+            DestroyCounter -= Time.deltaTime;
+            if (DestroyCounter < 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
-    public void Attack()
-    {
-        
-    }
+
 }

@@ -7,6 +7,7 @@ public class BulletPush : MonoBehaviour
 {
     public float ShootSpeed;
     public float Lifetime;
+    public float Damage;
     // Start is called before the first frame update
     void Start()
     {
