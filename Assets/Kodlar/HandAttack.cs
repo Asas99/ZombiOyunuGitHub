@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStatus : MonoBehaviour
+public class HandAttack : MonoBehaviour
 {
-    public float Health;
-    public int Water;
-    public int Food;
+    public float Damage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

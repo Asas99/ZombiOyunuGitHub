@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Shooting : MonoBehaviour
 {
     public GameObject Bullet;
-    public GameObject Spawnpoint;
+    public Transform Spawnpoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +24,7 @@ public class Shooting : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            //Burada kurþun olmayacaðý için ateþ etme sesi ve silahtan çýkan ateþle bir þeyler yapacaðýz. 
-            Ray ray = new Ray(transform.position, transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.CompareTag("zombi"))
-                {
-                    print("Görüyor: " + hit.collider.name);
-                }
-            }
+            Instantiate(Bullet, Spawnpoint.position, Spawnpoint.rotation);
         }
     }
     private void OnDrawGizmos()

@@ -117,7 +117,7 @@ public class ZombieManager : ZombieStats
                     MoveTowardsPlayer();
                 }
                 else {
-                    zombieAnimator.PlayNeckBite();
+                    zombieAnimator.PlayAttack();
                 }
 
 
@@ -146,7 +146,6 @@ public class ZombieManager : ZombieStats
 public class ZombieStats : MonoBehaviour
 {
     public float Health;
-    public float Damage;
     [Header("Oyun objesini yok etme")]
     public float DestroyCounter;
 

@@ -1498,6 +1498,7 @@ GameObject:
   - component: {fileID: 156265356}
   - component: {fileID: 156265355}
   - component: {fileID: 156265354}
+  - component: {fileID: 156265357}
   m_Layer: 0
   m_Name: right cube
   m_TagString: zombie hands
@@ -1594,6 +1595,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156265352}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &156265357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156265352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0e26a66c82b764fb8b7e35d66ee088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 2
 --- !u!1 &165201915
 GameObject:
   m_ObjectHideFlags: 0
@@ -3649,7 +3663,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
-  Damage: 0.1
   DestroyCounter: 5
   TargetObj: {fileID: 2044467950}
   Target: {x: 0, y: 0, z: 0}
@@ -4010,7 +4023,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
-  Damage: 0.1
   DestroyCounter: 5
   TargetObj: {fileID: 2044467950}
   Target: {x: 0, y: 0, z: 0}
@@ -4366,6 +4378,7 @@ GameObject:
   - component: {fileID: 580598999}
   - component: {fileID: 580598998}
   - component: {fileID: 580598997}
+  - component: {fileID: 580599000}
   m_Layer: 0
   m_Name: left cube
   m_TagString: zombie hands
@@ -4462,6 +4475,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580598995}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &580599000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580598995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0e26a66c82b764fb8b7e35d66ee088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 2
 --- !u!1 &582644568
 GameObject:
   m_ObjectHideFlags: 0
@@ -4549,6 +4575,7 @@ GameObject:
   - component: {fileID: 588244600}
   - component: {fileID: 588244599}
   - component: {fileID: 588244598}
+  - component: {fileID: 588244601}
   m_Layer: 0
   m_Name: left cube (1)
   m_TagString: zombie hands
@@ -4645,6 +4672,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588244596}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &588244601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588244596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0e26a66c82b764fb8b7e35d66ee088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 2
 --- !u!1 &589055388
 GameObject:
   m_ObjectHideFlags: 0
@@ -7976,6 +8016,7 @@ GameObject:
   - component: {fileID: 1002543474}
   - component: {fileID: 1002543473}
   - component: {fileID: 1002543472}
+  - component: {fileID: 1002543475}
   m_Layer: 0
   m_Name: right cube
   m_TagString: zombie hands
@@ -8072,6 +8113,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002543470}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1002543475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002543470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0e26a66c82b764fb8b7e35d66ee088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 2
 --- !u!4 &1020127856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3480699329000672020, guid: 03240e1cc27e94b4681b0b30170dfefe,
@@ -11489,6 +11543,7 @@ GameObject:
   - component: {fileID: 1488398719}
   - component: {fileID: 1488398718}
   - component: {fileID: 1488398717}
+  - component: {fileID: 1488398720}
   m_Layer: 0
   m_Name: right cube (1)
   m_TagString: zombie hands
@@ -11585,6 +11640,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488398715}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1488398720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488398715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0e26a66c82b764fb8b7e35d66ee088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 2
+--- !u!1 &1517820538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517820540}
+  - component: {fileID: 1517820539}
+  m_Layer: 0
+  m_Name: "g\xFCne\u015F tutucu"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1517820539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517820538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d581158c456ae704a8ab63675c7e15f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DayTime: 0
+  SunHolder: {fileID: 1517820538}
+  Speed: 0.001
+--- !u!4 &1517820540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517820538}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1579835264}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1527630264
 GameObject:
   m_ObjectHideFlags: 0
@@ -12617,13 +12733,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579835261}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2525392, y: -0.87971234, z: 0.26427045, w: 0.30412397}
-  m_LocalPosition: {x: -0.000000022351742, y: 3, z: 0.000000033527613}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 98.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 38.212, y: -149.261, z: -21.156}
+  m_Father: {fileID: 1517820540}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1589130990
 GameObject:
   m_ObjectHideFlags: 0
@@ -16254,6 +16370,7 @@ GameObject:
   - component: {fileID: 2091918433}
   - component: {fileID: 2091918432}
   - component: {fileID: 2091918431}
+  - component: {fileID: 2091918434}
   m_Layer: 0
   m_Name: left cube
   m_TagString: zombie hands
@@ -16350,6 +16467,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091918429}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2091918434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091918429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0e26a66c82b764fb8b7e35d66ee088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 2
 --- !u!1001 &2104115126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16684,7 +16814,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1579835264}
+  - {fileID: 1517820540}
   - {fileID: 1685099629}
   - {fileID: 1214384217}
   - {fileID: 634787620}

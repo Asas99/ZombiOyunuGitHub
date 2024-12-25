@@ -8,6 +8,7 @@ public class BulletPush : MonoBehaviour
     public float ShootSpeed;
     public float Lifetime;
     public float Damage;
+    private float DestroyCounter;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,11 @@ public class BulletPush : MonoBehaviour
     {
         PushMermi();
         DestoryMermi();
+        DestroyCounter -= Time.deltaTime;
+        if (DestroyCounter < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void PushMermi()
