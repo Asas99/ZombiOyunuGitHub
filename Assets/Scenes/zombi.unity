@@ -1749,12 +1749,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
   Dist: 0
   MaxCollectDist: 1.7
   Text: {fileID: 339322737}
+  animator: {fileID: 1333018610}
 --- !u!65 &195486972
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2077,12 +2077,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
   Dist: 0
   MaxCollectDist: 1.7
   Text: {fileID: 628767077}
+  animator: {fileID: 1333018610}
 --- !u!1 &238799077
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,13 +3662,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc8cc91ffc27e824abd207b9dae5aa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
-  DestroyCounter: 5
   TargetObj: {fileID: 2044467950}
   Target: {x: 0, y: 0, z: 0}
+  animator: {fileID: 648208796}
   viewRadius: 18.75
   viewAngle: 142
   zombieAnimator: {fileID: 0}
+  Health: 1
+  DestroyCounter: 5
 --- !u!114 &489546317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3681,7 +3682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32a39eac653b3247a810a990e0d017a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 648208796}
 --- !u!1 &496372111
 GameObject:
   m_ObjectHideFlags: 0
@@ -4009,7 +4009,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32a39eac653b3247a810a990e0d017a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 73394393}
 --- !u!114 &505330313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4022,13 +4021,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc8cc91ffc27e824abd207b9dae5aa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
-  DestroyCounter: 5
   TargetObj: {fileID: 2044467950}
   Target: {x: 0, y: 0, z: 0}
+  animator: {fileID: 73394393}
   viewRadius: 18.75
   viewAngle: 142
   zombieAnimator: {fileID: 0}
+  Health: 1
+  DestroyCounter: 5
 --- !u!195 &505330314
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6924,12 +6924,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
   Dist: 0
   MaxCollectDist: 0
   Text: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!65 &851993187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10353,7 +10353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7506f7a5d1fb14eb0ff8d163630a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 1333018610}
   rb: {fileID: 1333018613}
   MoveSpeed: 2
   MoveSpeedInAir: 1
@@ -10372,6 +10371,7 @@ MonoBehaviour:
   Sensitivity: 4
   Cam: {fileID: 302869158}
   Player: {fileID: 1333018609}
+  AlexAnimator: {fileID: 1333018610}
 --- !u!54 &1333018613
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12862,12 +12862,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 0}
   Dist: 0
   MaxCollectDist: 1.7
   Text: {fileID: 60168705}
+  animator: {fileID: 1333018610}
 --- !u!1 &1589935178
 GameObject:
   m_ObjectHideFlags: 0
@@ -15170,12 +15170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c938f5c4a980640bd342d1fe8bebed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexAnimator: {fileID: 1333018610}
   TagName: 
   playerInventory: {fileID: 1333018615}
   Dist: 0
   MaxCollectDist: 2
   Text: {fileID: 1289328774}
+  animator: {fileID: 1333018610}
 --- !u!64 &1985063776
 MeshCollider:
   m_ObjectHideFlags: 0

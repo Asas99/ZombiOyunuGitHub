@@ -1,37 +1,38 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class AnimatorManager : MonoBehaviour
+public static class AnimatorManager
 {
-    [Space(10)]
-    [Header("Animatör")]
-    public Animator AlexAnimator;
-
     /// <summary>
     /// Tüm animatör deðiþkenlerini false yapar.
     /// </summary>
-    public void SetAllAnimatorBools(Animator animator)
+    public static void SetAllAnimatorBools(Animator animator)
     {
-        foreach (AnimatorControllerParameter param in AlexAnimator.parameters)
+        foreach (AnimatorControllerParameter param in animator.parameters)
         {
-            animator.SetBool(param.name, false);
+            if (param.type == AnimatorControllerParameterType.Bool)
+            {
+                animator.SetBool(param.name, false);
+            }
         }
     }
 
     /// <summary>
     /// Belirtilen animator deðiþkeni dýþýnda tüm deðiþkenleri false yapar.
     /// </summary>
-    /// <param name="excludeBool"> True yapýlacak deðiþken.</param>
-    public void SetAllAnimatorBools(Animator animator,string excludeBool = null)
+    /// <param name="excludeBool">True yapýlacak deðiþken.</param>
+    public static void SetAllAnimatorBools(Animator animator, string excludeBool = null)
     {
-        foreach (AnimatorControllerParameter param in AlexAnimator.parameters)
+        foreach (AnimatorControllerParameter param in animator.parameters)
         {
             if (param.type == AnimatorControllerParameterType.Bool && param.name != excludeBool)
             {
                 animator.SetBool(param.name, false);
             }
         }
-        animator.SetBool(excludeBool, true);
+
+        if (!string.IsNullOrEmpty(excludeBool))
+        {
+            animator.SetBool(excludeBool, true);
+        }
     }
 }
-

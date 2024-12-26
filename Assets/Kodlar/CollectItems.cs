@@ -3,13 +3,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CollectItems : AnimatorManager
+public class CollectItems : MonoBehaviour
 {
     public string TagName;
     public PlayerInventory playerInventory;
     [Header("Animatör")]
     public float Dist, MaxCollectDist;
     public GameObject Text;
+    public Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,13 +26,13 @@ public class CollectItems : AnimatorManager
     // Update is called once per frame
     void Update()
     {
-        if (AlexAnimator.GetCurrentAnimatorStateInfo(0).IsName("Take item"))
-        {
-            if (AlexAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            {
-                AlexAnimator.SetBool("Take item", false);
-            }
-        }
+        //if (AlexAnimator.GetCurrentAnimatorStateInfo(0).IsName("Take item"))
+        //{
+        //    if (AlexAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        //    {
+        //        AlexAnimator.SetBool("Take item", false);
+        //    }
+        //}
         Dist = Vector3.Distance(transform.position, GameObject.FindAnyObjectByType<PlayerInventory>().gameObject.transform.position);
 
         foreach (var item in playerInventory.ItemInfos)
@@ -73,7 +74,7 @@ public class CollectItems : AnimatorManager
                 {
                     playerInventory.ItemInfos[0].Quantity++;
                     //playerInventory.ItemInfos[0].IsCurrentlyHaving = true;
-                    SetAllAnimatorBools(AlexAnimator, "Take item");
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     Destroy(gameObject);
                 }
                 break;
@@ -83,7 +84,7 @@ public class CollectItems : AnimatorManager
                 {
                     playerInventory.ItemInfos[1].Quantity++;
                     //playerInventory.ItemInfos[1].IsCurrentlyHaving = true;
-                    SetAllAnimatorBools(AlexAnimator, "Take item");
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     Destroy(gameObject);
                 }
                 break;
@@ -93,7 +94,7 @@ public class CollectItems : AnimatorManager
                 {
                     playerInventory.ItemInfos[2].Quantity += 5;
                     //playerInventory.ItemInfos[2].IsCurrentlyHaving = true;
-                    SetAllAnimatorBools(AlexAnimator, "Take item");
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     Destroy(gameObject);
                 }
                 break;

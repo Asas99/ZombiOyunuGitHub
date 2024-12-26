@@ -1,26 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ZombieAnimator : AnimatorManager
+public class ZombieAnimator : MonoBehaviour
 {
-    public void PlayIdle()
+    public void PlayIdle(Animator animator)
     {
-        SetAllAnimatorBools(AlexAnimator);
+        AnimatorManager.SetAllAnimatorBools(animator);
     }
-    public void PlayWalk()
+    public void PlayWalk(Animator animator)
     {
-        SetAllAnimatorBools(AlexAnimator, "IsWalking");
+        AnimatorManager.SetAllAnimatorBools(animator, "IsWalking");
     }
-    public void PlayAttack()
+    public void PlayAttack(Animator animator)
     {
-        SetAllAnimatorBools(AlexAnimator, "IsAttacking");
+        AnimatorManager.SetAllAnimatorBools(animator, "IsAttacking");
     }
-    public void PlayDie()
+    public void PlayDie(Animator animator)
     {
-        SetAllAnimatorBools(AlexAnimator, "IsDying");
+        AnimatorManager.SetAllAnimatorBools(animator, "IsDying");
     }
-    public void PlayNeckBite()
+    public void PlayNeckBite(Animator animator)
     {
-        SetAllAnimatorBools(AlexAnimator, "IsBitingNeck");
+        AnimatorManager.SetAllAnimatorBools(animator, "IsBitingNeck");
     }
 }

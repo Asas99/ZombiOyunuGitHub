@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CharacterController : AnimatorManager, IMovement101, IMovement201
+public class CharacterController : MonoBehaviour, IMovement101, IMovement201
 {
     [Header("Hareket ve zıplama")]
     public Rigidbody rb;
@@ -29,6 +29,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
     public float Sensitivity;
     public Camera Cam;
     public GameObject Player;
+    public Animator AlexAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -41,8 +42,8 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
     {
         Move(MoveSpeed);
         Jump(JumpPower);
-        Run(MoveSpeed, RunMultiplier);
-        Crouch(MoveSpeed, CrouchMultplier);
+        Run();
+        Crouch();
         ADSPosAndShoot();
     }
 
@@ -60,7 +61,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
             Multiplier = 1;
             if (x != 0 || z != 0)
             {
-                SetAllAnimatorBools(AlexAnimator,"IsWalking");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator,"IsWalking");
                 //AlexAnimator.SetBool("IsWalking", true);
                 //AlexAnimator.SetBool("IsRunning", false);
                 //AlexAnimator.SetBool("Has a pistol", false);
@@ -68,7 +69,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
             }
             else if (x == 0 && z == 0)
             {
-                SetAllAnimatorBools(AlexAnimator);
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator);
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsRunning", false);
                 //AlexAnimator.SetBool("Has a pistol", false);
@@ -81,7 +82,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
             Multiplier = RunMultiplier;
             if (x != 0 || z != 0)
             {
-                SetAllAnimatorBools(AlexAnimator, "IsRunning");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator, "IsRunning");
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsRunning", true);
                 //AlexAnimator.SetBool("Has a pistol", false);
@@ -89,7 +90,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
             }
             else if (x == 0 && z == 0)
             {
-                SetAllAnimatorBools(AlexAnimator);
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator);
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsRunning", false);
                 //AlexAnimator.SetBool("Has a pistol", false);
@@ -101,7 +102,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
             Multiplier = CrouchMultplier;
             if (x != 0 || z != 0)
             {
-                SetAllAnimatorBools(AlexAnimator,"Crawl");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator,"Crawl");
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsAttacking", false);
                 //AlexAnimator.SetBool("IsJumping", false);
@@ -111,7 +112,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
             }
             else if (x == 0 && z == 0)
             {
-                SetAllAnimatorBools(AlexAnimator);
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator);
                 //AlexAnimator.SetBool("IsAttacking", false);
                 //AlexAnimator.SetBool("IsJumping", false);
                 //AlexAnimator.SetBool("Crawl", false);
@@ -129,7 +130,7 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                SetAllAnimatorBools(AlexAnimator, "IsJumping");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator, "IsJumping");
                 //AlexAnimator.SetBool("IsJumping", true);
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsAttacking", false);
@@ -150,14 +151,14 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
         }
         rb.linearVelocity = new Vector3(0, rb.linearVelocity.y - AdditionalGravity * Time.fixedDeltaTime, 0);
     }
-    public void Crouch(float speed, float multiplier)
+    public void Crouch()
     {
         if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
         {
             IsCrouched = !IsCrouched;
         }
     }
-    public void Run(float speed, float multiplier)
+    public void Run()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
@@ -182,12 +183,12 @@ public class CharacterController : AnimatorManager, IMovement101, IMovement201
             {
                 if (Input.GetMouseButton(1))
                 {
-                    SetAllAnimatorBools(AlexAnimator, "Has a pistol");
+                    AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol");
                     //AlexAnimator.SetBool("Has a pistol", true);
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
-                    SetAllAnimatorBools(AlexAnimator, "Shoot");
+                    AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Shoot");
                     //AlexAnimator.SetBool("Shoot", true);
                 }
             }

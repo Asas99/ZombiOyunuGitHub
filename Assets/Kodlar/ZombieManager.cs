@@ -4,11 +4,12 @@ using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 using Unity.VisualScripting;
 
-public class ZombieManager : ZombieStats
+public class ZombieManager : MonoBehaviour
 {
     [Header("Oyuncuya doðru gidecek")]
     public GameObject TargetObj;
     public Vector3 Target;
+    public Animator animator;
     [Space(10)]
     [Header("Algýlama parametreleri")]
     public float viewRadius;
@@ -16,6 +17,9 @@ public class ZombieManager : ZombieStats
     public float viewAngle;
     [SerializeField]
     private ZombieAnimator zombieAnimator;
+    public float Health;
+    [Header("Oyun objesini yok etme")]
+    public float DestroyCounter;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,13 +48,24 @@ public class ZombieManager : ZombieStats
         //}
     }
 
+    public void DestroyObj()
+    {
+        if (Health <= 0)
+        {
+            DestroyCounter -= Time.deltaTime;
+            if (DestroyCounter < 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     public bool CanSeeTarget()
     {
         if (Target == null)
             return false;
 
         Vector3 directionToTarget = (Target - transform.position).normalized;  
-        float distanceToTarget = Vector3.Distance(transform.position, Target);
 
         Ray ray = new Ray(transform.position, directionToTarget);
         RaycastHit hit;
@@ -60,7 +75,7 @@ public class ZombieManager : ZombieStats
             // Check if there's an obstacle between enemy and target
             if (Physics.Raycast(ray, out hit,viewRadius))
             {
-                if (hit.collider.tag == "Player")
+                if (hit.collider.CompareTag("Player"))
                 {
                     return true; // Target is visible
                 }
@@ -92,7 +107,7 @@ public class ZombieManager : ZombieStats
 
     public void MoveTowardsPlayer()
     {
-        zombieAnimator.PlayWalk();
+        //zombieAnimator.PlayWalk(zombieAnimator);
         gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(Target.x, gameObject.transform.position.y, Target.z));
     }
 
@@ -101,7 +116,7 @@ public class ZombieManager : ZombieStats
     {
         if (Health <= 0)
         {
-            zombieAnimator.PlayDie();
+            //zombieAnimator.PlayDie();
         }
         DestroyObj();
 
@@ -117,14 +132,14 @@ public class ZombieManager : ZombieStats
                     MoveTowardsPlayer();
                 }
                 else {
-                    zombieAnimator.PlayAttack();
+                    //zombieAnimator.PlayAttack();
                 }
 
 
             }
             else
             {
-                zombieAnimator.PlayIdle();
+                //zombieAnimator.PlayIdle();
             }
         }
 
@@ -141,24 +156,4 @@ public class ZombieManager : ZombieStats
         }
     }
     #endregion
-}
-
-public class ZombieStats : MonoBehaviour
-{
-    public float Health;
-    [Header("Oyun objesini yok etme")]
-    public float DestroyCounter;
-
-    public void DestroyObj()
-    {
-        if (Health <= 0)
-        {
-            DestroyCounter -= Time.deltaTime;
-            if (DestroyCounter < 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
-
 }

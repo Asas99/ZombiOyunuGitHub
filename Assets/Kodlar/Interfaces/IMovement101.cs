@@ -12,7 +12,7 @@ public interface IMovement101
 
 public interface IMovement201
 {
-    public void Crouch(float speed, float multiplier);
-    public void Run(float speed, float multiplier);
+    public void Crouch();
+    public void Run();
 }
 
