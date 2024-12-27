@@ -16,14 +16,14 @@ public class ZombieManager : MonoBehaviour
     [Range(0, 360)]
     public float viewAngle;
     [SerializeField]
-    private ZombieAnimator zombieAnimator;
+    private ZombieAnimator zombieanimator;
     public float Health;
     [Header("Oyun objesini yok etme")]
     public float DestroyCounter;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        zombieAnimator = gameObject.GetComponent<ZombieAnimator>();
+        zombieanimator = gameObject.GetComponent<ZombieAnimator>();
     }
 
     void OnDrawGizmos()
@@ -107,7 +107,7 @@ public class ZombieManager : MonoBehaviour
 
     public void MoveTowardsPlayer()
     {
-        //zombieAnimator.PlayWalk(zombieAnimator);
+        zombieanimator.PlayWalk(animator);
         gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(Target.x, gameObject.transform.position.y, Target.z));
     }
 
@@ -116,7 +116,7 @@ public class ZombieManager : MonoBehaviour
     {
         if (Health <= 0)
         {
-            //zombieAnimator.PlayDie();
+            zombieanimator.PlayDie(animator);
         }
         DestroyObj();
 
@@ -132,14 +132,14 @@ public class ZombieManager : MonoBehaviour
                     MoveTowardsPlayer();
                 }
                 else {
-                    //zombieAnimator.PlayAttack();
+                    zombieanimator.PlayAttack(animator);
                 }
 
 
             }
             else
             {
-                //zombieAnimator.PlayIdle();
+                zombieanimator.PlayIdle(animator);
             }
         }
 
