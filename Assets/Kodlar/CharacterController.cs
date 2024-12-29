@@ -30,11 +30,12 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     public Camera Cam;
     public GameObject Player;
     public Animator AlexAnimator;
-
+    private Shooting shootingScript;
     // Start is called before the first frame update
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
+        shootingScript = FindAnyObjectByType<Shooting>();
     }
 
     // Update is called once per frame
@@ -181,6 +182,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
         {
             if(gameObject.GetComponent<PlayerInventory>().ItemInfos[0].Quantity > 0)
             {
+                shootingScript.CanShoot = true;
                 if (Input.GetMouseButton(1))
                 {
                     AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol");
@@ -189,8 +191,11 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
                 if (Input.GetMouseButtonDown(0))
                 {
                     AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Shoot");
-                    //AlexAnimator.SetBool("Shoot", true);
                 }
+            }
+            else if (gameObject.GetComponent<PlayerInventory>().ItemInfos[0].Quantity == 0)
+            {
+                shootingScript.CanShoot = false;
             }
         }
 

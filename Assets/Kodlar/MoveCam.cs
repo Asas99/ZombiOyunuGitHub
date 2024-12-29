@@ -18,10 +18,10 @@ public class MoveCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (animator.GetBool("Has a pistol"))
+        if (animator.GetBool("Has a pistol") || animator.GetBool("Shoot"))
         {
             cam.transform.localPosition = ADSPos;
-            cam.transform.localEulerAngles = ADSRot;
+            //cam.transform.localEulerAngles = ADSRot;
         }
         else
         {

@@ -8,11 +8,11 @@ public class BulletPush : MonoBehaviour
     public float ShootSpeed;
     public float Lifetime;
     public float Damage;
-    private float DestroyCounter;
+    public Vector3 PushDirection;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PushDirection = Camera.main.transform.forward;
     }
 
     // Update is called once per frame
@@ -20,16 +20,11 @@ public class BulletPush : MonoBehaviour
     {
         PushMermi();
         DestoryMermi();
-        DestroyCounter -= Time.deltaTime;
-        if (DestroyCounter < 0)
-        {
-            Destroy(gameObject);
-        }
     }
 
     public void PushMermi()
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * ShootSpeed * Time.deltaTime);
+        gameObject.GetComponent<Rigidbody>().AddForce(ShootSpeed * Time.deltaTime * PushDirection);
     }
 
     //Bir süre sonra mermiyi yok ediyoruz ki çok fazla mermi olduðunda bilgisayara yük olmasýn.

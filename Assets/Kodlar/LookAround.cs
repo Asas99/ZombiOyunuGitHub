@@ -17,7 +17,10 @@ public class LookAround : MonoBehaviour
         var x = Input.GetAxis("Mouse X");
         var y = Input.GetAxis("Mouse Y");
 
-        //Cam.transform.eulerAngles += new Vector3(-y * Sensitivity, 0, 0);
+        if (GameObject.FindObjectOfType<Shooting>().CanShoot)
+        {
+            Camera.main.transform.eulerAngles += new Vector3(y * Sensitivity, 0, 0);
+        }
         Player.transform.eulerAngles += new Vector3(0, x * Sensitivity, 0);
 
         //Mathf.Clamp(Cam.transform.eulerAngles.x, -90, 90);
