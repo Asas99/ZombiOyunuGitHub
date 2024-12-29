@@ -143,17 +143,13 @@ public class ZombieManager : MonoBehaviour
             }
         }
 
-        print(CanSeeTarget());
+        //print(CanSeeTarget());
     }
 
     #region Hasar alma
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("mermi"))
-        {
-            Health -= other.GetComponent<BulletPush>().Damage;
-            Destroy(other.gameObject);
-        }
+
     }
     #endregion
 }

@@ -19,7 +19,7 @@ public class LookAround : MonoBehaviour
 
         if (GameObject.FindObjectOfType<Shooting>().CanShoot)
         {
-            Camera.main.transform.eulerAngles += new Vector3(y * Sensitivity, 0, 0);
+            Camera.main.transform.eulerAngles += new Vector3(-y * Sensitivity, 0, 0);
         }
         Player.transform.eulerAngles += new Vector3(0, x * Sensitivity, 0);
 

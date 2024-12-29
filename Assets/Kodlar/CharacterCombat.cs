@@ -10,7 +10,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if(other.gameObject.CompareTag("zombie hands"))
         {
-            print("col detected");
+            //print("col detected");
             gameObject.GetComponent<PlayerStatus>().Health -= other.gameObject.GetComponent<HandAttack>().Damage;
         }
     }

@@ -8,6 +8,9 @@ public class Shooting : MonoBehaviour
     public GameObject Bullet;
     public Transform Spawnpoint;
     public bool CanShoot;
+    public Vector3 RayRot;
+    private Vector3 direciton;
+    public float DamageOfCurrentWeapon;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,22 +21,32 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         Shoot();
+        direciton = Quaternion.Euler(RayRot) * Camera.main.transform.forward;
+
     }
 
     public void Shoot()
     {
         if (Input.GetMouseButtonUp(0))
         {
-
-            if (Input.GetMouseButtonUp(0))
+            if (Physics.Raycast(Spawnpoint.position,direciton,out RaycastHit hit,1000f))
             {
-                Instantiate(Bullet, Spawnpoint.position, Spawnpoint.rotation);
+                if (hit.collider.transform.CompareTag("zombi"))
+                {
+                    if(hit.collider.gameObject.GetComponent<ZombieManager>() != null)
+                    {
+                        hit.collider.gameObject.GetComponent<ZombieManager>().Health -= DamageOfCurrentWeapon;
+                    }
+                    print(hit.collider.gameObject.name);
+                }
             }
-
+            // Instantiate(Bullet, Spawnpoint.position, Spawnpoint.rotation);
         }
-        //private void OnDrawGizmos()
-        //{
-        //    Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.forward* 1000f,Color.green);
-        //}
+
+       
+    }
+    private void OnDrawGizmos()
+    {
+          Debug.DrawRay(Spawnpoint.position, direciton * 1000f, Color.green);
     }
 }
