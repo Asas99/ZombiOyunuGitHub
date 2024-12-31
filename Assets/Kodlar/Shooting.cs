@@ -7,6 +7,7 @@ public class Shooting : MonoBehaviour
 {
     public GameObject Bullet;
     public Transform Spawnpoint;
+    public GameObject ShootPointer;
     public bool CanShoot;
     public Vector3 RayRot;
     private Vector3 direciton;
@@ -26,24 +27,34 @@ public class Shooting : MonoBehaviour
     }
 
     public void Shoot()
-    {
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (Physics.Raycast(Spawnpoint.position,direciton,out RaycastHit hit,1000f))
-            {
-                if (hit.collider.transform.CompareTag("zombi"))
+    {    
+        if (Physics.Raycast(Spawnpoint.position,direciton,out RaycastHit hit,1000f))
+            {        
+                if (hit.collider.gameObject != null)
                 {
-                    if(hit.collider.gameObject.GetComponent<ZombieManager>() != null)
-                    {
-                        hit.collider.gameObject.GetComponent<ZombieManager>().Health -= DamageOfCurrentWeapon;
-                    }
-                    print(hit.collider.gameObject.name);
+                    ShootPointer.transform.position = hit.point;
                 }
+           
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (hit.collider.transform.CompareTag("zombi"))
+                    {
+                        if(hit.collider.gameObject.GetComponent<ZombieManager>() != null)
+                        {
+                            hit.collider.gameObject.GetComponent<ZombieManager>().Health -= DamageOfCurrentWeapon;
+                        }
+                    }
+                    if (hit.collider.transform.CompareTag("zombie head"))
+                    {
+                        if (hit.collider.gameObject.GetComponent<ZombieManager>() != null)
+                        {
+                            hit.collider.gameObject.GetComponent<ZombieManager>().Health -= -1;
+                        }
+                    }
+                print(hit.collider.gameObject.name);
+                // Instantiate(Bullet, Spawnpoint.position, Spawnpoint.rotation);
             }
-            // Instantiate(Bullet, Spawnpoint.position, Spawnpoint.rotation);
-        }
-
-       
+            }       
     }
     private void OnDrawGizmos()
     {

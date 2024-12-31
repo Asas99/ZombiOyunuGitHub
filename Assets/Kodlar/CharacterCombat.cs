@@ -3,8 +3,6 @@ using UnityEngine.UI;
 
 public class CharacterCombat : MonoBehaviour
 {
-    public GameObject obj;
-
     //Hasar alma
     private void OnTriggerEnter(Collider other)
     {

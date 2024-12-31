@@ -16,7 +16,7 @@ public class DayNightCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DayTime += Time.deltaTime * Speed;
+        DayTime += (Time.deltaTime * Speed);
         SunHolder.transform.eulerAngles = new Vector3(0 + ((360 / 24) * DayTime), 0, 0);
     }
 }
