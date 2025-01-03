@@ -46,9 +46,9 @@ public class Shooting : MonoBehaviour
                     }
                     if (hit.collider.transform.CompareTag("zombie head"))
                     {
-                        if (hit.collider.gameObject.GetComponent<ZombieManager>() != null)
+                        if (hit.collider.gameObject.GetComponent<FollowZomiieHead>() != null)
                         {
-                            hit.collider.gameObject.GetComponent<ZombieManager>().Health -= -1;
+                            hit.collider.gameObject.GetComponent<FollowZomiieHead>().ZombieManager.Health = -1;
                         }
                     }
                 print(hit.collider.gameObject.name);

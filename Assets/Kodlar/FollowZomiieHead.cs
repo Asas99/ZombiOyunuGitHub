@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class FollowZomiieHead : MonoBehaviour
 {
     public GameObject ZombieHead;
+    public ZombieManager ZombieManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
