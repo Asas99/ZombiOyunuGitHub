@@ -27,7 +27,13 @@ public class CollectResources : MonoBehaviour
     {
         TakeResource();
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) 
+        {
+            TakeResource();
+        }
+    }
     public void TakeResource()
     {
         playerStatus.Health += HealthPrize;
