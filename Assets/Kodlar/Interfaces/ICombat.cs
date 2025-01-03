@@ -14,5 +14,5 @@ public interface ICombatADS
 
 public interface ITakeDamage
 {
-    public void TakeDamage();
+    public void TakeDamage(float amount);
 }

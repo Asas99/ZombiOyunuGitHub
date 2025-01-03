@@ -25,6 +25,11 @@ public class CollectResources : MonoBehaviour
 
     public void OnMouseDown()
     {
+        TakeResource();
+    }
+
+    public void TakeResource()
+    {
         playerStatus.Health += HealthPrize;
         playerStatus.Food += FoodPrize;
         playerStatus.Water += WaterPrize;
