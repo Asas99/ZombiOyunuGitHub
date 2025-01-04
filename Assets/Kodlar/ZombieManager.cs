@@ -67,13 +67,12 @@ public class ZombieManager : MonoBehaviour
 
         Vector3 directionToTarget = (Target - transform.position).normalized;  
 
-        Ray ray = new Ray(transform.position, directionToTarget);
-        RaycastHit hit;
+        Ray ray = new(transform.position, directionToTarget);
         // Check if the target is within the angle of view
         if (Vector3.Angle(transform.forward, directionToTarget) < viewAngle / 2)
         {
             // Check if there's an obstacle between enemy and target
-            if (Physics.Raycast(ray, out hit,viewRadius))
+            if (Physics.Raycast(ray, out RaycastHit hit, viewRadius))
             {
                 if (hit.collider.CompareTag("Player"))
                 {
@@ -117,6 +116,8 @@ public class ZombieManager : MonoBehaviour
         if (Health <= 0)
         {
             zombieanimator.PlayDie(animator);
+            gameObject.GetComponent<NavMeshAgent>().velocity = new Vector3(0,0,0);
+            gameObject.GetComponent<NavMeshAgent>().angularSpeed = 0;
         }
         DestroyObj();
 
@@ -145,11 +146,4 @@ public class ZombieManager : MonoBehaviour
 
         //print(CanSeeTarget());
     }
-
-    #region Hasar alma
-    public void OnTriggerEnter(Collider other)
-    {
-
-    }
-    #endregion
 }

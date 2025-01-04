@@ -27,5 +27,6 @@ public class ItemInfo
     public bool IsCurrentlyHaving;
     public int Quantity;
     public int MaxQuantity;
+    public Sprite sprite;
 }
 

@@ -82,6 +82,10 @@ public class InventoryManager : MonoBehaviour
                             slotManager.ObjectName = itemInfo.Name;
                             slotManager.ProductQuantity = itemInfo.Quantity;
                             itemInfo.IsCurrentlyHaving = true;
+                            if (itemInfo.sprite != null)
+                            {
+                                slotManager.image.sprite = itemInfo.sprite;
+                            }
                         }
                     }
                     if (itemInfo.IsCurrentlyHaving)
@@ -103,6 +107,10 @@ public class InventoryManager : MonoBehaviour
                         itemInfo.IsCurrentlyHaving = false;
                         slotManager.ProductQuantity = 0;
                         slotManager.QuantityText.text = "";
+                        if (itemInfo.sprite != null)
+                        {
+                            slotManager.image.sprite = null;
+                        }
                     }
                 }
 

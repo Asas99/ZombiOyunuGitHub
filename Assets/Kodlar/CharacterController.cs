@@ -185,7 +185,14 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
                 shootingScript.CanShoot = true;
                 if (Input.GetMouseButton(1))
                 {
-                    AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol");
+                    if (!AlexAnimator.GetBool("IsWalking"))
+                    {
+                        AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol");
+                    }
+                    if (AlexAnimator.GetBool("IsWalking"))
+                    {
+                        AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol","IsWalking");
+                    }
                     //AlexAnimator.SetBool("Has a pistol", true);
                 }
                 if (Input.GetMouseButtonDown(0))

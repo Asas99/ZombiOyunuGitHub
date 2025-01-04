@@ -15,6 +15,15 @@ TagManager:
   - zombie hands
   - mermi
   - zombie head
+  - Colt
+  - Bayonet
+  - ak47
+  - Krag-Jergensen
+  - remington
+  - revolver
+  - springfield
+  - winchester1897
+  - winchester1894
   layers:
   - Default
   - TransparentFX

@@ -12,11 +12,11 @@ public class Shooting : MonoBehaviour
     public bool CanShoot;
     public Vector3 RayRot;
     private Vector3 direciton;
-    public float DamageOfCurrentWeapon;
+    public WeaponEquipManager weaponEquipManager;
     // Start is called before the first frame update
     void Start()
     {
-
+        weaponEquipManager = GameObject.FindAnyObjectByType<WeaponEquipManager>();
     }
 
     // Update is called once per frame
@@ -43,7 +43,7 @@ public class Shooting : MonoBehaviour
                     {
                     if (hit.collider.gameObject.TryGetComponent<ZombieHealthManager>(out var healthManager))
                     {
-                        healthManager.TakeDamage(DamageOfCurrentWeapon);
+                        healthManager.TakeDamage(weaponEquipManager.Damage);
                     }
                     //if (hit.collider.gameObject.GetComponent<ZombieManager>() != null)
                     //    {
