@@ -22,9 +22,11 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Shoot();
-        direciton = Quaternion.Euler(RayRot) * Camera.main.transform.forward;
-
+        if (weaponEquipManager.CurrentAmmo > 0)
+        {
+            Shoot();
+            direciton = Quaternion.Euler(RayRot) * Camera.main.transform.forward;
+        }
     }
 
     
@@ -39,6 +41,8 @@ public class Shooting : MonoBehaviour
            
                 if (Input.GetMouseButtonUp(0))
                 {
+                weaponEquipManager.CurrentAmmo--;
+                weaponEquipManager.DecreaseBullet();
                 if (hit.collider.transform.CompareTag("zombi"))
                     {
                     if (hit.collider.gameObject.TryGetComponent<ZombieHealthManager>(out var healthManager))

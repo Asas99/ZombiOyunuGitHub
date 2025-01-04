@@ -9,6 +9,8 @@ public class WeaponEquipManager : MonoBehaviour
 
     [Header("Mevcut Sialh özellikleri")]
     public string Name;
+    [SerializeField]
+    private string selectedTag;
     public float Damage;
     public float CurrentAmmo, MaxAmmo;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,7 +29,7 @@ public class WeaponEquipManager : MonoBehaviour
             if (Tag == Weapon.GetComponent<WeaponInfo>().Tag)
             {
                 Name = Weapon.GetComponent<WeaponInfo>().name;
-                //Tag = Weapon.GetComponent<WeaponInfo>().Tag;
+                selectedTag = Weapon.GetComponent<WeaponInfo>().Tag;
                 Damage = Weapon.GetComponent<WeaponInfo>().Damage;
                 CurrentAmmo = Weapon.GetComponent<WeaponInfo>().CurrentAmmo;
                 MaxAmmo = Weapon.GetComponent<WeaponInfo>().MaxAmmo;
@@ -35,5 +37,15 @@ public class WeaponEquipManager : MonoBehaviour
             }
         }
         return false;
+    }
+    public void DecreaseBullet()
+    {
+        foreach (var Weapon in Weapons)
+        {
+            if (selectedTag == Weapon.GetComponent<WeaponInfo>().Tag)
+            {
+                Weapon.GetComponent<WeaponInfo>().CurrentAmmo = CurrentAmmo;
+            }
+        }
     }
 }
