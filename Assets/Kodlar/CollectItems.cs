@@ -155,7 +155,7 @@ public class CollectItems : MonoBehaviour
             case "winchester1897":
                 if (playerInventory.ItemInfos[8].Quantity < playerInventory.ItemInfos[8].MaxQuantity)
                 {
-                    weaponEquipManager.AssignWeapon("springfield");
+                    weaponEquipManager.AssignWeapon("winchester1897");
                     playerInventory.ItemInfos[8].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
@@ -165,7 +165,7 @@ public class CollectItems : MonoBehaviour
             case "winchester1894":
                 if (playerInventory.ItemInfos[9].Quantity < playerInventory.ItemInfos[9].MaxQuantity)
                 {
-                    weaponEquipManager.AssignWeapon("springfield");
+                    weaponEquipManager.AssignWeapon("winchester1894");
                     playerInventory.ItemInfos[9].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");

@@ -31,11 +31,14 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     public GameObject Player;
     public Animator AlexAnimator;
     private Shooting shootingScript;
+    [SerializeField]
+    private WeaponEquipManager weaponEquipManager;
     // Start is called before the first frame update
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
         shootingScript = FindAnyObjectByType<Shooting>();
+        weaponEquipManager = FindAnyObjectByType<WeaponEquipManager>();
     }
 
     // Update is called once per frame
@@ -180,18 +183,33 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     {
         if(gameObject.GetComponent<PlayerInventory>() != null)
         {
-            if(gameObject.GetComponent<PlayerInventory>().ItemInfos[0].Quantity > 0)
+            if(weaponEquipManager.Name != null)
             {
+                print(weaponEquipManager.Name);
                 shootingScript.CanShoot = true;
                 if (Input.GetMouseButton(1))
                 {
-                    if (!AlexAnimator.GetBool("IsWalking"))
+                    if (weaponEquipManager.Name == "colt" || weaponEquipManager.Name == "revolver")
                     {
-                        AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol");
+                        if (!AlexAnimator.GetBool("IsWalking"))
+                        {
+                            AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol");
+                        }
+                        if (AlexAnimator.GetBool("IsWalking"))
+                        {
+                            AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol","IsWalking");
+                        }
                     }
-                    if (AlexAnimator.GetBool("IsWalking"))
+                    else if (weaponEquipManager.Name == "ak47" || weaponEquipManager.Name == "Krag-Jergensen" || weaponEquipManager.Name == "remington" || weaponEquipManager.Name == "springfield" || weaponEquipManager.Name == "winchester1897" || weaponEquipManager.Name == "winchester1894")
                     {
-                        AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol","IsWalking");
+                        if (!AlexAnimator.GetBool("IsWalking"))
+                        {
+                            AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a rifle");
+                        }
+                        if (AlexAnimator.GetBool("IsWalking"))
+                        {
+                            AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a rifle", "IsWalking");
+                        }
                     }
                     //AlexAnimator.SetBool("Has a pistol", true);
                 }
