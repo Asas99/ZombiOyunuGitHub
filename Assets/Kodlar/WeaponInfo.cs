@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class WeaponInfo : MonoBehaviour
     public string Tag;
     public float Damage;
     public float CurrentAmmo, MaxAmmo;
+    public float chargersize;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

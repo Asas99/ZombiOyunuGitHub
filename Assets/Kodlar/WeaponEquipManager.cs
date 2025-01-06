@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public class WeaponEquipManager : MonoBehaviour
 {
     public GameObject[] Weapons;
-
     [Header("Mevcut Sialh özellikleri")]
     public string Name;
-    [SerializeField]
-    private string selectedTag;
+    public string selectedTag;
     public float Damage;
     public float CurrentAmmo, MaxAmmo;
+    public float ChargerSize;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +32,7 @@ public class WeaponEquipManager : MonoBehaviour
                 Damage = Weapon.GetComponent<WeaponInfo>().Damage;
                 CurrentAmmo = Weapon.GetComponent<WeaponInfo>().CurrentAmmo;
                 MaxAmmo = Weapon.GetComponent<WeaponInfo>().MaxAmmo;
+                ChargerSize = Weapon.GetComponent<WeaponInfo>().chargersize;
                 return true;
             }
         }

@@ -24,6 +24,13 @@ TagManager:
   - springfield
   - winchester1897
   - winchester1894
+  - krag ammo
+  - revolver ammo
+  - colt ammo
+  - springfield ammo
+  - winchester ammo
+  - ak 47 ammo
+  - remington ammo
   layers:
   - Default
   - TransparentFX
