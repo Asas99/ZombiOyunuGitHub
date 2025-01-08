@@ -78,7 +78,9 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[0].Quantity++;
                     //playerInventory.ItemInfos[0].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
 
@@ -109,7 +111,9 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[3].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
             case "Krag-Jergensen":
@@ -119,7 +123,9 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[4].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
             case "remington":
@@ -129,7 +135,9 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[5].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
             case "revolver":
@@ -139,7 +147,9 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[6].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
             case "springfield":
@@ -149,7 +159,9 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[7].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
             case "winchester1897":
@@ -159,7 +171,9 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[8].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
             case "winchester1894":
@@ -169,7 +183,87 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[9].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.SetActive(false);
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
+                }
+                break;
+
+            case "colt ammo":
+                if (playerInventory.ItemInfos[10].Quantity < playerInventory.ItemInfos[10].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[10].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
+                }
+                break;
+            case "ak 47 ammo":
+                if (playerInventory.ItemInfos[11].Quantity < playerInventory.ItemInfos[11].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[11].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
+                }
+                break;
+            case "krag ammo":
+                if (playerInventory.ItemInfos[12].Quantity < playerInventory.ItemInfos[12].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[12].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
+                }
+                break;
+            case "remington ammo":
+                if (playerInventory.ItemInfos[13].Quantity < playerInventory.ItemInfos[13].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[13].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
+                }
+                break;
+            case "revolver ammo":
+                if (playerInventory.ItemInfos[14].Quantity < playerInventory.ItemInfos[14].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[14].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
+                }
+                break;
+            case "winchester ammo":
+                if (playerInventory.ItemInfos[15].Quantity < playerInventory.ItemInfos[15].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[15].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
+                }
+                break;
+            case "springfield ammo":
+                if (playerInventory.ItemInfos[16].Quantity < playerInventory.ItemInfos[16].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[16].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Destroy(Text);
                 }
                 break;
 

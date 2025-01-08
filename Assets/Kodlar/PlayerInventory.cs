@@ -33,10 +33,14 @@ public class PlayerInventory : MonoBehaviour
             {
                 Item.MaxQuantity = (int)(WeaponEquipManager.Weapons[4].GetComponent<WeaponInfo>().chargersize * 2);
             }
-            if (Item.Name == "winchester ammo")
+            if (Item.Name == "springfield ammo")
             {
                 Item.MaxQuantity = (int)(WeaponEquipManager.Weapons[5].GetComponent<WeaponInfo>().chargersize * 2);
+            }
+            if (Item.Name == "winchester ammo")
+            {
                 Item.MaxQuantity = (int)(WeaponEquipManager.Weapons[6].GetComponent<WeaponInfo>().chargersize * 2);
+                Item.MaxQuantity = (int)(WeaponEquipManager.Weapons[7].GetComponent<WeaponInfo>().chargersize * 2);
             }
         }
         #endregion

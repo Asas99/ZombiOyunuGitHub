@@ -12,6 +12,7 @@ public class WeaponEquipManager : MonoBehaviour
     public float Damage;
     public float CurrentAmmo, MaxAmmo;
     public float ChargerSize;
+    public float BulletInCharger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,7 +32,15 @@ public class WeaponEquipManager : MonoBehaviour
                 selectedTag = Weapon.GetComponent<WeaponInfo>().Tag;
                 Damage = Weapon.GetComponent<WeaponInfo>().Damage;
                 CurrentAmmo = Weapon.GetComponent<WeaponInfo>().CurrentAmmo;
-                MaxAmmo = Weapon.GetComponent<WeaponInfo>().MaxAmmo;
+                BulletInCharger = Weapon.GetComponent<WeaponInfo>().AmmoInCharger;
+                if (CurrentAmmo >= Weapon.GetComponent<WeaponInfo>().chargersize)
+                {
+                    Weapon.GetComponent<WeaponInfo>().AmmoInCharger = Weapon.GetComponent<WeaponInfo>().chargersize;
+                }
+                if (CurrentAmmo < Weapon.GetComponent<WeaponInfo>().chargersize)
+                {
+                    Weapon.GetComponent<WeaponInfo>().AmmoInCharger = Weapon.GetComponent<WeaponInfo>().CurrentAmmo;
+                }
                 ChargerSize = Weapon.GetComponent<WeaponInfo>().chargersize;
                 return true;
             }
@@ -40,12 +49,28 @@ public class WeaponEquipManager : MonoBehaviour
     }
     public void DecreaseBullet()
     {
-        foreach (var Weapon in Weapons)
+
+        if (!selectedTag.Contains("winchester"))
         {
-            if (selectedTag == Weapon.GetComponent<WeaponInfo>().Tag)
+            foreach (var Weapon in Weapons)
             {
-                Weapon.GetComponent<WeaponInfo>().CurrentAmmo = CurrentAmmo;
+                if (selectedTag == Weapon.GetComponent<WeaponInfo>().Tag)
+                {      
+                    Weapon.GetComponent<WeaponInfo>().CurrentAmmo--;
+                    Weapon.GetComponent<WeaponInfo>().AmmoInCharger--;
+                    Weapon.GetComponent<WeaponInfo>().CurrentAmmo = CurrentAmmo;
+
+                }
             }
+        }
+        else
+        {
+            Weapons[6].GetComponent<WeaponInfo>().CurrentAmmo--;
+            Weapons[7].GetComponent<WeaponInfo>().CurrentAmmo--;
+            Weapons[6].GetComponent<WeaponInfo>().AmmoInCharger--;
+            Weapons[7].GetComponent<WeaponInfo>().AmmoInCharger--;
+            Weapons[6].GetComponent<WeaponInfo>().CurrentAmmo = CurrentAmmo;
+            Weapons[7].GetComponent<WeaponInfo>().CurrentAmmo = CurrentAmmo;
         }
     }
 }

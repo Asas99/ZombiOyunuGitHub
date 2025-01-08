@@ -185,7 +185,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
         {
             if(weaponEquipManager.Name != null)
             {
-                print(weaponEquipManager.Name);
+                //print(weaponEquipManager.Name);
                 shootingScript.CanShoot = true;
                 if (Input.GetMouseButton(1))
                 {

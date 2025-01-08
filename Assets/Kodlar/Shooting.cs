@@ -38,42 +38,45 @@ public class Shooting : MonoBehaviour
                 {
                     ShootPointer.transform.position = hit.point;
                 }
-           
-                if (Input.GetMouseButtonUp(0))
+                if (weaponEquipManager.BulletInCharger >= 0)
                 {
-                weaponEquipManager.CurrentAmmo--;
-                weaponEquipManager.DecreaseBullet();
-                if (hit.collider.transform.CompareTag("zombi"))
+                    if (Input.GetMouseButtonUp(0))
                     {
-                    if (hit.collider.gameObject.TryGetComponent<ZombieHealthManager>(out var healthManager))
-                    {
-                        healthManager.TakeDamage(weaponEquipManager.Damage);
+                    weaponEquipManager.CurrentAmmo--;
+                    weaponEquipManager.BulletInCharger--;
+                    weaponEquipManager.DecreaseBullet();
+                    if (hit.collider.transform.CompareTag("zombi"))
+                        {
+                        if (hit.collider.gameObject.TryGetComponent<ZombieHealthManager>(out var healthManager))
+                        {
+                            healthManager.TakeDamage(weaponEquipManager.Damage);
+                        }
+                        //if (hit.collider.gameObject.GetComponent<ZombieManager>() != null)
+                        //    {
+                        //    hit.collider.gameObject.GetComponent<ZombieHealthManager>().TakeDamage(DamageOfCurrentWeapon);
+                        //    }
                     }
-                    //if (hit.collider.gameObject.GetComponent<ZombieManager>() != null)
-                    //    {
-                    //    hit.collider.gameObject.GetComponent<ZombieHealthManager>().TakeDamage(DamageOfCurrentWeapon);
-                    //    }
-                }
-                    if (hit.collider.transform.CompareTag("zombie head"))
-                    {
+                        if (hit.collider.transform.CompareTag("zombie head"))
+                        {
 
-                    //if (hit.collider.gameObject.GetComponent<ZombieManager>() != null)
-                    //{
-                    //    hit.collider.gameObject.GetComponent<ZombieHealthManager>().TakeDamage(hit.collider.gameObject.GetComponent<ZombieManager>().Health + 1);  
+                        //if (hit.collider.gameObject.GetComponent<ZombieManager>() != null)
+                        //{
+                        //    hit.collider.gameObject.GetComponent<ZombieHealthManager>().TakeDamage(hit.collider.gameObject.GetComponent<ZombieManager>().Health + 1);  
 
-                    //}
-                    //print("Headshot!");
-                    //print(hit.collider.gameObject.GetComponent<ZombieHealthManager>();
+                        //}
+                        //print("Headshot!");
+                        //print(hit.collider.gameObject.GetComponent<ZombieHealthManager>();
 
-                    if (hit.collider.gameObject.TryGetComponent<ZombieHealthManager>(out var healthManager))
-                    {
-                        healthManager.TakeDamage(healthManager.zombieManager.Health + 1);
+                        if (hit.collider.gameObject.TryGetComponent<ZombieHealthManager>(out var healthManager))
+                        {
+                            healthManager.TakeDamage(healthManager.zombieManager.Health + 1);
 
+                        }
                     }
+                    //print(hit.collider.gameObject.name);
+                    // Instantiate(Bullet, Spawnpoint.position, Spawnpoint.rotation);
                 }
-                //print(hit.collider.gameObject.name);
-                // Instantiate(Bullet, Spawnpoint.position, Spawnpoint.rotation);
-            }
+                }
             }       
     }
     private void OnDrawGizmos()
