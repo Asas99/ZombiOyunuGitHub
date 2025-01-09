@@ -4,7 +4,7 @@ using UnityEngine;
 public static class AnimatorManager
 {
     /// <summary>
-    /// Tüm animatör deðiþkenlerini false yapar.
+    /// Tï¿½m animatï¿½r deï¿½iï¿½kenlerini false yapar.
     /// </summary>
     public static void SetAllAnimatorBools(Animator animator)
     {
@@ -18,9 +18,9 @@ public static class AnimatorManager
     }
 
     /// <summary>
-    /// Belirtilen animator deðiþkeni dýþýnda tüm deðiþkenleri false yapar.
+    /// Belirtilen animator deï¿½iï¿½keni dï¿½ï¿½ï¿½nda tï¿½m deï¿½iï¿½kenleri false yapar.
     /// </summary>
-    /// <param name="excludeBool">True yapýlacak deðiþken.</param>
+    /// <param name="excludeBool">True yapï¿½lacak deï¿½iï¿½ken.</param>
     public static void SetAllAnimatorBools(Animator animator, string excludeBool = null)
     {
         foreach (AnimatorControllerParameter param in animator.parameters)
@@ -38,9 +38,9 @@ public static class AnimatorManager
     }
 
     /// <summary>
-    /// Belirtilen animator deðiþkenleri dýþýnda tüm deðiþkenleri false yapar.
+    /// Belirtilen animator deï¿½iï¿½kenleri dï¿½ï¿½ï¿½nda tï¿½m deï¿½iï¿½kenleri false yapar.
     /// </summary>
-    /// <param name="excludeBools">True yapýlacak deðiþkenler.</param>
+    /// <param name="excludeBools">True yapï¿½lacak deï¿½iï¿½kenler.</param>
     public static void SetAllAnimatorBools(Animator animator, params string[] excludeBools)
     {
         foreach (AnimatorControllerParameter param in animator.parameters)
