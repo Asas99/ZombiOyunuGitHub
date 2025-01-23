@@ -147,8 +147,10 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[6].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-                    gameObject.GetComponent<MeshRenderer>().enabled = false;
-                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    gameObject.transform.GetChild(0).transform.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
+                    gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
                     Destroy(Text);
                 }
                 break;

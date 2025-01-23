@@ -20,7 +20,6 @@ public class LookAround : MonoBehaviour
 
         if (GameObject.FindObjectOfType<Shooting>().CanShoot && (AlexAnimator.GetBool("Has a pistol") || AlexAnimator.GetBool("Has a rifle")))
         {
-            print("qq");
             var y = Input.GetAxis("Mouse Y");
             Camera.main.transform.eulerAngles += new Vector3(-y * Sensitivity, 0, 0);
         }

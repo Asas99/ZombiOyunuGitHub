@@ -215,7 +215,15 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
-                    AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Shoot");
+                    if (AlexAnimator.GetBool("Has a pistol"))
+                    {
+                    AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Shoot","Has a pistol");
+                    }
+                    if (AlexAnimator.GetBool("Has a rifle"))
+                    {
+                        AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Shoot", "Has a rifle");
+                    }
+
                 }
             }
             else if (gameObject.GetComponent<PlayerInventory>().ItemInfos[0].Quantity == 0)
