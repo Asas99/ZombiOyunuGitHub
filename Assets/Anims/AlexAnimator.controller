@@ -421,6 +421,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Shoot
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Has a pistol
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 191819260525724936}
   m_Solo: 0
@@ -986,6 +989,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Has a rifle
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Shoot
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 191819260525724936}
   m_Solo: 0
@@ -1010,6 +1016,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: IsWalking
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Has a rifle
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4349835004337431369}
@@ -1060,6 +1069,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: IsWalking
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Has a rifle
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 243940966652910210}
@@ -1323,7 +1335,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: ff2a41fd77edfae44a751afbbc6ef7dd,
+  m_Motion: {fileID: -203655887218126122, guid: acca7cc6f90bec1499aaeb0307793811,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
