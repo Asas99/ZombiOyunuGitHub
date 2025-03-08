@@ -23,6 +23,8 @@ public class BuildingLoot : MonoBehaviour
     public int SpringfieldAmmoCount;
     public int WinchesterAmmoCount;
 
+    public GameObject TextMesh;
+
 
     public void Awake()
     {
@@ -48,6 +50,7 @@ public class BuildingLoot : MonoBehaviour
     void Start()
     {
         inventory = GameObject.FindFirstObjectByType<PlayerInventory>();
+        TextMesh.SetActive(false);
     }
 
     // Update is called once per frame
@@ -79,6 +82,11 @@ public class BuildingLoot : MonoBehaviour
                     IsCollected = true;
                 }
             }
+            if (IsCollected)
+            {
+                CanCollect = false;
+                TextMesh.SetActive(false);
+            }
         }
     }
 
@@ -86,7 +94,12 @@ public class BuildingLoot : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            CanCollect = true;  
+            if (!IsCollected)
+            {
+                CanCollect = true;
+                TextMesh.SetActive(true);
+            }
+
         }
     }
     private void OnTriggerExit(Collider other)
@@ -94,6 +107,7 @@ public class BuildingLoot : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CanCollect = false;
+            TextMesh.SetActive(false);
         }
     }
 }
