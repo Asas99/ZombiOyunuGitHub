@@ -23,48 +23,6 @@ public class InventoryManager : MonoBehaviour
             InventoryCanvas.active = !InventoryCanvas.active;
             UpdateInventory();
         }
-        #region UpdateInventory
-        //foreach (SlotManager slotManager in slotManagers)
-                //{
-                //    foreach (var itemInfo in playerInventory.ItemInfos)
-                //    {
-                //        if (itemInfo.Quantity > 0)
-                //        {
-                //            if (!itemInfo.IsCurrentlyHaving)
-                //            {
-                //                if (slotManager.ObjectName == "")
-                //                {
-                //                    print(itemInfo.IsCurrentlyHaving + ", s" + itemInfo.Name);
-                //                    slotManager.ObjectName = itemInfo.Name;
-                //                    slotManager.ProductQuantity = itemInfo.Quantity;
-                //                    itemInfo.IsCurrentlyHaving = true;
-                //                }
-                //            }
-                //            if (itemInfo.IsCurrentlyHaving)
-                //            {
-                //                if (slotManager.ObjectName == itemInfo.Name)
-                //                {
-                //                    slotManager.ProductQuantity = itemInfo.Quantity;
-                //                    slotManager.QuantityText.text = itemInfo.Quantity + "";
-                //                }
-
-                //            }
-                //        }
-                //        if (itemInfo.IsCurrentlyHaving)
-                //        {
-
-                //            if (itemInfo.Quantity <= 0)
-                //            {
-                //                slotManager.ObjectName = "";
-                //                itemInfo.IsCurrentlyHaving = false;
-                //                slotManager.ProductQuantity = 0;
-                //                slotManager.QuantityText.text = "";
-                //            }
-                //        }
-
-                //    }
-                //}
-        #endregion
     }
 
     public void UpdateInventory()
