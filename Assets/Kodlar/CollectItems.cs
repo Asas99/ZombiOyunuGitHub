@@ -35,6 +35,8 @@ public class CollectItems : MonoBehaviour
         //        AlexAnimator.SetBool("Take item", false);
         //    }
         //}
+        if (GameObject.FindAnyObjectByType<PlayerInventory>()!= null)
+        {
         Dist = Vector3.Distance(transform.position, GameObject.FindAnyObjectByType<PlayerInventory>().gameObject.transform.position);
 
         foreach (var item in playerInventory.ItemInfos)
@@ -64,6 +66,8 @@ public class CollectItems : MonoBehaviour
                 Text.SetActive(false);
             }
         }
+        }
+
     }
 
     public void Collect()

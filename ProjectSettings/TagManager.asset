@@ -31,6 +31,7 @@ TagManager:
   - winchester ammo
   - ak 47 ammo
   - remington ammo
+  - araba
   layers:
   - Default
   - TransparentFX
