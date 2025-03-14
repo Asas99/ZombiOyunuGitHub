@@ -98,6 +98,7 @@ public class CollectItems : MonoBehaviour
                 }
                 break;
 
+
             case "tahta":
                 if (playerInventory.ItemInfos[2].Quantity < playerInventory.ItemInfos[2].MaxQuantity)
                 {
@@ -270,6 +271,16 @@ public class CollectItems : MonoBehaviour
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Destroy(Text);
+                }
+                break;
+
+            case "Benzin":
+                if (playerInventory.ItemInfos[17].Quantity < playerInventory.ItemInfos[17].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[17].Quantity++;
+                    //playerInventory.ItemInfos[1].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    Destroy(gameObject);
                 }
                 break;
 
