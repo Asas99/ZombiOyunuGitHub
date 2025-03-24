@@ -59,7 +59,7 @@ public class carManager : MonoBehaviour
             }
             player.SetActive(false);
             CarCam.gameObject.SetActive(true);
-            player.transform.position = transform.position + Offset;
+            player.transform.position = gameObject.transform.position + Offset;
 
         }
         else if (!IsDriving)
@@ -74,10 +74,10 @@ public class carManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (Dist < MaxDist)
-            {
-                IsDriving = !IsDriving;
-            }
+                if (Dist < MaxDist)
+                {
+                    IsDriving = true;
+                }
         }
     }
 
@@ -100,7 +100,11 @@ public class carManager : MonoBehaviour
             gameObject.transform.position += transform.forward * Speed * Time.deltaTime;
             gameObject.transform.eulerAngles += new Vector3(0, x * TurnSpeed * Time.deltaTime, 0);
         }
-
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            player.transform.position = gameObject.transform.position + Offset;
+            IsDriving = false;
+        }
         #endregion
 
     }
