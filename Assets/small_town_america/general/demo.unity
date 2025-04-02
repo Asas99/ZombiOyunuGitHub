@@ -94,8 +94,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 288d3b797c8408443bbb78a171da3105,
-    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 9396a14a085620142ad12d093d20986e, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6241,8 +6240,7 @@ PrefabInstance:
 --- !u!1 &1691832284
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 100000, guid: e7530cf6dc2ee0449b97ab7767da6b31,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e7530cf6dc2ee0449b97ab7767da6b31, type: 3}
   m_PrefabInstance: {fileID: 72025030}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -6260,8 +6258,7 @@ GameObject:
 --- !u!23 &1691832285
 MeshRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: e7530cf6dc2ee0449b97ab7767da6b31,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: e7530cf6dc2ee0449b97ab7767da6b31, type: 3}
   m_PrefabInstance: {fileID: 72025030}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691832284}
@@ -6307,8 +6304,7 @@ MeshRenderer:
 --- !u!33 &1691832286
 MeshFilter:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3300000, guid: e7530cf6dc2ee0449b97ab7767da6b31,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 3300000, guid: e7530cf6dc2ee0449b97ab7767da6b31, type: 3}
   m_PrefabInstance: {fileID: 72025030}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691832284}
@@ -6316,8 +6312,7 @@ MeshFilter:
 --- !u!4 &1691832287
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 400000, guid: e7530cf6dc2ee0449b97ab7767da6b31,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: e7530cf6dc2ee0449b97ab7767da6b31, type: 3}
   m_PrefabInstance: {fileID: 72025030}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691832284}
@@ -8306,51 +8301,51 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 273864873}
-  - {fileID: 1222348139}
-  - {fileID: 1031076027}
-  - {fileID: 430700260}
-  - {fileID: 1887180805}
-  - {fileID: 2037783790}
-  - {fileID: 1022469608}
-  - {fileID: 635116497}
   - {fileID: 75775626}
-  - {fileID: 430081726}
+  - {fileID: 1222348139}
+  - {fileID: 430700260}
+  - {fileID: 2037783790}
+  - {fileID: 635116497}
   - {fileID: 1166144572}
+  - {fileID: 1887180805}
+  - {fileID: 1022469608}
   - {fileID: 446876761}
-  - {fileID: 1629978886}
+  - {fileID: 1031076027}
+  - {fileID: 430081726}
   - {fileID: 1977894585}
   - {fileID: 2120304615}
+  - {fileID: 1629978886}
   - {fileID: 945700386}
-  - {fileID: 1098878889}
   - {fileID: 2021037199}
+  - {fileID: 1098878889}
   - {fileID: 776747871}
   - {fileID: 441472235}
   - {fileID: 683092216}
   - {fileID: 1105468512}
-  - {fileID: 1005311116}
-  - {fileID: 1244987680}
   - {fileID: 2067156189}
-  - {fileID: 866229364}
-  - {fileID: 1541462978}
+  - {fileID: 1244987680}
+  - {fileID: 1005311116}
   - {fileID: 819512580}
+  - {fileID: 1541462978}
+  - {fileID: 866229364}
   - {fileID: 2014209739}
   - {fileID: 702121414}
   - {fileID: 1604217765}
-  - {fileID: 130680035}
   - {fileID: 1637306009}
+  - {fileID: 130680035}
   - {fileID: 1771304004}
-  - {fileID: 1706058098}
   - {fileID: 583241344}
+  - {fileID: 1706058098}
   - {fileID: 1738613455}
-  - {fileID: 1794391529}
   - {fileID: 72025030}
+  - {fileID: 1794391529}
   - {fileID: 567070483}
   - {fileID: 1035461765}
   - {fileID: 1191791138}
   - {fileID: 39396694}
   - {fileID: 1484297195}
-  - {fileID: 1728256328}
   - {fileID: 1356153380}
+  - {fileID: 1728256328}
   - {fileID: 1602437845}
   - {fileID: 1036838644}
   - {fileID: 697579067}
@@ -8389,8 +8384,8 @@ SceneRoots:
   - {fileID: 338758494}
   - {fileID: 1155832031}
   - {fileID: 1758910302}
-  - {fileID: 744883988}
   - {fileID: 655659361}
+  - {fileID: 744883988}
   - {fileID: 1488000659}
   - {fileID: 1270670407}
   - {fileID: 1165053826}
@@ -8408,15 +8403,15 @@ SceneRoots:
   - {fileID: 1501153533}
   - {fileID: 1553224695}
   - {fileID: 1714780475}
-  - {fileID: 892122976}
   - {fileID: 649388111}
+  - {fileID: 892122976}
   - {fileID: 1481193802}
   - {fileID: 1358986448}
   - {fileID: 37437619}
   - {fileID: 935930189}
   - {fileID: 1627207589}
-  - {fileID: 693064944}
   - {fileID: 139411560}
+  - {fileID: 693064944}
   - {fileID: 2117040352}
   - {fileID: 591581359}
   - {fileID: 179701175}
