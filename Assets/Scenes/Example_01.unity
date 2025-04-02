@@ -26,7 +26,11 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+<<<<<<< Updated upstream
   m_SkyboxMaterial: {fileID: 2100000, guid: d93961d83ffaccf4f8c04cbf7a141552, type: 2}
+=======
+  m_SkyboxMaterial: {fileID: 0}
+>>>>>>> Stashed changes
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -26015,6 +26019,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710267657}
   m_Mesh: {fileID: -5495902117074765545, guid: fa1102217cd525c4ab3e50e86c3528c7, type: 3}
+--- !u!4 &710807789 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0e010328a33f304faf5023c3259456c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1875936098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &711017673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31420,7 +31430,7 @@ Transform:
   - {fileID: 358567534}
   - {fileID: 1787589940}
   - {fileID: 1052397398}
-  - {fileID: 1875936099}
+  - {fileID: 710807789}
   - {fileID: 1995409725}
   - {fileID: 544229228}
   - {fileID: 827261299}
@@ -69068,12 +69078,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0e010328a33f304faf5023c3259456c, type: 3}
+<<<<<<< Updated upstream
 --- !u!4 &1875936099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0e010328a33f304faf5023c3259456c,
     type: 3}
   m_PrefabInstance: {fileID: 1875936098}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1876520393
 GameObject:
   m_ObjectHideFlags: 0
