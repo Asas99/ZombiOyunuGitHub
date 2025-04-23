@@ -16,7 +16,9 @@ public class OptionsMenu : MonoBehaviour
             optionsPanel.SetActive(!isOptionsActive);
 
             // Main Menu Panel'i tam tersi duruma getir
-            mainMenuPanel.SetActive(isOptionsActive);
+            mainMenuPanel.SetActive(isOptionsActive);        
         }
     }
 }
+
+
