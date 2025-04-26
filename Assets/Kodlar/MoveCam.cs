@@ -3,16 +3,16 @@ using UnityEngine.UI;
 
 public class MoveCam : MonoBehaviour
 {
-    public Vector3 InýtPos, ADSPosPistol, ADSPosRifle;
-    public Vector3 InýtRot, ADSRifleRot;
+    public Vector3 InitPos, ADSPosPistol, ADSPosRifle;
+    public Vector3 InitRot, ADSRifleRot;
     public Camera cam;
     public Animator animator;
     public GameObject normalParent, rifleAdsParent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        cam.transform.localPosition = InýtPos;
-        cam.transform.localEulerAngles = InýtRot;
+        cam.transform.localPosition = InitPos;
+        cam.transform.localEulerAngles = InitRot;
 
     }
 
@@ -38,8 +38,8 @@ public class MoveCam : MonoBehaviour
                 if (!animator.GetBool("Has a pistol") && !animator.GetBool("Has a rifle"))
                 {
                     //cam.transform.parent = normalParent.transform;
-                    cam.transform.localPosition = InýtPos;
-                    cam.transform.localEulerAngles = InýtRot;
+                    cam.transform.localPosition = InitPos;
+                    cam.transform.localEulerAngles = InitRot;
                 }
         }
     }
