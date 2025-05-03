@@ -33,6 +33,7 @@ TagManager:
   - remington ammo
   - araba
   - Benzin
+  - "b\u0131\xE7ak"
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -33,6 +34,8 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     private Shooting shootingScript;
     [SerializeField]
     private WeaponEquipManager weaponEquipManager;
+    private bool HasAKnife;
+    public GameObject Knife;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +52,29 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
         Run();
         Crouch();
         ADSPosAndShoot();
+        GetKnifeInOut();
+        AttackWithKnife();
+    }
+
+    private void AttackWithKnife()
+    {
+        if (HasAKnife)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator, "IsStabbing","Has a knife");
+            }
+        }
+    }
+
+    private void GetKnifeInOut()
+    {
+        Knife.SetActive(HasAKnife);
+        if(Input.GetMouseButtonDown(0))
+        {
+            HasAKnife = !HasAKnife;
+            AlexAnimator.SetBool("Has a knife", HasAKnife);
+        }
     }
 
     public void Move(float speed)
@@ -65,7 +91,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
             Multiplier = 1;
             if (x != 0 || z != 0)
             {
-                AnimatorManager.SetAllAnimatorBools(AlexAnimator,"IsWalking");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator,"IsWalking","Has a knife");
                 //AlexAnimator.SetBool("IsWalking", true);
                 //AlexAnimator.SetBool("IsRunning", false);
                 //AlexAnimator.SetBool("Has a pistol", false);
@@ -73,7 +99,14 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
             }
             else if (x == 0 && z == 0)
             {
-                AnimatorManager.SetAllAnimatorBools(AlexAnimator);
+                if (!HasAKnife)
+                {
+                    AnimatorManager.SetAllAnimatorBools(AlexAnimator);
+                }
+                else if(HasAKnife)
+                {
+                    AnimatorManager.SetAllAnimatorBools(AlexAnimator,"Has a knife");
+                }
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsRunning", false);
                 //AlexAnimator.SetBool("Has a pistol", false);

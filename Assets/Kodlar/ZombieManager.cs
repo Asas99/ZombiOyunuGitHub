@@ -146,4 +146,12 @@ public class ZombieManager : MonoBehaviour
 
         //print(CanSeeTarget());
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("býçak"))
+        {
+            gameObject.GetComponent<ZombieHealthManager>().TakeDamage(10);
+        }
+    }
 }
