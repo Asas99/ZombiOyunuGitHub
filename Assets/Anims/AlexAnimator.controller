@@ -323,7 +323,7 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6567573249207016785}
-    m_Position: {x: 340, y: 360, z: 0}
+    m_Position: {x: 330, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4384748996975286544}
     m_Position: {x: 320, y: 400, z: 0}
@@ -557,7 +557,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: go upstairs
+    m_ConditionEvent: isClimbingStairs
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 191819260525724936}
@@ -736,7 +736,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: go upstairs
+  - m_Name: isClimbingStairs
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -947,7 +947,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: go upstairs
+    m_ConditionEvent: isClimbingStairs
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6567573249207016785}
