@@ -35,6 +35,8 @@ TagManager:
   - Benzin
   - "b\u0131\xE7ak"
   - Stairs
+  - Road
+  - City
   layers:
   - Default
   - TransparentFX
