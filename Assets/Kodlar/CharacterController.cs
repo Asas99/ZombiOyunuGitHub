@@ -45,7 +45,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Move(MoveSpeed);
         Jump(JumpPower);
