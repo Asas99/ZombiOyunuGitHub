@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class carManager : MonoBehaviour
 {
@@ -15,22 +14,30 @@ public class carManager : MonoBehaviour
     public float NaturalDecel;
     [SerializeField]
     private float Speed;
-    public float MinSpeed,MaxSpeed;
+    public float MinSpeed, MaxSpeed;
     public float TurnSpeed;
     [Space(10)]
     public float MaxFuel, CurrentFuel;
     public float OneFuelWorth;
     public float FuelComsumption;
+
+    private Rigidbody rb;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
+       
+            rb = GetComponent<Rigidbody>();
+           
         
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed);
         if (CurrentFuel < 0)
         {
@@ -44,13 +51,13 @@ public class carManager : MonoBehaviour
         HopOnOff();
 
         if (IsDriving)
-        {    
+        {
             Drive();
             if (MaxFuel > CurrentFuel)
             {
                 if (MaxFuel - CurrentFuel > OneFuelWorth)
                 {
-                if (GameObject.FindFirstObjectByType<PlayerInventory>().ItemInfos[17].Quantity > 0)
+                    if (GameObject.FindFirstObjectByType<PlayerInventory>().ItemInfos[17].Quantity > 0)
                     {
                         GameObject.FindFirstObjectByType<PlayerInventory>().ItemInfos[17].Quantity--;
                         CurrentFuel += OneFuelWorth;
@@ -60,52 +67,113 @@ public class carManager : MonoBehaviour
             player.SetActive(false);
             CarCam.gameObject.SetActive(true);
             player.transform.position = gameObject.transform.position + Offset;
-
         }
         else if (!IsDriving)
         {
             player.SetActive(true);
             CarCam.gameObject.SetActive(false);
         }
-
     }
+    void FixedUpdate()
+    {
+        if (!IsDriving) return; // Karakter binmeden araba hareket etmesin
+
+        float x = Input.GetAxis("Horizontal"); // A / D
+        float y = Input.GetAxis("Vertical");   // W / S
+
+        // Dönüþ
+        if (x != 0)
+        {
+            transform.Rotate(Vector3.forward, x * TurnSpeed * Time.fixedDeltaTime);
+        }
+
+        // Yakýt tüketimi ve hýzlanma
+        if (y != 0 && CurrentFuel > 0)
+        {
+            CurrentFuel -= FuelComsumption * Time.fixedDeltaTime;
+            Speed += Accel * y * Time.fixedDeltaTime;
+        }
+
+        // Hýzý sýnýrla
+        Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed);
+
+        // Doðal yavaþlama
+        if (y == 0)
+        {
+            Speed = Mathf.MoveTowards(Speed, 0f, NaturalDecel * Time.fixedDeltaTime);
+        }
+
+        // Hareket
+        if (CurrentFuel > 0 && Speed != 0)
+        {
+            Vector3 forward = transform.right;
+            Vector3 movement = forward * -y * Speed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + movement);
+        }
+    }
+
+
+
 
     public void HopOnOff()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-                if (Dist < MaxDist)
-                {
-                    IsDriving = true;
-                }
+            if (Dist < MaxDist)
+            {
+                IsDriving = true;
+            }
         }
     }
+
+
 
     public void Drive()
     {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal"); // A / D
+        float y = Input.GetAxis("Vertical");   // W / S
 
-        if (y != 0)
+        // Yakýt tüketimi ve hýzlanma
+        if (y != 0 && CurrentFuel > 0)
         {
             CurrentFuel -= FuelComsumption * Time.deltaTime;
+            Speed += Accel * y * Time.deltaTime;
         }
-        #region Hýzlan ve yavaþla
-        Speed += Accel * y;
-        #endregion
 
-        if (CurrentFuel > 0)
+        // Hýzý sýnýrla
+        Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed);
+
+        // Doðal yavaþlama
+        if (y == 0)
         {
-            #region Hareket Et
-            gameObject.transform.position += transform.forward * Speed * Time.deltaTime;
-            gameObject.transform.eulerAngles += new Vector3(0, x * TurnSpeed * Time.deltaTime, 0);
+            Speed = Mathf.MoveTowards(Speed, 0f, NaturalDecel * Time.deltaTime);
         }
+
+        // Araba'nýn hareketi (X ekseni ileri yön)
+        if (CurrentFuel > 0 && Speed != 0)
+        {
+            Vector3 forward = transform.right; // X ekseni ileri yön
+            Vector3 movement = forward * -y * Speed * Time.deltaTime; // y ters çevrildi
+            rb.MovePosition(transform.position + movement);
+        }
+
+        // Dönüþler (Z ekseni etrafýnda döner)
+        if (x != 0)
+        {
+            float direction = y <= 0 ? 1f : -1f; // ileri/geri yönüne göre dönüþ yönü
+            transform.Rotate(Vector3.forward, x * TurnSpeed * Time.deltaTime * direction);
+        }
+
+        // Arabadan inme
         if (Input.GetKeyDown(KeyCode.X))
         {
-            player.transform.position = gameObject.transform.position + Offset;
+            player.transform.position = transform.position + Offset;
             IsDriving = false;
         }
-        #endregion
-
     }
+
+
+
+
+
 }
