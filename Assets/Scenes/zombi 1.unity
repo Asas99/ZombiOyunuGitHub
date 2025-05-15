@@ -12932,6 +12932,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 201470960}
     m_Modifications:
+    - target: {fileID: -5754084199372789682, guid: f06d610d461b5f446a84f92e4f41b3d5,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -8552261695923337930, guid: c87d5da8ed2ed144398a639013bdc700,
+        type: 3}
+    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4760825738776760043, guid: 3cad226ff240e494d937d9313bc1a84c,
         type: 3}
       propertyPath: m_Name
@@ -13011,22 +13027,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 76.33
-      objectReference: {fileID: 0}
-    - target: {fileID: -5754084199372789682, guid: f06d610d461b5f446a84f92e4f41b3d5,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -8552261695923337930, guid: c87d5da8ed2ed144398a639013bdc700,
-        type: 3}
-    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21693,7 +21693,7 @@ MonoBehaviour:
   Player: {fileID: 1333018609}
   AlexAnimator: {fileID: 1333018610}
   weaponEquipManager: {fileID: 1333018621}
-  Knife: {fileID: 0}
+  Knife: {fileID: 919132149155446097, guid: 8e4416b2964b4f0438e3cb074aea8aab, type: 3}
 --- !u!54 &1333018613
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33726,6 +33726,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 201470960}
     m_Modifications:
+    - target: {fileID: -5754084199372789682, guid: f06d610d461b5f446a84f92e4f41b3d5,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 150581138598605843, guid: db454fecce693d746bb8c9748ea5eeac,
+        type: 3}
+    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2346465068091653653, guid: 4a15e02cf05856243814292d39e2fcb5,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -33805,22 +33821,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: winchester1894
-      objectReference: {fileID: 0}
-    - target: {fileID: -5754084199372789682, guid: f06d610d461b5f446a84f92e4f41b3d5,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 150581138598605843, guid: db454fecce693d746bb8c9748ea5eeac,
-        type: 3}
-    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3451118302482216456, guid: f06d610d461b5f446a84f92e4f41b3d5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
