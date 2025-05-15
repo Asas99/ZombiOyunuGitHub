@@ -7,7 +7,7 @@ public class ToggleCanvas : MonoBehaviour
     void Start()
     {
         // Başlangıçta Canvas'ın gizli olmasını istiyorsan bunu kullanabilirsin.
-        canvas.enabled = false;
+        
     }
 
     void Update()
