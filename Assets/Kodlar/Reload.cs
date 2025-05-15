@@ -25,7 +25,7 @@ public class Reload : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    if (Weapon.GetComponent<WeaponInfo>().AmmoInCharger == 0)
+                    if (Weapon.GetComponent<WeaponInfo>().AmmoInCharger < 0)
                     {
                         if (Weapon.GetComponent<WeaponInfo>().CurrentAmmo >= Weapon.GetComponent<WeaponInfo>().chargersize)
                         {
