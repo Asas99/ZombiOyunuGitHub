@@ -64,5 +64,6 @@ public class ItemInfo
     public int Quantity;
     public int MaxQuantity;
     public Sprite sprite;
+    public GameObject ItemObject;
 }
 

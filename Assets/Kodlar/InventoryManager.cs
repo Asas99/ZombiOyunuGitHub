@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         playerInventory = GameObject.FindAnyObjectByType<PlayerInventory>();
+        Debug.Log("ssssss" + GameObject.FindFirstObjectByType<InventoryManager>().name);
     }
 
     // Update is called once per frame

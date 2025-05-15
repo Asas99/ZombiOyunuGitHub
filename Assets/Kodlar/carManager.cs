@@ -137,7 +137,7 @@ public class carManager : MonoBehaviour
         if (y != 0 && CurrentFuel > 0)
         {
             CurrentFuel -= FuelComsumption * Time.deltaTime;
-            Speed += Accel * y * Time.deltaTime;
+            Speed += Accel * -y * Time.deltaTime;
         }
 
         // Hýzý sýnýrla
@@ -153,7 +153,7 @@ public class carManager : MonoBehaviour
         if (CurrentFuel > 0 && Speed != 0)
         {
             Vector3 forward = transform.right; // X ekseni ileri yön
-            Vector3 movement = forward * -y * Speed * Time.deltaTime; // y ters çevrildi
+            Vector3 movement = forward * 1 * Speed * Time.deltaTime; // y ters çevrildi
             rb.MovePosition(transform.position + movement);
         }
 

@@ -11002,6 +11002,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5754084199372789682, guid: d0ed79f8bf910ea4f9fa33a7ed973d08,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4536773283001372330, guid: d0ed79f8bf910ea4f9fa33a7ed973d08,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: 5842629e6568b424fb16d6f9eeae83ff,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -11097,12 +11103,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -5754084199372789682, guid: d0ed79f8bf910ea4f9fa33a7ed973d08,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4536773283001372330, guid: d0ed79f8bf910ea4f9fa33a7ed973d08,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
