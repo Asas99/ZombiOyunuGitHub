@@ -2,28 +2,24 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public GameManager.InventoryItem itemData;
-
-    private bool isPlayerNear = false;
-
-    void Update()
-    {
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
-        {
-            FindObjectOfType<GameManager>().AddItem(itemData);
-            Destroy(gameObject); // item yerden kaybolur
-        }
-    }
+    public string itemName;
+    public Sprite icon;
+    public GameManager.ItemType type;
+    public int effectAmount;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            isPlayerNear = true;
-    }
+        {
+            GameManager.Instance.AddItem(new GameManager.InventoryItem
+            {
+                itemName = itemName,
+                icon = icon,
+                type = type,
+                effectAmount = effectAmount
+            });
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-            isPlayerNear = false;
+            Destroy(gameObject);
+        }
     }
 }

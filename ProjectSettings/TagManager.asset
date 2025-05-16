@@ -37,6 +37,7 @@ TagManager:
   - Stairs
   - Road
   - City
+  - Fire
   layers:
   - Default
   - TransparentFX

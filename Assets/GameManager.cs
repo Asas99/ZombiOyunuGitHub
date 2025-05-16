@@ -1,9 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     [System.Serializable]
     public class InventoryItem
     {
@@ -11,12 +14,11 @@ public class GameManager : MonoBehaviour
         public Sprite icon;
         public ItemType type;
         public int effectAmount;
-        public GameObject worldPrefab; // Dünyaya düþecek prefab
+        public GameObject slotObject;
     }
 
-    public enum ItemType { Food, Drink }
+    public enum ItemType { Food, Drink, RawFish, CookedFish, Lighter, Stick }
 
-    [Header("UI")]
     public GameObject inventoryPanel;
     public GameObject optionsPanel;
     public Transform slotParent;
@@ -25,34 +27,40 @@ public class GameManager : MonoBehaviour
     public Button dropButton;
     public Slider thirstSlider;
     public Slider hungerSlider;
+    public GameObject cookButton;
 
-    [Header("Item Settings")]
-    public Sprite waterIcon;
-
-    [Header("Drop Settings")]
-    public Transform player; // Oyuncunun konumu
+    public GameObject firePrefab;
+    public GameObject stickPrefab;
+    public GameObject cookedFishPrefab;
+    public Transform fireSpawnPoint;
 
     private List<InventoryItem> items = new();
     private InventoryItem currentItem;
     private GameObject currentSlot;
 
+    void Awake() => Instance = this;
+
     void Start()
     {
         inventoryPanel.SetActive(false);
         optionsPanel.SetActive(false);
+        cookButton.SetActive(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+
+        CheckCraftingConditions();
     }
 
     public void AddItem(InventoryItem item)
     {
-        items.Add(item);
         GameObject slot = Instantiate(slotPrefab, slotParent);
         slot.GetComponent<Image>().sprite = item.icon;
+        item.slotObject = slot;
+        items.Add(item);
 
         Button btn = slot.GetComponent<Button>();
         btn.onClick.AddListener(() => OnItemClick(item, slot));
@@ -76,12 +84,10 @@ public class GameManager : MonoBehaviour
         if (currentItem.type == ItemType.Drink)
         {
             thirstSlider.value += currentItem.effectAmount;
-            Debug.Log("Su içildi, susuzluk azaldý");
         }
         else if (currentItem.type == ItemType.Food)
         {
             hungerSlider.value += currentItem.effectAmount;
-            Debug.Log("Yemek yendi, açlýk azaldý");
         }
 
         RemoveCurrentItem();
@@ -89,19 +95,78 @@ public class GameManager : MonoBehaviour
 
     void DropItem()
     {
-        if (currentItem.worldPrefab != null && player != null)
-        {
-            Vector3 dropPosition = player.position + player.forward * 1.5f;
-            Instantiate(currentItem.worldPrefab, dropPosition, Quaternion.identity);
-        }
-
         RemoveCurrentItem();
     }
 
     void RemoveCurrentItem()
     {
         items.Remove(currentItem);
-        Destroy(currentSlot);
+        Destroy(currentItem.slotObject);
         optionsPanel.SetActive(false);
+    }
+
+    void CheckCraftingConditions()
+    {
+        bool hasRawFish = items.Any(i => i.type == ItemType.RawFish);
+        bool hasLighter = items.Any(i => i.type == ItemType.Lighter);
+        int stickCount = items.Count(i => i.type == ItemType.Stick);
+
+        cookButton.SetActive(hasRawFish && hasLighter && stickCount >= 5);
+    }
+
+    public void CookFish()
+    {
+        bool hasRawFish = RemoveItem(ItemType.RawFish);
+        bool hasLighter = RemoveItem(ItemType.Lighter);
+        bool removedSticks = RemoveItems(ItemType.Stick, 5);
+
+        if (hasRawFish && hasLighter && removedSticks)
+        {
+            GameObject sticks = Instantiate(stickPrefab, fireSpawnPoint.position, Quaternion.identity);
+            GameObject fire = Instantiate(firePrefab, fireSpawnPoint.position + Vector3.up * 0.5f, Quaternion.identity);
+
+            StartCoroutine(FinishCooking(sticks, fire));
+        }
+        else
+        {
+            Debug.LogWarning("Gerekli malzemeler eksik.");
+        }
+    }
+
+    IEnumerator<WaitForSeconds> FinishCooking(GameObject sticks, GameObject fire)
+    {
+        yield return new WaitForSeconds(5f);
+
+        Destroy(fire);
+        Destroy(sticks);
+
+        Instantiate(cookedFishPrefab, fireSpawnPoint.position, Quaternion.identity);
+    }
+
+    bool RemoveItem(ItemType type)
+    {
+        InventoryItem item = items.FirstOrDefault(i => i.type == type);
+        if (item != null)
+        {
+            items.Remove(item);
+            Destroy(item.slotObject);
+            return true;
+        }
+        return false;
+    }
+
+    bool RemoveItems(ItemType type, int count)
+    {
+        var foundItems = items.Where(i => i.type == type).Take(count).ToList();
+        if (foundItems.Count == count)
+        {
+            foreach (var item in foundItems)
+            {
+                items.Remove(item);
+                Destroy(item.slotObject);
+            }
+            return true;
+        }
+        return false;
     }
 }
