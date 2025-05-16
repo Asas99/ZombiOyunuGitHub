@@ -12,6 +12,6 @@ public class InventoryItem
 
 public enum ItemType
 {
-    Food,
-    Drink
+    Food,Drink, Stick, Lighter, RawFish, CookedFish
+
 }
