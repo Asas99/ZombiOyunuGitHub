@@ -140,8 +140,11 @@ public class GameManager : MonoBehaviour
         Destroy(fire);
         Destroy(sticks);
 
-        Instantiate(cookedFishPrefab, fireSpawnPoint.position, Quaternion.identity);
+        // Balığı biraz yukarıda çıkar ki yere gömülmesin
+        Vector3 spawnPos = fireSpawnPoint.position + Vector3.up * 0.2f;
+        Instantiate(cookedFishPrefab, spawnPos, Quaternion.identity);
     }
+
 
     bool RemoveItem(ItemType type)
     {
