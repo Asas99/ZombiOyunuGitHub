@@ -38,6 +38,7 @@ TagManager:
   - Road
   - City
   - Fire
+  - top
   layers:
   - Default
   - TransparentFX
@@ -49,7 +50,7 @@ TagManager:
   - minimap
   - Terrain
   - wall
-  - 
+  - top
   - 
   - 
   - 
