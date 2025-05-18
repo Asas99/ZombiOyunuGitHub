@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WeaponEquipManager : MonoBehaviour
 {
     public GameObject[] Weapons;
-    [Header("Mevcut Sialh özellikleri")]
+    [Header("Mevcut Silah özellikleri")]
     public string Name;
     public string selectedTag;
     public float Damage;

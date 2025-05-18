@@ -22,6 +22,7 @@ public class SwitchWeaponInHand : MonoBehaviour
                 if (weapon.CompareTag(weaponEquipManager.selectedTag))
                 {
                     weapon.SetActive(true);
+                    print("bulundu tag" + weaponEquipManager.selectedTag);
                 }
                 else
                 {
