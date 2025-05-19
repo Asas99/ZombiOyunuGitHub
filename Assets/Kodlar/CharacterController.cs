@@ -224,6 +224,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
                 {
                     if (weaponEquipManager.Name == "colt" || weaponEquipManager.Name == "revolver")
                     {
+                        print("revolver var,nişan için hazır");
                         if (!AlexAnimator.GetBool("IsWalking"))
                         {
                             AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol");
