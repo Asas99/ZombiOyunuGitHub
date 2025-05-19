@@ -4,29 +4,31 @@ using UnityEngine.Rendering;
 public class DayNightCycle : MonoBehaviour
 {
     [Header("Lights")]
-    public Light directionalLight;
-    public Light moonLight;
+    public Light directionalLight;  // Güneş ışığı
+    public Light moonLight;         // Ay ışığı
 
     [Header("Time Settings")]
-    public float dayDuration = 60f;
+    public float dayDuration = 60f; // Tam döngü süresi (saniye)
 
-    private float time;
+    private float time; // 0 - 1 arası zaman
     private Gradient sunColor;
+    private Gradient ambientGradient;
+    private Gradient fogGradient;
 
     void Start()
     {
         RenderSettings.ambientMode = AmbientMode.Flat;
         RenderSettings.fog = true;
 
-        // Güneş rengi gradient’i
+        // GÜNEŞ IŞIĞI RENGİ GEÇİŞLERİ
         sunColor = new Gradient();
         sunColor.SetKeys(
             new GradientColorKey[] {
-                new GradientColorKey(new Color(0.043f, 0.114f, 0.227f), 0f),
-                new GradientColorKey(new Color(1f, 0.627f, 0.478f), 0.25f),
-                new GradientColorKey(Color.white, 0.5f),
-                new GradientColorKey(new Color(1f, 0.627f, 0.478f), 0.75f),
-                new GradientColorKey(new Color(0.043f, 0.114f, 0.227f), 1f)
+                new GradientColorKey(new Color(0.1f, 0.1f, 0.2f), 0f),       // Gece
+                new GradientColorKey(new Color(1f, 0.5f, 0.3f), 0.25f),      // Gün doğumu
+                new GradientColorKey(Color.white, 0.5f),                    // Gündüz
+                new GradientColorKey(new Color(1f, 0.5f, 0.3f), 0.75f),      // Gün batımı
+                new GradientColorKey(new Color(0.1f, 0.1f, 0.2f), 1f)        // Gece
             },
             new GradientAlphaKey[] {
                 new GradientAlphaKey(1f, 0f),
@@ -34,12 +36,46 @@ public class DayNightCycle : MonoBehaviour
             }
         );
 
-        directionalLight.shadows = LightShadows.Soft;
-        directionalLight.shadowStrength = 0.8f;
-        directionalLight.shadowBias = 0.05f;
-        directionalLight.shadowNormalBias = 0.4f;
+        // AMBIENT LIGHT GEÇİŞİ (gerçekçi, yumuşak)
+        ambientGradient = new Gradient();
+        ambientGradient.SetKeys(
+            new GradientColorKey[] {
+                new GradientColorKey(new Color(0.03f, 0.04f, 0.06f), 0f),      // Gece
+                new GradientColorKey(new Color(0.25f, 0.2f, 0.2f), 0.2f),      // Gün doğumu
+                new GradientColorKey(new Color(0.55f, 0.55f, 0.5f), 0.5f),     // Gündüz
+                new GradientColorKey(new Color(0.25f, 0.2f, 0.2f), 0.8f),      // Gün batımı
+                new GradientColorKey(new Color(0.03f, 0.04f, 0.06f), 1f)       // Gece
+            },
+            new GradientAlphaKey[] {
+                new GradientAlphaKey(1f, 0f),
+                new GradientAlphaKey(1f, 1f)
+            }
+        );
 
-        moonLight.shadows = LightShadows.None;
+        // FOG RENGİ: Ambient ile uyumlu şekilde geçiş
+        fogGradient = new Gradient();
+        fogGradient.SetKeys(
+            new GradientColorKey[] {
+                new GradientColorKey(new Color(0.05f, 0.06f, 0.08f), 0f),       // Gece
+                new GradientColorKey(new Color(0.35f, 0.3f, 0.25f), 0.25f),     // Gün doğumu
+                new GradientColorKey(new Color(0.8f, 0.8f, 0.75f), 0.5f),       // Gündüz
+                new GradientColorKey(new Color(0.35f, 0.3f, 0.25f), 0.75f),     // Gün batımı
+                new GradientColorKey(new Color(0.05f, 0.06f, 0.08f), 1f)        // Gece
+            },
+            new GradientAlphaKey[] {
+                new GradientAlphaKey(1f, 0f),
+                new GradientAlphaKey(1f, 1f)
+            }
+        );
+
+        // Gölge ve ışık detayları
+        directionalLight.shadows = LightShadows.Soft;
+        directionalLight.shadowStrength = 0.9f;
+        directionalLight.shadowBias = 0.05f;
+
+        moonLight.color = new Color(0.3f, 0.35f, 0.45f); // Soğuk gece ışığı
+        moonLight.shadows = LightShadows.Soft;
+        moonLight.shadowStrength = 0.5f;
     }
 
     void Update()
@@ -57,23 +93,13 @@ public class DayNightCycle : MonoBehaviour
         directionalLight.enabled = isDay;
         moonLight.enabled = !isDay;
 
-        Color currentSunColor = sunColor.Evaluate(time);
+        // Işık yoğunluğu
+        directionalLight.intensity = isDay ? intensity * 1.2f : 0f;
+        moonLight.intensity = isDay ? 0f : (1f - intensity) * 0.3f;
 
-        if (isDay)
-        {
-            directionalLight.intensity = intensity * 1.2f;
-            RenderSettings.ambientLight = new Color(0.4f, 0.4f, 0.4f);
-        }
-        else
-        {
-            moonLight.intensity = (1f - intensity) * 0.2f;
-            RenderSettings.ambientLight = new Color(0.05f, 0.1f, 0.2f);
-        }
-
-        directionalLight.color = currentSunColor;
-
-        // Dinamik fog rengi: Gündüz güneş rengi, gece yumuşak koyu mavi
-        Color nightFog = new Color(0.08f, 0.1f, 0.15f);
-        RenderSettings.fogColor = Color.Lerp(nightFog, currentSunColor, intensity);
+        // Renk ve ortam geçişleri
+        directionalLight.color = sunColor.Evaluate(time);
+        RenderSettings.ambientLight = ambientGradient.Evaluate(time);
+        RenderSettings.fogColor = fogGradient.Evaluate(time);
     }
 }
