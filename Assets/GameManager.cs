@@ -7,18 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [System.Serializable]
-    public class InventoryItem
-    {
-        public string itemName;
-        public Sprite icon;
-        public ItemType type;
-        public int effectAmount;
-        public GameObject slotObject;
-    }
-
-    public enum ItemType { Food, Drink, RawFish, CookedFish, Lighter, Stick }
-
     public GameObject inventoryPanel;
     public GameObject optionsPanel;
     public Transform slotParent;
@@ -81,13 +69,13 @@ public class GameManager : MonoBehaviour
 
     void UseItem()
     {
-        if (currentItem.type == ItemType.Drink)
+        if (currentItem.itemType == ItemType.Drink)
         {
-            thirstSlider.value += currentItem.effectAmount;
+            thirstSlider.value += currentItem.restoreAmount;
         }
-        else if (currentItem.type == ItemType.Food)
+        else if (currentItem.itemType == ItemType.Food)
         {
-            hungerSlider.value += currentItem.effectAmount;
+            hungerSlider.value += currentItem.restoreAmount;
         }
 
         RemoveCurrentItem();
@@ -107,9 +95,9 @@ public class GameManager : MonoBehaviour
 
     void CheckCraftingConditions()
     {
-        bool hasRawFish = items.Any(i => i.type == ItemType.RawFish);
-        bool hasLighter = items.Any(i => i.type == ItemType.Lighter);
-        int stickCount = items.Count(i => i.type == ItemType.Stick);
+        bool hasRawFish = items.Any(i => i.itemType == ItemType.RawFish);
+        bool hasLighter = items.Any(i => i.itemType == ItemType.Lighter);
+        int stickCount = items.Count(i => i.itemType == ItemType.Stick);
 
         cookButton.SetActive(hasRawFish && hasLighter && stickCount >= 5);
     }
@@ -140,15 +128,18 @@ public class GameManager : MonoBehaviour
         Destroy(fire);
         Destroy(sticks);
 
-        // Balığı biraz yukarıda çıkar ki yere gömülmesin
         Vector3 spawnPos = fireSpawnPoint.position + Vector3.up * 0.2f;
         Instantiate(cookedFishPrefab, spawnPos, Quaternion.identity);
     }
 
-
-    bool RemoveItem(ItemType type)
+    public bool HasItem(ItemType type)
     {
-        InventoryItem item = items.FirstOrDefault(i => i.type == type);
+        return items.Any(i => i.itemType == type);
+    }
+
+    public bool RemoveItem(ItemType type)
+    {
+        InventoryItem item = items.FirstOrDefault(i => i.itemType == type);
         if (item != null)
         {
             items.Remove(item);
@@ -160,7 +151,7 @@ public class GameManager : MonoBehaviour
 
     bool RemoveItems(ItemType type, int count)
     {
-        var foundItems = items.Where(i => i.type == type).Take(count).ToList();
+        var foundItems = items.Where(i => i.itemType == type).Take(count).ToList();
         if (foundItems.Count == count)
         {
             foreach (var item in foundItems)

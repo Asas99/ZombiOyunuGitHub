@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class InventoryItem
@@ -8,6 +8,9 @@ public class InventoryItem
     public GameObject worldPrefab;
     public ItemType itemType;
     public int restoreAmount;
+
+    // ✅ Bu satırı ekle
+    public GameObject slotObject;
 }
 
 public enum ItemType
@@ -17,6 +20,6 @@ public enum ItemType
     Stick,
     Lighter,
     RawFish,
-    CookedFish
-
+    CookedFish,
+    FuelCan
 }

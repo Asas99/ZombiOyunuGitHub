@@ -1,24 +1,25 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
     public string itemName;
     public Sprite icon;
-    public GameManager.ItemType type;
+    public ItemType type; // ✅ GameManager.ItemType değil
     public int effectAmount;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.AddItem(new GameManager.InventoryItem
+            InventoryItem newItem = new InventoryItem
             {
                 itemName = itemName,
                 icon = icon,
-                type = type,
-                effectAmount = effectAmount
-            });
+                itemType = type, // ✅ type yerine itemType
+                restoreAmount = effectAmount
+            };
 
+            GameManager.Instance.AddItem(newItem);
             Destroy(gameObject);
         }
     }
