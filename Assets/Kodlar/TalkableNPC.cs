@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TalkableNPC : MonoBehaviour
 {
     public GameObject DialogueManagerObject;
+    public GameObject DialogueManagerPanel;
     public DialogueManager dialogueManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,6 +13,7 @@ public class TalkableNPC : MonoBehaviour
         if (DialogueManagerObject != null)
         {
             dialogueManager = DialogueManagerObject.GetComponent<DialogueManager>();
+            DialogueManagerPanel.SetActive(false);
         } 
     }
 
@@ -20,9 +22,10 @@ public class TalkableNPC : MonoBehaviour
     {
         if(dialogueManager != null)
         {
-            if(Input.GetKeyDown(KeyCode.T))
+            if(Input.GetKeyDown(KeyCode.D))
             {
                 dialogueManager.StartDialogue();
+                DialogueManagerPanel.SetActive(true);
                 print("Started");
             }
         }   
