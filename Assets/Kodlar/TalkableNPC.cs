@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,15 +21,29 @@ public class TalkableNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dialogueManager != null)
+        //if(dialogueManager != null)
+        //{
+        //    if(Input.GetKeyDown(KeyCode.D))
+        //    {
+        //        dialogueManager.StartDialogue();
+        //        DialogueManagerPanel.SetActive(true);
+        //        print("Started");
+        //    }
+        //}   
+
+    }
+
+    public void OnMouseDown()
+    {
+        if (dialogueManager != null)
         {
-            if(Input.GetKeyDown(KeyCode.D))
+            if (dialogueManager.ElementIndex == 0)
             {
                 dialogueManager.StartDialogue();
                 DialogueManagerPanel.SetActive(true);
                 print("Started");
             }
-        }   
+        }  
         dialogueManager.SetDialoguePart();
     }
 }

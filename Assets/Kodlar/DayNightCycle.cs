@@ -9,7 +9,7 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("Time Settings")]
     public float dayDuration = 60f; // Tam döngü süresi (saniye)
-
+    [SerializeField]
     private float time; // 0 - 1 arası zaman
     private Gradient sunColor;
     private Gradient ambientGradient;

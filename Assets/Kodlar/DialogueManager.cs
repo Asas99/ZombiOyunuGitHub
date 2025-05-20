@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     public Image SpeakerImage;
     public GameObject GeneralPanel;
     [SerializeField]
-    private int ElementIndex;
+    public int ElementIndex;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
     {
         IsTalking = false;
         GeneralPanel.SetActive(IsTalking);
-        ElementIndex = 0;
+        ElementIndex = -1;
     }
 }
 
