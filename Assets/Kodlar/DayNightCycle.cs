@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -18,7 +19,17 @@ public class DayNightCycle : MonoBehaviour
     void Start()
     {
         RenderSettings.ambientMode = AmbientMode.Flat;
-        RenderSettings.fog = true;
+        
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "EmreAlexEv")
+        {
+            RenderSettings.fog = false;
+        }
+        else
+        {
+            RenderSettings.fog = true;
+        }
 
         // Öncelik: Uykudan uyanma kontrolü
         if (PlayerPrefs.GetInt("WakeUp", 0) == 1)
