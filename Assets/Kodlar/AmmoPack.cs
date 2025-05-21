@@ -21,8 +21,8 @@ public class AmmoPack : MonoBehaviour
     {
         for (int i = 0; i < gameObject.GetComponent<AmmoPack>().CompatibleWeapons.Length; i++)
         {
-            gameObject.GetComponent<AmmoPack>().CompatibleWeapons[i].GetComponent<WeaponInfo>()
-.CurrentAmmo += gameObject.GetComponent<AmmoPack>().AmmoCount;
+            gameObject.GetComponent<AmmoPack>().CompatibleWeapons[i].GetComponent<WeaponInfo>().CurrentAmmo += gameObject.GetComponent<AmmoPack>().AmmoCount;
+
         }
     }
 }
