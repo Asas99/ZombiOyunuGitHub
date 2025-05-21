@@ -34,7 +34,6 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     private Shooting shootingScript;
     [SerializeField]
     private WeaponEquipManager weaponEquipManager;
-    [SerializeField]
     private bool HasAKnife;
     public GameObject Knife;
     // Start is called before the first frame update
@@ -61,7 +60,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     {
         if (HasAKnife)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.N))
             {
                 AnimatorManager.SetAllAnimatorBools(AlexAnimator, "IsStabbing","Has a knife");
             }
@@ -71,7 +70,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     private void GetKnifeInOut()
     {
         Knife.SetActive(HasAKnife);
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetKeyDown(KeyCode.B))
         {
             HasAKnife = !HasAKnife;
             AlexAnimator.SetBool("Has a knife", HasAKnife);
