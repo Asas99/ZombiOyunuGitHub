@@ -14840,9 +14840,9 @@ MonoBehaviour:
   Food: 100
   WaterDecrease: 1
   FoodDecrease: 1
-  HealthSlider: {fileID: 0}
-  WaterSlider: {fileID: 0}
-  FoodSlider: {fileID: 0}
+  HealthSlider: {fileID: 1018184322}
+  WaterSlider: {fileID: 1238018420}
+  FoodSlider: {fileID: 1309173384}
 --- !u!114 &1650293377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14890,6 +14890,7 @@ MonoBehaviour:
   Player: {fileID: 1650293372}
   AlexAnimator: {fileID: 1650293383}
   weaponEquipManager: {fileID: 0}
+  HasAKnife: 0
   Knife: {fileID: 564546607}
 --- !u!114 &1650293379
 MonoBehaviour:
