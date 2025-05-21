@@ -14,7 +14,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     public float MoveSpeed;
     public float MoveSpeedInAir;
     public float JumpPower;
-    public float WaitForJumpTime,JumpTime;
+    public float WaitForJumpTime, JumpTime;
     [SerializeField]
     private bool JumpTriggered;
     public float AdditionalGravity;
@@ -34,6 +34,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     private Shooting shootingScript;
     [SerializeField]
     private WeaponEquipManager weaponEquipManager;
+    [SerializeField]
     private bool HasAKnife;
     public GameObject Knife;
     // Start is called before the first frame update
@@ -60,9 +61,9 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     {
         if (HasAKnife)
         {
-            if (Input.GetKeyDown(KeyCode.N))
+            if (Input.GetMouseButtonDown(0))
             {
-                AnimatorManager.SetAllAnimatorBools(AlexAnimator, "IsStabbing","Has a knife");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator, "IsStabbing", "Has a knife");
             }
         }
     }
@@ -70,7 +71,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     private void GetKnifeInOut()
     {
         Knife.SetActive(HasAKnife);
-        if(Input.GetKeyDown(KeyCode.B))
+        if (Input.GetMouseButtonDown(1))
         {
             HasAKnife = !HasAKnife;
             AlexAnimator.SetBool("Has a knife", HasAKnife);
@@ -91,7 +92,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
             Multiplier = 1;
             if (x != 0 || z != 0)
             {
-                AnimatorManager.SetAllAnimatorBools(AlexAnimator,"IsWalking","Has a knife");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator, "IsWalking", "Has a knife");
                 //AlexAnimator.SetBool("IsWalking", true);
                 //AlexAnimator.SetBool("IsRunning", false);
                 //AlexAnimator.SetBool("Has a pistol", false);
@@ -103,9 +104,9 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
                 {
                     AnimatorManager.SetAllAnimatorBools(AlexAnimator);
                 }
-                else if(HasAKnife)
+                else if (HasAKnife)
                 {
-                    AnimatorManager.SetAllAnimatorBools(AlexAnimator,"Has a knife");
+                    AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a knife");
                 }
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsRunning", false);
@@ -139,7 +140,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
             Multiplier = CrouchMultplier;
             if (x != 0 || z != 0)
             {
-                AnimatorManager.SetAllAnimatorBools(AlexAnimator,"Crawl");
+                AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Crawl");
                 //AlexAnimator.SetBool("IsWalking", false);
                 //AlexAnimator.SetBool("IsAttacking", false);
                 //AlexAnimator.SetBool("IsJumping", false);
@@ -214,9 +215,9 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     //Nişan alacak
     public void ADSPosAndShoot()
     {
-        if(gameObject.GetComponent<PlayerInventory>() != null)
+        if (gameObject.GetComponent<PlayerInventory>() != null)
         {
-            if(weaponEquipManager.Name != null)
+            if (weaponEquipManager.Name != null)
             {
                 //print(weaponEquipManager.Name);
                 shootingScript.CanShoot = true;
@@ -231,7 +232,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
                         }
                         if (AlexAnimator.GetBool("IsWalking"))
                         {
-                            AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol","IsWalking");
+                            AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Has a pistol", "IsWalking");
                         }
                     }
                     else if (weaponEquipManager.Name == "ak47" || weaponEquipManager.Name == "Krag-Jergensen" || weaponEquipManager.Name == "remington" || weaponEquipManager.Name == "springfield" || weaponEquipManager.Name == "winchester1897" || weaponEquipManager.Name == "winchester1894")
@@ -251,7 +252,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
                 {
                     if (AlexAnimator.GetBool("Has a pistol"))
                     {
-                    AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Shoot","Has a pistol");
+                        AnimatorManager.SetAllAnimatorBools(AlexAnimator, "Shoot", "Has a pistol");
                     }
                     if (AlexAnimator.GetBool("Has a rifle"))
                     {
@@ -294,4 +295,3 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
         }
     }
 }
-
