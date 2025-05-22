@@ -122,8 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163a22e922b93774eb3511a4b4b7e353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData:
-    itemName: Konserve
-    icon: {fileID: 21300020, guid: a1d46cd3f2614cc43be92ab44ea7d819, type: 3}
-    type: 0
-    effectAmount: 20
+  itemName: 
+  icon: {fileID: 21300000, guid: 7e688c72613b0c54eb664703e44e0878, type: 3}
+  type: 0
+  effectAmount: 40
