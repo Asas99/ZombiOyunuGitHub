@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private List<InventoryItem> items = new();
     private InventoryItem currentItem;
     private GameObject currentSlot;
+    public int maxItemCount = 20;
 
     void Awake() => Instance = this;
 
@@ -33,7 +34,9 @@ public class GameManager : MonoBehaviour
         inventoryPanel.SetActive(false);
         optionsPanel.SetActive(false);
         cookButton.SetActive(false);
+
     }
+
 
     void Update()
     {
@@ -43,16 +46,24 @@ public class GameManager : MonoBehaviour
         CheckCraftingConditions();
     }
 
-    public void AddItem(InventoryItem item)
+    public bool AddItem(InventoryItem item)
+{
+    if (items.Count >= maxItemCount)
     {
-        GameObject slot = Instantiate(slotPrefab, slotParent);
-        slot.GetComponent<Image>().sprite = item.icon;
-        item.slotObject = slot;
-        items.Add(item);
-
-        Button btn = slot.GetComponent<Button>();
-        btn.onClick.AddListener(() => OnItemClick(item, slot));
+        Debug.LogWarning("Envanter dolu! Eşya alınamadı.");
+        return false;
     }
+
+    GameObject slot = Instantiate(slotPrefab, slotParent);
+    slot.GetComponent<Image>().sprite = item.icon;
+    item.slotObject = slot;
+    items.Add(item);
+
+    Button btn = slot.GetComponent<Button>();
+    btn.onClick.AddListener(() => OnItemClick(item, slot));
+
+    return true;
+}
 
     void OnItemClick(InventoryItem item, GameObject slot)
     {

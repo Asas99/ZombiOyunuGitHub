@@ -4,7 +4,7 @@ public class ItemPickup : MonoBehaviour
 {
     public string itemName;
     public Sprite icon;
-    public ItemType type; // ✅ GameManager.ItemType değil
+    public ItemType type;
     public int effectAmount;
 
     void OnTriggerEnter(Collider other)
@@ -15,12 +15,20 @@ public class ItemPickup : MonoBehaviour
             {
                 itemName = itemName,
                 icon = icon,
-                itemType = type, // ✅ type yerine itemType
+                itemType = type,
                 restoreAmount = effectAmount
             };
 
-            GameManager.Instance.AddItem(newItem);
-            Destroy(gameObject);
+            bool added = GameManager.Instance.AddItem(newItem);
+
+            if (added)
+            {
+                Destroy(gameObject); // Sadece envantere eklenebildiyse yok et
+            }
+            else
+            {
+                Debug.Log("Envanter dolu! Obje alınamadı.");
+            }
         }
     }
 }
