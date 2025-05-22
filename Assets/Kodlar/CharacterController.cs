@@ -71,7 +71,7 @@ public class CharacterController : MonoBehaviour, IMovement101, IMovement201
     private void GetKnifeInOut()
     {
         Knife.SetActive(HasAKnife);
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             HasAKnife = !HasAKnife;
             AlexAnimator.SetBool("Has a knife", HasAKnife);
