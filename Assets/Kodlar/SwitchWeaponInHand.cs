@@ -30,5 +30,12 @@ public class SwitchWeaponInHand : MonoBehaviour
                 }
             }
         }
+        if (weaponEquipManager != null && string.IsNullOrEmpty(weaponEquipManager.selectedTag))
+        {
+            foreach (var weapon in WeaponsInHand)
+            {
+                    weapon.SetActive(false);
+            }
+        }
     }
 }
