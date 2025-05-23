@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -12,14 +13,18 @@ public class CollectItems : MonoBehaviour
     public GameObject Text;
     public Animator animator;
     private WeaponEquipManager weaponEquipManager;
+    bool Collected;
+    private GameObject Player;
+    public Vector3 DropOffset;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         TagName = transform.tag;
         playerInventory = FindAnyObjectByType<PlayerInventory>();
+        Player = FindAnyObjectByType<CharacterController>().gameObject;
         if (Text != null)
         {
-            Text.SetActive(false);
+            Text.GetComponent<MeshRenderer>().enabled = false;
             weaponEquipManager = FindAnyObjectByType<WeaponEquipManager>();
         }
 
@@ -48,50 +53,74 @@ public class CollectItems : MonoBehaviour
         }
         if (Dist < MaxCollectDist)
         {
-            if (Text != null)
+            if (Text != null && !Collected)
             {
-                Text.SetActive(true);
+                Text.GetComponent<MeshRenderer>().enabled = true;
             }
-
-            if (Input.GetKeyDown(KeyCode.Q))
+            if(Collected)
             {
-                Collect();
-
+                Text.GetComponent<MeshRenderer>().enabled = false;
             }
         }
         else
         {
             if(Text != null)
             {
-                Text.SetActive(false);
+                Text.GetComponent<MeshRenderer>().enabled = false;
             }
         }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (string.IsNullOrEmpty(weaponEquipManager.selectedTag) && !Collected)
+                {
+                    if (Dist < MaxCollectDist)
+                    {
+                        Collect();
+                        Collected = !Collected;
+                    }
+                }
+                else if (!string.IsNullOrEmpty(weaponEquipManager.selectedTag) && Collected)
+                {
+                    Collected = !Collected;
+                    Decollect();
+                }
+            }
         }
 
     }
 
+    private void Decollect()
+    {
+        GameObject.FindGameObjectWithTag(weaponEquipManager.selectedTag).gameObject.transform.position = Player.transform.position + DropOffset;
+        GameObject.FindGameObjectWithTag(weaponEquipManager.selectedTag).gameObject.GetComponent<MeshRenderer>().enabled = true;
+        GameObject.FindGameObjectWithTag(weaponEquipManager.selectedTag).gameObject.GetComponent<MeshCollider>().enabled = true;
+        weaponEquipManager.selectedTag = "";
+        weaponEquipManager.Name = "";
+        print("DecollectWorked");
+    }
+
     public void Collect()
     {
-
         switch (TagName)
         {
             case "Colt":
                 if (playerInventory.ItemInfos[0].Quantity < playerInventory.ItemInfos[0].MaxQuantity)
                 {
                     weaponEquipManager.AssignWeapon("Colt");
-                    playerInventory.ItemInfos[0].Quantity++;
+                    //playerInventory.ItemInfos[0].Quantity++;
                     //playerInventory.ItemInfos[0].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
 
             case "gofret":
                 if (playerInventory.ItemInfos[1].Quantity < playerInventory.ItemInfos[1].MaxQuantity)
                 {
-                    playerInventory.ItemInfos[1].Quantity++;
+                    //playerInventory.ItemInfos[1].Quantity++;
                     //playerInventory.ItemInfos[1].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     Destroy(gameObject);
@@ -102,7 +131,7 @@ public class CollectItems : MonoBehaviour
             case "tahta":
                 if (playerInventory.ItemInfos[2].Quantity < playerInventory.ItemInfos[2].MaxQuantity)
                 {
-                    playerInventory.ItemInfos[2].Quantity ++;
+                    //playerInventory.ItemInfos[2].Quantity ++;
                     //playerInventory.ItemInfos[2].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     Destroy(gameObject);
@@ -113,12 +142,12 @@ public class CollectItems : MonoBehaviour
                 if (playerInventory.ItemInfos[3].Quantity < playerInventory.ItemInfos[3].MaxQuantity)
                 {
                     weaponEquipManager.AssignWeapon("ak47");
-                    playerInventory.ItemInfos[3].Quantity++;
+                    //playerInventory.ItemInfos[3].Quantity++;
                     //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "Krag-Jergensen":
@@ -130,7 +159,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "remington":
@@ -142,7 +171,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "revolver":
@@ -156,7 +185,7 @@ public class CollectItems : MonoBehaviour
                     gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
                     gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "springfield":
@@ -168,7 +197,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "winchester1897":
@@ -180,7 +209,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "winchester1894":
@@ -192,7 +221,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
 
@@ -204,7 +233,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "ak 47 ammo":
@@ -215,7 +244,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "krag ammo":
@@ -226,7 +255,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "remington ammo":
@@ -237,7 +266,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "revolver ammo":
@@ -248,7 +277,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "winchester ammo":
@@ -259,7 +288,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
             case "springfield ammo":
@@ -270,7 +299,7 @@ public class CollectItems : MonoBehaviour
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
-                    Destroy(Text);
+                    Text.GetComponent<MeshRenderer>().enabled = false;
                 }
                 break;
 

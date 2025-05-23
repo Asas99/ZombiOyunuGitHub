@@ -75,7 +75,7 @@ public class Shooting : MonoBehaviour
                 if (hit.collider.gameObject != null)
                 {
                     ShootPointer.transform.position = hit.point;
-                print(hit.collider.gameObject.name);
+                //print(hit.collider.gameObject.name);
                 }
                 if (weaponEquipManager.BulletInCharger >= 0)
                 {
