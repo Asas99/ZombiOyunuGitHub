@@ -7,11 +7,26 @@ public class ItemPickup : MonoBehaviour
     public ItemType type;
     public int effectAmount;
 
-    public Transform player;          // Player Transform'u
-    public GameObject textObject;     // Text objesi (Canvas veya 3D Text)
-    public float showDistance = 3f;   // Görünme mesafesi
+    public GameObject textObject;   // Mesafeye göre gösterilecek text objesi
+    public float showDistance = 3f; // Mesafe sınırı
 
-    private bool playerInRange = false; // Oyuncu menzilde mi?
+    private Transform player;
+    private bool playerInRange = false; // Mesafe içindeyse true olur
+
+    void Awake()
+    {
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                player = playerObj.transform;
+            else
+                Debug.LogWarning("Player objesi bulunamadı! Tag 'Player' olarak ayarlı mı?");
+        }
+
+        if (textObject != null)
+            textObject.SetActive(false);
+    }
 
     void Update()
     {
@@ -27,7 +42,6 @@ public class ItemPickup : MonoBehaviour
 
             playerInRange = true;
 
-            // E tuşuna basıldıysa itemi alma işlemi
             if (Input.GetKeyDown(KeyCode.E))
             {
                 TryPickupItem();
@@ -39,6 +53,15 @@ public class ItemPickup : MonoBehaviour
                 textObject.SetActive(false);
 
             playerInRange = false;
+        }
+    }
+
+    // Direkt objenin triggerına girince otomatik alma
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            TryPickupItem();
         }
     }
 

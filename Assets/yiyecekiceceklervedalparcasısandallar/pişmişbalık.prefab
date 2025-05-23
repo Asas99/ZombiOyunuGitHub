@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2556721215645980060
 Transform:
   m_ObjectHideFlags: 0
@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2529344934175454422}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: -0.2186795, y: 1.46, z: 8.56}
-  m_LocalScale: {x: 0.00283103, y: 0.00283103, z: 0.00283103}
+  m_LocalScale: {x: 0.002114197, y: 0.002114197, z: 0.002114197}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.98, y: 0, z: 0}
 --- !u!33 &126797093505242946
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -174,6 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "pi\u015Fmi\u015Fbal\u0131k"
-  icon: {fileID: 21300000, guid: e03ec8e9f77869549a03eb22e7a6e3cf, type: 3}
+  icon: {fileID: 21300018, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
   type: 0
   effectAmount: 50
+  textObject: {fileID: 0}
+  showDistance: 10
