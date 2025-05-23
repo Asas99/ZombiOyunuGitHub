@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 8256593521451957494}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.4, y: -1.89, z: -57.93}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 0.4, y: -0.61, z: -30.79}
+  m_LocalScale: {x: 0.0011623444, y: 0.0011623444, z: 0.0011623444}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163a22e922b93774eb3511a4b4b7e353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: "\xE7akmak"
   icon: {fileID: 21300000, guid: abf9ad1f9b9d79a438ab55582256137f, type: 3}
   type: 3
   effectAmount: 0

@@ -12,38 +12,63 @@ public class DayNightCycle : MonoBehaviour
     public float dayDuration = 60f;
     [SerializeField]
     private float time;
+
     private Gradient sunColor;
     private Gradient ambientGradient;
     private Gradient fogGradient;
 
+    private int currentDay = 0;
+    private bool hasTriggeredNewDay = false;
+
+    // Yeni gün başladığında tetiklenecek event
+    public delegate void NewDayDelegate(int dayCount);
+    public static event NewDayDelegate OnNewDay;
+
     void Start()
     {
         RenderSettings.ambientMode = AmbientMode.Flat;
-        
 
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "EmreAlexEv")
-        {
-            RenderSettings.fog = false;
-        }
-        else
-        {
-            RenderSettings.fog = true;
-        }
+        RenderSettings.fog = sceneName != "EmreAlexEv";
 
-        // Öncelik: Uykudan uyanma kontrolü
+        // Uyanma kontrolü
         if (PlayerPrefs.GetInt("WakeUp", 0) == 1)
         {
             time = 0.2f; // Sabah
             PlayerPrefs.SetInt("WakeUp", 0);
         }
-        // Eğer uyanma değilse, kayıtlı zamanı yükle
         else if (PlayerPrefs.HasKey("SavedTime"))
         {
             time = PlayerPrefs.GetFloat("SavedTime");
         }
 
-        // GÜNEŞ IŞIĞI RENGİ GEÇİŞLERİ
+        SetupGradients();
+    }
+
+    void Update()
+    {
+        time += Time.deltaTime / dayDuration;
+        if (time > 1f)
+        {
+            time = 0f;
+            hasTriggeredNewDay = false;
+        }
+
+        // Yeni gün başlangıcı kontrolü
+        if (time >= 0.01f && time <= 0.02f && !hasTriggeredNewDay)
+        {
+            currentDay++;
+            hasTriggeredNewDay = true;
+            OnNewDay?.Invoke(currentDay);
+        }
+
+        PlayerPrefs.SetFloat("SavedTime", time);
+
+        UpdateLighting();
+    }
+
+    void SetupGradients()
+    {
         sunColor = new Gradient();
         sunColor.SetKeys(
             new GradientColorKey[] {
@@ -59,7 +84,6 @@ public class DayNightCycle : MonoBehaviour
             }
         );
 
-        // AMBIENT LIGHT GEÇİŞİ
         ambientGradient = new Gradient();
         ambientGradient.SetKeys(
             new GradientColorKey[] {
@@ -75,7 +99,6 @@ public class DayNightCycle : MonoBehaviour
             }
         );
 
-        // FOG RENGİ
         fogGradient = new Gradient();
         fogGradient.SetKeys(
             new GradientColorKey[] {
@@ -92,14 +115,8 @@ public class DayNightCycle : MonoBehaviour
         );
     }
 
-    void Update()
+    void UpdateLighting()
     {
-        time += Time.deltaTime / dayDuration;
-        if (time > 1f) time = 0f;
-
-        // Zamanı kaydet
-        PlayerPrefs.SetFloat("SavedTime", time);
-
         float sunAngle = time * 360f - 90f;
         directionalLight.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
         moonLight.transform.rotation = Quaternion.Euler(sunAngle + 180f, 170f, 0f);
@@ -118,13 +135,7 @@ public class DayNightCycle : MonoBehaviour
         RenderSettings.fogColor = fogGradient.Evaluate(time);
     }
 
-    public float GetCurrentTime()
-    {
-        return time;
-    }
-
-    public void SetTime(float newTime)
-    {
-        time = Mathf.Clamp01(newTime);
-    }
+    public float GetCurrentTime() => time;
+    public void SetTime(float newTime) => time = Mathf.Clamp01(newTime);
+    public int GetCurrentDay() => currentDay;
 }
