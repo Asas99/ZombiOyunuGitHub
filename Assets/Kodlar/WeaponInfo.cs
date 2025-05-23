@@ -10,6 +10,7 @@ public class WeaponInfo : MonoBehaviour
     public float CurrentAmmo;
     public float chargersize;
     public float AmmoInCharger;
+    public Sprite sprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
