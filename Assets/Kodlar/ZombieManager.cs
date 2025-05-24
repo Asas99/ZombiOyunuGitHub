@@ -23,7 +23,22 @@ public class ZombieManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // ZombieAnimator component'ini al
         zombieanimator = gameObject.GetComponent<ZombieAnimator>();
+
+        // TargetObj yoksa, otomatik olarak Player tag'li objeyi bul
+        if (TargetObj == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                TargetObj = player;
+            }
+            else
+            {
+                Debug.LogError("ZombieManager: 'Player' tag'li obje bulunamadý!");
+            }
+        }
     }
 
     void OnDrawGizmos()

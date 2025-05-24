@@ -41,9 +41,20 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
-            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+        {
+            bool isActive = !inventoryPanel.activeSelf;
+            inventoryPanel.SetActive(isActive);
+            optionsPanel.SetActive(false);
 
-        CheckCraftingConditions();
+            Time.timeScale = isActive ? 0 : 1;
+
+            // Oyuncunun silahı varsa ateş etmesini engellemek için cursor'u da aktif edebilirsin:
+            Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = isActive;
+        }
+
+        if (Time.timeScale != 0) // Oyun durduysa crafting kontrol etme
+            CheckCraftingConditions();
     }
 
     public bool AddItem(InventoryItem item)
