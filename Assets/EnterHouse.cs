@@ -21,19 +21,14 @@ public class EnterHouse : MonoBehaviour
         if (exitButton != null) exitButton.SetActive(false);
         if (sleepButton != null) sleepButton.SetActive(false);
 
-        // Sadece ev sahnesindeyken DayNightCycle bul
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            dayNightCycle = Object.FindFirstObjectByType<DayNightCycle>();
-
-        }
+        // DayNightCycle sahnedeyse bul
+        dayNightCycle = Object.FindFirstObjectByType<DayNightCycle>();
 
         // Eve gir butonu
         if (enterButton != null)
         {
             enterButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                // Zamaný kaydet
                 SaveCurrentTime();
                 SceneManager.LoadScene(2);
             });
@@ -56,19 +51,11 @@ public class EnterHouse : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player eve girdi");
-
-            isPlayerInsideTrigger = true;
-
-            if (enterButton != null)
-            {
-                enterButton.SetActive(true);
-                enterButton.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-            }
+            enterButton.SetActive(true);
         }
     }
 
@@ -80,18 +67,19 @@ public class EnterHouse : MonoBehaviour
 
             if (enterButton != null) enterButton.SetActive(false);
             if (exitButton != null) exitButton.SetActive(false);
-            if (sleepButton != null) sleepButton.SetActive(false);
         }
     }
 
     void Update()
     {
-        // Ev sahnesindeyken yataða yakýnlýk ve gece kontrolü
-        if (SceneManager.GetActiveScene().buildIndex == 1 && sleepButton != null && dayNightCycle != null && bedPosition != null)
+        if (SceneManager.GetActiveScene().buildIndex == 2 && sleepButton != null && dayNightCycle != null && bedPosition != null)
         {
             float distanceToBed = Vector3.Distance(player.transform.position, bedPosition.position);
             float time = dayNightCycle.GetCurrentTime();
-            bool isNight = time < 0.25f || time > 0.75f;
+            bool isNight = time >= 0.75f && time <= 1.0f;
+
+            Debug.Log("Yataða uzaklýk: " + distanceToBed.ToString("F2"));
+            Debug.Log("Zaman: " + time.ToString("F2") + " | Gece mi? " + isNight);
 
             sleepButton.SetActive(distanceToBed < sleepDistance && isNight);
         }
@@ -101,7 +89,7 @@ public class EnterHouse : MonoBehaviour
     {
         PlayerPrefs.SetInt("WakeUp", 1); // Sabah baþlat
         PlayerPrefs.SetFloat("SavedTime", 0.2f); // Sabah zamaný
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     void SaveCurrentTime()

@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         inventoryPanel.SetActive(false);
         optionsPanel.SetActive(false);
         cookButton.SetActive(false);
@@ -141,6 +144,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Gerekli malzemeler eksik.");
         }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
     }
 
     IEnumerator<WaitForSeconds> FinishCooking(GameObject sticks, GameObject fire)

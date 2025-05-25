@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2556721215645980060
 Transform:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "pi\u015Fmi\u015Fbal\u0131k"
-  icon: {fileID: 21300018, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  icon: {fileID: 21300000, guid: e03ec8e9f77869549a03eb22e7a6e3cf, type: 3}
   type: 0
   effectAmount: 50
   textObject: {fileID: 0}

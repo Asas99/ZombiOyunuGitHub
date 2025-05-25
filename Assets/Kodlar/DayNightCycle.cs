@@ -26,6 +26,7 @@ public class DayNightCycle : MonoBehaviour
 
     void Start()
     {
+
         RenderSettings.ambientMode = AmbientMode.Flat;
 
         string sceneName = SceneManager.GetActiveScene().name;
