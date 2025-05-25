@@ -24,7 +24,8 @@ public class EnterHouse : MonoBehaviour
         // Sadece ev sahnesindeyken DayNightCycle bul
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            dayNightCycle = FindObjectOfType<DayNightCycle>();
+            dayNightCycle = Object.FindFirstObjectByType<DayNightCycle>();
+
         }
 
         // Eve gir butonu
@@ -34,7 +35,7 @@ public class EnterHouse : MonoBehaviour
             {
                 // Zamaný kaydet
                 SaveCurrentTime();
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(2);
             });
         }
 
@@ -44,7 +45,7 @@ public class EnterHouse : MonoBehaviour
             exitButton.GetComponent<Button>().onClick.AddListener(() =>
             {
                 SaveCurrentTime();
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
             });
         }
 
@@ -59,13 +60,15 @@ public class EnterHouse : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player eve girdi");
+
             isPlayerInsideTrigger = true;
 
-            if (SceneManager.GetActiveScene().buildIndex == 0 && enterButton != null)
+            if (enterButton != null)
+            {
                 enterButton.SetActive(true);
-
-            if (SceneManager.GetActiveScene().buildIndex == 1 && exitButton != null)
-                exitButton.SetActive(true);
+                enterButton.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+            }
         }
     }
 
@@ -103,7 +106,7 @@ public class EnterHouse : MonoBehaviour
 
     void SaveCurrentTime()
     {
-        DayNightCycle cycle = FindObjectOfType<DayNightCycle>();
+        DayNightCycle cycle = Object.FindFirstObjectByType<DayNightCycle>();
         if (cycle != null)
         {
             PlayerPrefs.SetFloat("SavedTime", cycle.GetCurrentTime());
