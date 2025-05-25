@@ -9,6 +9,6 @@ public class StartButtonScript : MonoBehaviour
         Debug.Log("Start Butonuna Tıklandı!");
         
         // Yeni bir sahne yüklemek için (örneğin: "GameScene")
-        SceneManager.LoadScene("zombi 1");
+        SceneManager.LoadScene(1);
     }
 }
