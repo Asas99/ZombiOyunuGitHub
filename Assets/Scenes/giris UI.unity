@@ -2819,6 +2819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 565364067}
+  targetCanvas: {fileID: 116164541}
   startFOV: 90
   endFOV: 20
   zoomDuration: 30

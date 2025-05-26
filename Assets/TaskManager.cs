@@ -74,6 +74,6 @@ public class TaskManager : MonoBehaviour
 
         dialogueBox.SetActive(false);
         taskText.gameObject.SetActive(true);
-        taskText.text = "Görev: Dýþarý çýk ve yer altý üssünü bul";
+        taskText.text = "Görev: Dýþarý çýk ve sinyalin devamý için yakýnlarda yeni bir radyo bul";
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraZoom : MonoBehaviour
 {
     public Camera targetCamera;
+    public Canvas targetCanvas; // Canvas referansý
     public float startFOV = 90f;
     public float endFOV = 20f;
     public float zoomDuration = 5f;
@@ -16,6 +17,11 @@ public class CameraZoom : MonoBehaviour
         {
             targetCamera.fieldOfView = startFOV;
         }
+
+        if (targetCanvas != null)
+        {
+            targetCanvas.enabled = false; // Baþta görünmesin
+        }
     }
 
     void Update()
@@ -27,7 +33,14 @@ public class CameraZoom : MonoBehaviour
             targetCamera.fieldOfView = Mathf.Lerp(startFOV, endFOV, t);
 
             if (t >= 1f)
+            {
                 isZooming = false;
+
+                if (targetCanvas != null)
+                {
+                    targetCanvas.enabled = true; // Zoom tamamlanýnca göster
+                }
+            }
         }
     }
 }
