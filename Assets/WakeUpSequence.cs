@@ -1,23 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WakeUpCutscene : MonoBehaviour
 {
     [Header("Cameras")]
-    public Camera familyPhotoCam;    // Aile tablosu kamerası
+    public Camera familyPhotoCam;
     public float familyPhotoCamStartFOV = 60f;
     public float familyPhotoCamTargetFOV = 30f;
     public float familyPhotoFOVDuration = 2f;
 
     public Camera playerCam;
-    public Camera cinematicCam1;     // Alex'e bakan
-    public Camera cinematicCam2;     // Radyoya zoom
+    public Camera cinematicCam1; // Alex'e bakan
+    public Camera cinematicCam2; // Radyoya zoom
     public float radioCamStartFOV = 60f;
     public float radioCamTargetFOV = 30f;
     public float radioFOVDuration = 2f;
 
     [Header("Player & BlendShape")]
-    public GameObject playerControl; // Oyuncu kontrol objesi
+    public GameObject playerControl;
     public SkinnedMeshRenderer faceRenderer;
     public int eyeBlinkBlendShapeIndex = 0;
 
@@ -30,11 +31,32 @@ public class WakeUpCutscene : MonoBehaviour
     public float eyeOpenDuration = 1.5f;
 
     [Header("UI & Sleeping Object")]
-    public GameObject canvasUI;          // Sinematik boyunca kapalı kalacak Canvas
-    public GameObject sleepingManObj;   // Uyuyan adam objesi
+    public GameObject canvasUI;
+    public GameObject sleepingManObj;
 
     void Start()
     {
+        int playCutscene = PlayerPrefs.GetInt("PlayWakeUpCutscene", 0);
+
+        if (playCutscene != 1)
+        {
+            // Sinematik oynatılmayacaksa doğrudan oyuncuya geç
+            playerCam.enabled = true;
+
+            familyPhotoCam.enabled = false;
+            cinematicCam1.enabled = false;
+            cinematicCam2.enabled = false;
+
+            playerControl.SetActive(true);
+            canvasUI.SetActive(true);
+            sleepingManObj.SetActive(false);
+            return;
+        }
+
+        // Sinematik oynatılacaksa: bayrağı sıfırla ki bir daha çalışmasın
+        PlayerPrefs.SetInt("PlayWakeUpCutscene", 0);
+
+        // Sinematik setup
         playerControl.SetActive(false);
         playerCam.enabled = false;
         cinematicCam1.enabled = false;
@@ -45,31 +67,30 @@ public class WakeUpCutscene : MonoBehaviour
         cinematicCam2.fieldOfView = radioCamStartFOV;
 
         faceRenderer.SetBlendShapeWeight(eyeBlinkBlendShapeIndex, 100f);
-
         canvasUI.SetActive(false);
         sleepingManObj.SetActive(true);
 
         StartCoroutine(PlayCutscene());
     }
 
+
+
     IEnumerator PlayCutscene()
     {
-        // 1. Aile tablosu kamerası FOV azalıyor
+        // 1. Aile tablosu → FOV küçülür
         yield return StartCoroutine(AnimateFOV(familyPhotoCam, familyPhotoCamStartFOV, familyPhotoCamTargetFOV, familyPhotoFOVDuration));
 
-        // Aile tablosu kamerası kapat, Alex kamerası aç
+        // 2. Alex kameraya geçiş
         familyPhotoCam.enabled = false;
         cinematicCam1.enabled = true;
-
-        // 2. Alex kamerası sabit süre
         yield return new WaitForSeconds(cam1Duration);
 
-        // 3. Radyo kamerası aktif, FOV azalıyor
+        // 3. Radyo kamera → FOV küçülür
         cinematicCam1.enabled = false;
         cinematicCam2.enabled = true;
         yield return StartCoroutine(AnimateFOV(cinematicCam2, radioCamStartFOV, radioCamTargetFOV, radioFOVDuration));
 
-        // 4. Tekrar Alex kamerası
+        // 4. Alex'e dönüş
         cinematicCam2.enabled = false;
         cinematicCam1.enabled = true;
         yield return new WaitForSeconds(cam1ReturnDuration);
@@ -84,7 +105,6 @@ public class WakeUpCutscene : MonoBehaviour
         cinematicCam1.enabled = false;
         playerCam.enabled = true;
         playerControl.SetActive(true);
-
         canvasUI.SetActive(true);
         sleepingManObj.SetActive(false);
 

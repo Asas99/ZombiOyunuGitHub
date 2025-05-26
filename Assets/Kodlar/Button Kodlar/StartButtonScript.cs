@@ -3,12 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class StartButtonScript : MonoBehaviour
 {
-    // Bu fonksiyon buton tıklandığında çağrılır
     public void OnStartButtonClick()
     {
         Debug.Log("Start Butonuna Tıklandı!");
-        
-        // Yeni bir sahne yüklemek için (örneğin: "GameScene")
-        SceneManager.LoadScene(1);
+
+        // Şu anki aktif sahnenin indeksini kaydet (örneğin sahne 0)
+        PlayerPrefs.SetInt("PreviousSceneIndex", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.SetInt("PlayWakeUpCutscene", 1); // İstersen sinematik için kullanabilirsin
+
+        // Sahne 2'yi yükle
+        SceneManager.LoadScene(2);
     }
 }
