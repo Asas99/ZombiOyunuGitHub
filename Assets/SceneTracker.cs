@@ -7,11 +7,18 @@ public class SceneTracker : MonoBehaviour
 
     private void Awake()
     {
+        // SceneTracker sahnede baþka varsa sil, sadece bir tane olsun
+        if (FindObjectsOfType<SceneTracker>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneUnloaded(Scene scene)
     {
         previousSceneIndex = scene.buildIndex;
     }

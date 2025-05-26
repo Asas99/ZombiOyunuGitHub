@@ -21,23 +21,29 @@ public class TaskManager : MonoBehaviour
     private bool task1Completed = false;
     private bool dialoguePlayed = false;
 
-
     void Start()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         int previousScene = SceneTracker.previousSceneIndex;
 
-        // Sahne 2'deyiz ve ya sahne 0'dan geldik ya da test için direkt sahne 2'den baþlatýldýysa çalýþtýr
-        if (!((previousScene == 0 && currentScene == 2) || previousScene == -1))
+        Debug.Log($"[TASKMANAGER] CurrentScene: {currentScene}, PreviousScene: {previousScene}");
+
+        // SADECE sahne 0'dan sahne 2'ye geçildiyse çalýþsýn
+        if (!(previousScene == 0 && currentScene == 2))
         {
+            Debug.Log("[TASKMANAGER] Koþul saðlanmadý, tüm görev objeleri pasif yapýlýyor.");
+
+            // UI'larý da görünmez yap
+            if (taskText != null) taskText.gameObject.SetActive(false);
+            if (dialogueBox != null) dialogueBox.SetActive(false);
             this.enabled = false;
             return;
         }
 
-        taskText.text = "Görev: Radyoyu bul";
-        dialogueBox.SetActive(false);
+        // Görev baþladý
+        if (taskText != null) taskText.text = "Görev: Radyoyu bul";
+        if (dialogueBox != null) dialogueBox.SetActive(false);
     }
-
 
     void Update()
     {
@@ -67,6 +73,7 @@ public class TaskManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         dialogueBox.SetActive(false);
+        taskText.gameObject.SetActive(true);
         taskText.text = "Görev: Dýþarý çýk ve yer altý üssünü bul";
     }
 }
