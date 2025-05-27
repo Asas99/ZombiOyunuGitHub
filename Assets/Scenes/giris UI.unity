@@ -2822,7 +2822,7 @@ MonoBehaviour:
   targetCanvas: {fileID: 116164541}
   startFOV: 90
   endFOV: 20
-  zoomDuration: 30
+  zoomDuration: 38
 --- !u!4 &343471231
 Transform:
   m_ObjectHideFlags: 0
@@ -3062,7 +3062,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b20741f0bfed58b4db3d036446ea1fc7, type: 3}
   m_Resource: {fileID: 8300000, guid: b20741f0bfed58b4db3d036446ea1fc7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.304
+  m_Volume: 0.065
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3895,8 +3895,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434, y: 243}
-  m_SizeDelta: {x: 725.845, y: 296.1656}
+  m_AnchoredPosition: {x: 434, y: 67.70569}
+  m_SizeDelta: {x: 725.845, y: 646.7543}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &507970234
 MonoBehaviour:
@@ -3930,7 +3930,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 1.3
   m_Text: "The Remnant\n on Humanity"
 --- !u!222 &507970235
 CanvasRenderer:
@@ -8372,7 +8372,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 21e6b6234a745cb4998dca9bb304efeb, type: 3}
   m_Resource: {fileID: 8300000, guid: 21e6b6234a745cb4998dca9bb304efeb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.709
+  m_Volume: 0.196
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11608,7 +11608,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: d34f2b14953990a41a712e1a43b2d14e, type: 3}
   m_Resource: {fileID: 8300000, guid: d34f2b14953990a41a712e1a43b2d14e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.661
   m_Pitch: 1
   Loop: 1
   Mute: 0
