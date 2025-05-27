@@ -138,169 +138,169 @@ public class CollectItems : MonoBehaviour
                 }
                 break;
 
-            //case "ak47":
-            //    if (playerInventory.ItemInfos[3].Quantity < playerInventory.ItemInfos[3].MaxQuantity)
-            //    {
-            //        weaponEquipManager.AssignWeapon("ak47");
-            //        //playerInventory.ItemInfos[3].Quantity++;
-            //        //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "Krag-Jergensen":
-            //    if (playerInventory.ItemInfos[4].Quantity < playerInventory.ItemInfos[4].MaxQuantity)
-            //    {
-            //        weaponEquipManager.AssignWeapon("Krag-Jergensen");
-            //        playerInventory.ItemInfos[4].Quantity++;
-            //        //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "remington":
-            //    if (playerInventory.ItemInfos[5].Quantity < playerInventory.ItemInfos[5].MaxQuantity)
-            //    {
-            //        weaponEquipManager.AssignWeapon("remington");
-            //        playerInventory.ItemInfos[5].Quantity++;
-            //        //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "revolver":
-            //    if (playerInventory.ItemInfos[6].Quantity < playerInventory.ItemInfos[6].MaxQuantity)
-            //    {
-            //        weaponEquipManager.AssignWeapon("revolver");
-            //        playerInventory.ItemInfos[6].Quantity++;
-            //        //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.transform.GetChild(0).transform.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
-            //        gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "springfield":
-            //    if (playerInventory.ItemInfos[7].Quantity < playerInventory.ItemInfos[7].MaxQuantity)
-            //    {
-            //        weaponEquipManager.AssignWeapon("springfield");
-            //        playerInventory.ItemInfos[7].Quantity++;
-            //        //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "winchester1897":
-            //    if (playerInventory.ItemInfos[8].Quantity < playerInventory.ItemInfos[8].MaxQuantity)
-            //    {
-            //        weaponEquipManager.AssignWeapon("winchester1897");
-            //        playerInventory.ItemInfos[8].Quantity++;
-            //        //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "winchester1894":
-            //    if (playerInventory.ItemInfos[9].Quantity < playerInventory.ItemInfos[9].MaxQuantity)
-            //    {
-            //        weaponEquipManager.AssignWeapon("winchester1894");
-            //        playerInventory.ItemInfos[9].Quantity++;
-            //        //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "colt ammo":
-            //    if (playerInventory.ItemInfos[10].Quantity < playerInventory.ItemInfos[10].MaxQuantity)
-            //    {
-            //        playerInventory.ItemInfos[10].Quantity++;
-            //        gameObject.GetComponent<AmmoPack>().CollectAmmo();
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "ak 47 ammo":
-            //    if (playerInventory.ItemInfos[11].Quantity < playerInventory.ItemInfos[11].MaxQuantity)
-            //    {
-            //        playerInventory.ItemInfos[11].Quantity++;
-            //        gameObject.GetComponent<AmmoPack>().CollectAmmo();
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "krag ammo":
-            //    if (playerInventory.ItemInfos[12].Quantity < playerInventory.ItemInfos[12].MaxQuantity)
-            //    {
-            //        playerInventory.ItemInfos[12].Quantity++;
-            //        gameObject.GetComponent<AmmoPack>().CollectAmmo();
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "remington ammo":
-            //    if (playerInventory.ItemInfos[13].Quantity < playerInventory.ItemInfos[13].MaxQuantity)
-            //    {
-            //        playerInventory.ItemInfos[13].Quantity++;
-            //        gameObject.GetComponent<AmmoPack>().CollectAmmo();
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "revolver ammo":
-            //    if (playerInventory.ItemInfos[14].Quantity < playerInventory.ItemInfos[14].MaxQuantity)
-            //    {
-            //        playerInventory.ItemInfos[14].Quantity++;
-            //        gameObject.GetComponent<AmmoPack>().CollectAmmo();
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "winchester ammo":
-            //    if (playerInventory.ItemInfos[15].Quantity < playerInventory.ItemInfos[15].MaxQuantity)
-            //    {
-            //        playerInventory.ItemInfos[15].Quantity++;
-            //        gameObject.GetComponent<AmmoPack>().CollectAmmo();
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
-            //case "springfield ammo":
-            //    if (playerInventory.ItemInfos[16].Quantity < playerInventory.ItemInfos[16].MaxQuantity)
-            //    {
-            //        playerInventory.ItemInfos[16].Quantity++;
-            //        gameObject.GetComponent<AmmoPack>().CollectAmmo();
-            //        AnimatorManager.SetAllAnimatorBools(animator, "Take item");
-            //        gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //        gameObject.GetComponent<MeshCollider>().enabled = false;
-            //        Text.GetComponent<MeshRenderer>().enabled = false;
-            //    }
-            //    break;
+            case "ak47":
+                if (playerInventory.ItemInfos[3].Quantity < playerInventory.ItemInfos[3].MaxQuantity)
+                {
+                    weaponEquipManager.AssignWeapon("ak47");
+                    //playerInventory.ItemInfos[3].Quantity++;
+                    //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "Krag-Jergensen":
+                if (playerInventory.ItemInfos[4].Quantity < playerInventory.ItemInfos[4].MaxQuantity)
+                {
+                    weaponEquipManager.AssignWeapon("Krag-Jergensen");
+                    playerInventory.ItemInfos[4].Quantity++;
+                    //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "remington":
+                if (playerInventory.ItemInfos[5].Quantity < playerInventory.ItemInfos[5].MaxQuantity)
+                {
+                    weaponEquipManager.AssignWeapon("remington");
+                    playerInventory.ItemInfos[5].Quantity++;
+                    //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "revolver":
+                if (playerInventory.ItemInfos[6].Quantity < playerInventory.ItemInfos[6].MaxQuantity)
+                {
+                    weaponEquipManager.AssignWeapon("revolver");
+                    playerInventory.ItemInfos[6].Quantity++;
+                    //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.transform.GetChild(0).transform.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
+                    gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.transform.GetChild(0).transform.gameObject.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "springfield":
+                if (playerInventory.ItemInfos[7].Quantity < playerInventory.ItemInfos[7].MaxQuantity)
+                {
+                    weaponEquipManager.AssignWeapon("springfield");
+                    playerInventory.ItemInfos[7].Quantity++;
+                    //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "winchester1897":
+                if (playerInventory.ItemInfos[8].Quantity < playerInventory.ItemInfos[8].MaxQuantity)
+                {
+                    weaponEquipManager.AssignWeapon("winchester1897");
+                    playerInventory.ItemInfos[8].Quantity++;
+                    //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "winchester1894":
+                if (playerInventory.ItemInfos[9].Quantity < playerInventory.ItemInfos[9].MaxQuantity)
+                {
+                    weaponEquipManager.AssignWeapon("winchester1894");
+                    playerInventory.ItemInfos[9].Quantity++;
+                    //playerInventory.ItemInfos[3].IsCurrentlyHaving = true;
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "colt ammo":
+                if (playerInventory.ItemInfos[10].Quantity < playerInventory.ItemInfos[10].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[10].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "ak 47 ammo":
+                if (playerInventory.ItemInfos[11].Quantity < playerInventory.ItemInfos[11].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[11].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "krag ammo":
+                if (playerInventory.ItemInfos[12].Quantity < playerInventory.ItemInfos[12].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[12].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "remington ammo":
+                if (playerInventory.ItemInfos[13].Quantity < playerInventory.ItemInfos[13].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[13].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "revolver ammo":
+                if (playerInventory.ItemInfos[14].Quantity < playerInventory.ItemInfos[14].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[14].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "winchester ammo":
+                if (playerInventory.ItemInfos[15].Quantity < playerInventory.ItemInfos[15].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[15].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
+            case "springfield ammo":
+                if (playerInventory.ItemInfos[16].Quantity < playerInventory.ItemInfos[16].MaxQuantity)
+                {
+                    playerInventory.ItemInfos[16].Quantity++;
+                    gameObject.GetComponent<AmmoPack>().CollectAmmo();
+                    AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    Text.GetComponent<MeshRenderer>().enabled = false;
+                }
+                break;
 
             case "Benzin":
                 if (playerInventory.ItemInfos[17].Quantity < playerInventory.ItemInfos[17].MaxQuantity)
