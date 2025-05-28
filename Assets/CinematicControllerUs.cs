@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class CinematicTrigger : MonoBehaviour
 {
@@ -40,7 +41,20 @@ public class CinematicTrigger : MonoBehaviour
     public GameObject[] enemyGunMuzzleFlashes;
     public AudioClip enemyGunfireClip;
 
+    public SkinnedMeshRenderer alexMeshRenderer;
+    public string blinkBlendShapeName = "Blink";
+    private int blinkBlendShapeIndex = -1;
+
+    public Transform playerTransform;
+    public Transform nurseTransform; // hemşire karakterin transform'u
+    public float kissDistance = 4f;
+    private bool kissTriggered = false;
+
+    public GameObject dialoguePanel;
+    public TextMeshProUGUI dialogueText;
+
     private bool hasTriggered = false;
+    private bool followPlayer = false;
 
     private void Awake()
     {
@@ -63,6 +77,19 @@ public class CinematicTrigger : MonoBehaviour
             }
         }
 
+        if (alexMeshRenderer != null && alexMeshRenderer.sharedMesh != null)
+        {
+            var mesh = alexMeshRenderer.sharedMesh;
+            for (int i = 0; i < mesh.blendShapeCount; i++)
+            {
+                if (mesh.GetBlendShapeName(i) == blinkBlendShapeName)
+                {
+                    blinkBlendShapeIndex = i;
+                    break;
+                }
+            }
+        }
+
         if (womanGunMuzzleFlash != null)
             womanGunMuzzleFlash.SetActive(false);
 
@@ -72,9 +99,7 @@ public class CinematicTrigger : MonoBehaviour
                 flash.SetActive(false);
         }
 
-        // Kadının Animator'ını başlangıçta devre dışı bırak
-        if (womanAnimator != null)
-            womanAnimator.enabled = false;
+        dialoguePanel.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -255,5 +280,70 @@ public class CinematicTrigger : MonoBehaviour
         flash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         flash.SetActive(false);
+    }
+
+    IEnumerator AlexBlinkSequence()
+    {
+        while (true)
+        {
+            if (blinkBlendShapeIndex != -1)
+            {
+                // 0 → 100
+                for (float t = 0; t <= 1f; t += Time.deltaTime * 10f)
+                {
+                    float weight = Mathf.Lerp(0f, 100f, t);
+                    alexMeshRenderer.SetBlendShapeWeight(blinkBlendShapeIndex, weight);
+                    yield return null;
+                }
+
+                // 100 → 0
+                for (float t = 0; t <= 1f; t += Time.deltaTime * 10f)
+                {
+                    float weight = Mathf.Lerp(100f, 0f, t);
+                    alexMeshRenderer.SetBlendShapeWeight(blinkBlendShapeIndex, weight);
+                    yield return null;
+                }
+            }
+
+            yield return new WaitForSeconds(Random.Range(3f, 7f));
+        }
+    }
+
+    void Update()
+    {
+        if (!kissTriggered && Vector3.Distance(playerTransform.position, nurseTransform.position) <= kissDistance)
+        {
+            kissTriggered = true;
+            StartCoroutine(TriggerKiss());
+        }
+
+        if (followPlayer)
+        {
+            float distance = Vector3.Distance(playerTransform.position, nurseTransform.position);
+            if (distance > 2.5f)
+            {
+                Vector3 direction = (playerTransform.position - nurseTransform.position).normalized;
+                nurseTransform.position += direction * Time.deltaTime * 2f; // Kadın karakterin hızı
+                nurseTransform.rotation = Quaternion.LookRotation(direction);
+
+                womanAnimator.SetBool("Walk", true);
+            }
+            else
+            {
+                womanAnimator.SetBool("Walk", false);
+            }
+        }
+    }
+
+    IEnumerator TriggerKiss()
+    {
+        womanAnimator.SetBool("Kiss", true);
+        dialoguePanel.SetActive(true);
+        dialogueText.text = "İyi ki buraya geldiğini duymuşum... Bensiz başaramazsın Alex..";
+        yield return new WaitForSeconds(10f); // Diyalog süresi
+        womanAnimator.SetBool("Kiss", false);
+        dialoguePanel.SetActive(false);
+
+        followPlayer = true; // Takip etmeye başla
     }
 }
