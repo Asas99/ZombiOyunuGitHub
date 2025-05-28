@@ -1,3 +1,4 @@
+﻿
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -70,6 +71,10 @@ public class CinematicTrigger : MonoBehaviour
             if (flash != null)
                 flash.SetActive(false);
         }
+
+        // Kadının Animator'ını başlangıçta devre dışı bırak
+        if (womanAnimator != null)
+            womanAnimator.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -140,7 +145,7 @@ public class CinematicTrigger : MonoBehaviour
 
         StartCoroutine(ContinueMusicForDuration(15f));
 
-        // Ek sahne: kad�n banditleri vurur
+        // Kadın banditleri vurur
         StartCoroutine(WomanShootAndKillSequence());
 
         SetBlackScreen(false);
@@ -206,6 +211,13 @@ public class CinematicTrigger : MonoBehaviour
 
     IEnumerator WomanShootAndKillSequence()
     {
+        // Animator'ı aktif hale getir
+        if (!womanAnimator.enabled)
+            womanAnimator.enabled = true;
+
+        // Shoot başlasın
+        womanAnimator.SetBool("Shoot", true);
+
         yield return new WaitForSeconds(1f);
 
         for (int i = 0; i < enemyBandits.Length; i++)
@@ -213,8 +225,6 @@ public class CinematicTrigger : MonoBehaviour
             Vector3 dir = enemyBandits[i].transform.position - charactersToAppear[0].transform.position;
             dir.y = 0;
             charactersToAppear[0].transform.rotation = Quaternion.LookRotation(dir);
-
-            womanAnimator.SetTrigger("Shoot");
 
             if (womanGunMuzzleFlash != null)
                 StartCoroutine(MuzzleFlashEffect(womanGunMuzzleFlash));
@@ -236,7 +246,8 @@ public class CinematicTrigger : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
 
-        //womanAnimator.SetTrigger("Idle");
+        // Tüm düşmanlar öldü → Shoot kapansın → Idle'a dön
+        womanAnimator.SetBool("Shoot", false);
     }
 
     IEnumerator MuzzleFlashEffect(GameObject flash)
