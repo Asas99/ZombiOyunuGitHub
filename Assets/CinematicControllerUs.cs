@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -11,16 +12,22 @@ public class CinematicTrigger : MonoBehaviour
     public float[] camDurations;
 
     public Canvas gameCanvas;
-    public GameObject player; // Gerçek oyuncu
-    public GameObject dummyPlayer; // Sinematikteki karakter
+    public GameObject player;
+    public GameObject dummyPlayer;
 
     public SkinnedMeshRenderer dummyMeshRenderer;
     public string smileBlendShapeName = "Smile";
     private int smileBlendShapeIndex = -1;
 
-    public GameObject blackScreen; // Siyah ekran (UI Image)
+    public GameObject blackScreen;
     public AudioSource audioSource;
     public AudioClip gunfireClip;
+    public AudioClip cinematicMusicClip;
+    public AudioClip reloadClip; // Kamera 3'te çalacak ses
+
+    public GameObject bandit; // Ölmesi gereken düþman
+    public Animator banditAnimator; // Bandit'in Animator bileþeni
+    public string banditDeathTrigger = "Die"; // Animator'daki trigger parametresi
 
     private bool hasTriggered = false;
 
@@ -32,7 +39,6 @@ public class CinematicTrigger : MonoBehaviour
         dummyPlayer.SetActive(false);
         blackScreen.SetActive(false);
 
-        // Blend shape indexini al
         if (dummyMeshRenderer != null && dummyMeshRenderer.sharedMesh != null)
         {
             var mesh = dummyMeshRenderer.sharedMesh;
@@ -57,15 +63,23 @@ public class CinematicTrigger : MonoBehaviour
 
     IEnumerator PlayCinematic()
     {
-        // --- [BAÞLANGIÇTAKÝ SÝYAH EKRAN] ---
-        yield return StartCoroutine(FadeBlackScreen(true, 1f));
+        // Baþlangýçta siyah ekran
+        SetBlackScreen(true);
         yield return new WaitForSeconds(2f);
-        yield return StartCoroutine(FadeBlackScreen(false, 1f));
+        SetBlackScreen(false);
 
-        // Oyuncuyu devre dýþý býrak, dummy'yi aktif et
+        // Müzik baþlat
+        if (audioSource != null && cinematicMusicClip != null)
+        {
+            audioSource.clip = cinematicMusicClip;
+            audioSource.loop = false;
+            audioSource.Play();
+        }
+
+        // Oyuncuyu devre dýþý býrak
         player.SetActive(false);
         dummyPlayer.SetActive(true);
-        gameCanvas.enabled = false;
+        gameCanvas.gameObject.SetActive(false);
 
         foreach (var character in charactersToAppear)
             character.SetActive(true);
@@ -75,12 +89,20 @@ public class CinematicTrigger : MonoBehaviour
         {
             EnableOnlyCamera(i);
 
+            if (i == 2 && charactersToAppear.Length > 0)
+            {
+                StartCoroutine(MoveCharacterForward(charactersToAppear[0].transform, 1.5f, 2f));
+
+                if (reloadClip != null)
+                    AudioSource.PlayClipAtPoint(reloadClip, cameras[i].transform.position);
+            }
+
             if (i == 5)
             {
                 if (smileBlendShapeIndex != -1)
                     dummyMeshRenderer.SetBlendShapeWeight(smileBlendShapeIndex, 100f);
 
-                yield return StartCoroutine(MoveCam6Forward(cameras[i].transform, 3f, 2f));
+                StartCoroutine(MoveCam6Forward(cameras[i].transform, 2f, camDurations[i]));
             }
 
             yield return new WaitForSeconds(camDurations[i]);
@@ -90,61 +112,50 @@ public class CinematicTrigger : MonoBehaviour
         foreach (var cam in cameras)
             cam.SetActive(false);
 
-        // --- [SÝNEMATÝK SONU: SÝYAH EKRAN ve SES] ---
-        yield return StartCoroutine(FadeBlackScreen(true, 1f));
-
-        if (audioSource != null && gunfireClip != null)
-        {
-            audioSource.clip = gunfireClip;
-            audioSource.Play();
-        }
-
-        yield return new WaitForSeconds(4f); // siyah ekran + ses süresi
-
-        // Dummy kapat, oyuncu aç
+        // Dummy karakteri hemen kaldýr
         dummyPlayer.SetActive(false);
+
+        // Oyuncuyu geri getir
         player.SetActive(true);
-        gameCanvas.enabled = true;
+        gameCanvas.gameObject.SetActive(true);
 
         if (characterToDisappearAfter != null)
             characterToDisappearAfter.SetActive(false);
 
-        yield return StartCoroutine(FadeBlackScreen(false, 1f));
-    }
+        // Bandit ölme animasyonu
+        if (banditAnimator != null)
+            banditAnimator.SetTrigger(banditDeathTrigger);
 
+        // Silah sesi oyuncu kontrolüne geçince çalsýn
+        if (audioSource != null && gunfireClip != null)
+        {
+            audioSource.PlayOneShot(gunfireClip);
+        }
+
+        // Müzik bitene kadar beklemeden devam etsin
+        StartCoroutine(ContinueMusicForDuration(15f));
+
+        SetBlackScreen(false);
+    }
 
     void EnableOnlyCamera(int index)
     {
         for (int i = 0; i < cameras.Length; i++)
             cameras[i].SetActive(i == index);
     }
-    IEnumerator FadeBlackScreen(bool fadeIn, float duration)
+
+    void SetBlackScreen(bool active)
     {
-        if (blackScreen == null) yield break;
+        if (blackScreen == null) return;
 
         Image img = blackScreen.GetComponent<Image>();
-        if (img == null) yield break;
-
-        blackScreen.SetActive(true);
-        float startAlpha = fadeIn ? 0f : 1f;
-        float endAlpha = fadeIn ? 1f : 0f;
-
-        float elapsed = 0f;
-        while (elapsed < duration)
+        if (img != null)
         {
-            float t = elapsed / duration;
-            float alpha = Mathf.Lerp(startAlpha, endAlpha, t);
-            img.color = new Color(img.color.r, img.color.g, img.color.b, alpha);
-            elapsed += Time.deltaTime;
-            yield return null;
+            img.color = new Color(img.color.r, img.color.g, img.color.b, active ? 1f : 0f);
         }
 
-        img.color = new Color(img.color.r, img.color.g, img.color.b, endAlpha);
-
-        if (!fadeIn)
-            blackScreen.SetActive(false);
+        blackScreen.SetActive(active);
     }
-
 
     IEnumerator MoveCam6Forward(Transform cam, float distance, float duration)
     {
@@ -161,5 +172,31 @@ public class CinematicTrigger : MonoBehaviour
         }
 
         cam.position = targetPos;
+    }
+
+    IEnumerator MoveCharacterForward(Transform character, float distance, float duration)
+    {
+        Vector3 startPos = character.position;
+        Vector3 targetPos = startPos + character.forward * distance;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            character.position = Vector3.Lerp(startPos, targetPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        character.position = targetPos;
+    }
+
+    IEnumerator ContinueMusicForDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 }
