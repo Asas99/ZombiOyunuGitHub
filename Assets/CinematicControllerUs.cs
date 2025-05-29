@@ -17,7 +17,7 @@ public class CinematicTrigger : MonoBehaviour
     public GameObject dummyPlayer;
 
     public SkinnedMeshRenderer dummyMeshRenderer;
-    public string smileBlendShapeName = "Smile";
+    public string smileBlendShapeName = "Mutluolma";
     private int smileBlendShapeIndex = -1;
 
     public GameObject blackScreen;
@@ -42,7 +42,7 @@ public class CinematicTrigger : MonoBehaviour
     public AudioClip enemyGunfireClip;
 
     public SkinnedMeshRenderer alexMeshRenderer;
-    public string blinkBlendShapeName = "Blink";
+    public string blinkBlendShapeName = "Gozkırpma";
     private int blinkBlendShapeIndex = -1;
 
     public Transform playerTransform;
@@ -55,6 +55,7 @@ public class CinematicTrigger : MonoBehaviour
 
     private bool hasTriggered = false;
     private bool followPlayer = false;
+    private bool cinematicFinished = false;
 
     private void Awake()
     {
@@ -100,6 +101,9 @@ public class CinematicTrigger : MonoBehaviour
         }
 
         dialoguePanel.SetActive(false);
+
+        // Start the blinking coroutine
+        StartCoroutine(AlexBlinkSequence());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -174,6 +178,9 @@ public class CinematicTrigger : MonoBehaviour
         StartCoroutine(WomanShootAndKillSequence());
 
         SetBlackScreen(false);
+
+        // Mark cinematic as finished
+        cinematicFinished = true;
     }
 
     void EnableOnlyCamera(int index)
@@ -278,7 +285,7 @@ public class CinematicTrigger : MonoBehaviour
     IEnumerator MuzzleFlashEffect(GameObject flash)
     {
         flash.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f); // Daha uzun görünürlük
         flash.SetActive(false);
     }
 
@@ -311,7 +318,7 @@ public class CinematicTrigger : MonoBehaviour
 
     void Update()
     {
-        if (!kissTriggered && Vector3.Distance(playerTransform.position, nurseTransform.position) <= kissDistance)
+        if (cinematicFinished && !kissTriggered && Vector3.Distance(playerTransform.position, nurseTransform.position) <= kissDistance)
         {
             kissTriggered = true;
             StartCoroutine(TriggerKiss());
