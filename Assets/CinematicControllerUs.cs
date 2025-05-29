@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
@@ -25,6 +24,7 @@ public class CinematicTrigger : MonoBehaviour
     public AudioClip gunfireClip;
     public AudioClip cinematicMusicClip;
     public AudioClip reloadClip;
+    public AudioClip extraSoundClip; // Ekstra ses
 
     public GameObject bandit;
     public Animator banditAnimator;
@@ -46,7 +46,7 @@ public class CinematicTrigger : MonoBehaviour
     private int blinkBlendShapeIndex = -1;
 
     public Transform playerTransform;
-    public Transform nurseTransform; // hemşire karakterin transform'u
+    public Transform nurseTransform;
     public float kissDistance = 4f;
     private bool kissTriggered = false;
 
@@ -56,6 +56,8 @@ public class CinematicTrigger : MonoBehaviour
     private bool hasTriggered = false;
     private bool followPlayer = false;
     private bool cinematicFinished = false;
+
+    private bool extraSoundPlayed = false; // Ek sesin çalınıp çalınmadığını kontrol eder
 
     private void Awake()
     {
@@ -102,7 +104,6 @@ public class CinematicTrigger : MonoBehaviour
 
         dialoguePanel.SetActive(false);
 
-        // Start the blinking coroutine
         StartCoroutine(AlexBlinkSequence());
     }
 
@@ -137,6 +138,12 @@ public class CinematicTrigger : MonoBehaviour
         for (int i = 0; i < cameras.Length; i++)
         {
             EnableOnlyCamera(i);
+
+            if (i == 1 && !extraSoundPlayed && extraSoundClip != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(extraSoundClip);
+                extraSoundPlayed = true;
+            }
 
             if (i == 2 && charactersToAppear.Length > 0)
             {
@@ -173,13 +180,9 @@ public class CinematicTrigger : MonoBehaviour
             audioSource.PlayOneShot(gunfireClip);
 
         StartCoroutine(ContinueMusicForDuration(15f));
-
-        // Kadın banditleri vurur
         StartCoroutine(WomanShootAndKillSequence());
 
         SetBlackScreen(false);
-
-        // Mark cinematic as finished
         cinematicFinished = true;
     }
 
@@ -243,13 +246,10 @@ public class CinematicTrigger : MonoBehaviour
 
     IEnumerator WomanShootAndKillSequence()
     {
-        // Animator'ı aktif hale getir
         if (!womanAnimator.enabled)
             womanAnimator.enabled = true;
 
-        // Shoot başlasın
         womanAnimator.SetBool("Shoot", true);
-
         yield return new WaitForSeconds(1f);
 
         for (int i = 0; i < enemyBandits.Length; i++)
@@ -278,14 +278,13 @@ public class CinematicTrigger : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
 
-        // Tüm düşmanlar öldü → Shoot kapansın → Idle'a dön
         womanAnimator.SetBool("Shoot", false);
     }
 
     IEnumerator MuzzleFlashEffect(GameObject flash)
     {
         flash.SetActive(true);
-        yield return new WaitForSeconds(0.3f); // Daha uzun görünürlük
+        yield return new WaitForSeconds(0.3f);
         flash.SetActive(false);
     }
 
@@ -295,7 +294,6 @@ public class CinematicTrigger : MonoBehaviour
         {
             if (blinkBlendShapeIndex != -1)
             {
-                // 0 → 100
                 for (float t = 0; t <= 1f; t += Time.deltaTime * 10f)
                 {
                     float weight = Mathf.Lerp(0f, 100f, t);
@@ -303,7 +301,6 @@ public class CinematicTrigger : MonoBehaviour
                     yield return null;
                 }
 
-                // 100 → 0
                 for (float t = 0; t <= 1f; t += Time.deltaTime * 10f)
                 {
                     float weight = Mathf.Lerp(100f, 0f, t);
@@ -330,7 +327,7 @@ public class CinematicTrigger : MonoBehaviour
             if (distance > 2.5f)
             {
                 Vector3 direction = (playerTransform.position - nurseTransform.position).normalized;
-                nurseTransform.position += direction * Time.deltaTime * 2f; // Kadın karakterin hızı
+                nurseTransform.position += direction * Time.deltaTime * 2f;
                 nurseTransform.rotation = Quaternion.LookRotation(direction);
 
                 womanAnimator.SetBool("Walk", true);
@@ -347,10 +344,10 @@ public class CinematicTrigger : MonoBehaviour
         womanAnimator.SetBool("Kiss", true);
         dialoguePanel.SetActive(true);
         dialogueText.text = "İyi ki buraya geldiğini duymuşum... Bensiz başaramazsın Alex..";
-        yield return new WaitForSeconds(10f); // Diyalog süresi
+        yield return new WaitForSeconds(10f);
         womanAnimator.SetBool("Kiss", false);
         dialoguePanel.SetActive(false);
 
-        followPlayer = true; // Takip etmeye başla
+        followPlayer = true;
     }
 }
