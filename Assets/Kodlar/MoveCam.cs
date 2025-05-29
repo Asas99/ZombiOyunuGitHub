@@ -5,6 +5,7 @@ public class MoveCam : MonoBehaviour
 {
     public Vector3 InitPos, ADSPosPistol, ADSPosRifle;
     public Vector3 InitRot, ADSRifleRot;
+    public Vector3 WalkPos;
     public Camera cam;
     public Animator animator;
     public GameObject normalParent, rifleAdsParent;
@@ -19,9 +20,8 @@ public class MoveCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if (animator.GetBool("Has a pistol") || animator.GetBool("Shoot"))
+        if (animator.GetBool("Has a pistol") || animator.GetBool("Shoot"))
             {
-            print("a");
                 //cam.transform.parent = normalParent.transform;
                 cam.transform.localPosition = ADSPosPistol;
                 //cam.transform.localEulerAngles = ADSRot;
@@ -37,9 +37,18 @@ public class MoveCam : MonoBehaviour
         {
                 if (!animator.GetBool("Has a pistol") && !animator.GetBool("Has a rifle"))
                 {
-                    //cam.transform.parent = normalParent.transform;
-                    cam.transform.localPosition = InitPos;
-                    cam.transform.localEulerAngles = InitRot;
+                    if (animator.GetBool("IsWalking"))
+                    {
+                        cam.transform.localPosition = WalkPos;
+                    print("s");
+                }
+                    if (!animator.GetBool("IsWalking"))
+                    {
+                        //cam.transform.parent = normalParent.transform;
+                        cam.transform.localPosition = InitPos;
+                        cam.transform.localEulerAngles = InitRot;
+                    }
+
                 }
         }
     }
