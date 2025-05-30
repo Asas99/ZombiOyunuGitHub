@@ -9,7 +9,7 @@ public class DayNightCycle : MonoBehaviour
     public Light moonLight;
 
     [Header("Time Settings")]
-    public float dayDuration = 60f;
+    public float dayDuration = 6f;
     [SerializeField]
     private float time;
 
@@ -26,7 +26,6 @@ public class DayNightCycle : MonoBehaviour
 
     void Start()
     {
-
         RenderSettings.ambientMode = AmbientMode.Flat;
 
         string sceneName = SceneManager.GetActiveScene().name;

@@ -34,7 +34,11 @@ public class SwitchWeaponInHand : MonoBehaviour
         {
             foreach (var weapon in WeaponsInHand)
             {
+                if (weapon.tag != weaponEquipManager.selectedTag)
+                {
+                    print(weapon.gameObject.name + "IsDeactivated");
                     weapon.SetActive(false);
+                }
             }
         }
     }

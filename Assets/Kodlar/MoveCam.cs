@@ -40,7 +40,6 @@ public class MoveCam : MonoBehaviour
                     if (animator.GetBool("IsWalking"))
                     {
                         cam.transform.localPosition = WalkPos;
-                    print("s");
                 }
                     if (!animator.GetBool("IsWalking"))
                     {
