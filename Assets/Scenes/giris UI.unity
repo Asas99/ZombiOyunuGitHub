@@ -610,79 +610,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!1001 &72588550
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.045485
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -73.569595
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4438127167652369755, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: d31471ea9be103e4b91cc41e3c4b976b, type: 2}
-    - target: {fileID: 919132149155446097, guid: e4da7085c81305d4c8b53cfeca1c409c,
-        type: 3}
-      propertyPath: m_Name
-      value: Thriller Idle 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e4da7085c81305d4c8b53cfeca1c409c, type: 3}
 --- !u!1 &78183681
 GameObject:
   m_ObjectHideFlags: 0
@@ -3940,74 +3867,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507970232}
   m_CullTransparentMesh: 1
---- !u!1001 &515745359
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10.099699
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.00000011920929
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -73.44454
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 06eb4e3f9abe3614e8d209eec86923c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Thriller Idle
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 06eb4e3f9abe3614e8d209eec86923c7, type: 3}
 --- !u!1 &526803777
 GameObject:
   m_ObjectHideFlags: 0
@@ -5096,7 +4955,7 @@ MonoBehaviour:
   blinkDuration: 0.1
   minBlinkInterval: 2
   maxBlinkInterval: 6
-  expressionBlendShapeIndices: 010000000200000003000000040000000500000006000000
+  expressionBlendShapeIndices: 02000000
 --- !u!4 &651734977
 Transform:
   m_ObjectHideFlags: 0
@@ -14351,8 +14210,8 @@ SkinnedMeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_Quality: 4
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 5735803535552193058, guid: a7f6290500e351548be378b6ac088b62, type: 3}
   m_Bones:
@@ -14406,10 +14265,10 @@ SkinnedMeshRenderer:
   - {fileID: 5477181765664590938}
   m_BlendShapeWeights:
   - 0
-  - 30.9
+  - 0
   - 100
   - 0
-  - 0
+  - 100
   - 0
   - 0
   m_RootBone: {fileID: 366175169458541295}
@@ -17058,8 +16917,6 @@ SceneRoots:
   - {fileID: 486512122}
   - {fileID: 528050669}
   - {fileID: 2046706100}
-  - {fileID: 72588550}
-  - {fileID: 515745359}
   - {fileID: 838818619584767341}
   - {fileID: 651734977}
   - {fileID: 543450651950327147}
