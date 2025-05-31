@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EmreAlexEv.unity
     guid: 69a03adaeb156e941989f43092c85068
+  - enabled: 1
+    path: "Assets/Scenes/Yeralt\u0131\xFCss\xFC.unity"
+    guid: 8309e25d6e830574c9558f2d8c1d1f36
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
