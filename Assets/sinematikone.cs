@@ -16,12 +16,13 @@ public class CinematicAndElevator : MonoBehaviour
     public GameObject blackScreen;
     public Transform spawnPoint;
     public Transform player;
+    public Transform womanCharacter; // Kadın karakter referansı
     public Transform elevator;
     public GameObject alphaZombie;
     public string[] dialogues;
     public float cinematicDuration = 10.0f;
     public float interactionDistance = 3.0f;
-    public float camera3PanDuration = 2.0f; // 2 saniyeye düşürüldü
+    public float camera3PanDuration = 2.0f; // 2 saniye
 
     [Header("Sesler")]
     public AudioClip camera1Sound;
@@ -49,7 +50,7 @@ public class CinematicAndElevator : MonoBehaviour
     {
         cinematicActive = true;
 
-        // Başta 1 saniye siyah ekran
+        // Sinematik başında 1 saniye siyah ekran
         blackScreen.SetActive(true);
         yield return new WaitForSeconds(1f);
         blackScreen.SetActive(false);
@@ -64,16 +65,16 @@ public class CinematicAndElevator : MonoBehaviour
         if (camera1Sound != null)
             AudioSource.PlayClipAtPoint(camera1Sound, cinematicCam1.transform.position);
 
-        // Diyaloglar
+        // Diyaloglar gösterimi
         for (int i = 0; i < dialogues.Length; i++)
         {
             dialogueText.text = dialogues[i];
             yield return new WaitForSeconds(cinematicDuration / dialogues.Length);
         }
 
-        // Kamera 1 kapanışı ve diyalog panel gizleme
+        // Kamera 1 kapanışı ve diyalog paneli kapat
         dialogueText.text = "";
-        cinematicCanvas.gameObject.SetActive(false); // Paneli de kapat
+        cinematicCanvas.gameObject.SetActive(false);
         cinematicCam1.gameObject.SetActive(false);
 
         // Kamera 2
@@ -81,8 +82,8 @@ public class CinematicAndElevator : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         cinematicCam2.gameObject.SetActive(false);
 
-        // Kamera 3
-        cinematicCanvas.gameObject.SetActive(false); // Diyalog panel gözükmesin
+        // Kamera 3 geçişi ve diyalog paneli görünmesin
+        cinematicCanvas.gameObject.SetActive(false);
         cinematicCam3.gameObject.SetActive(true);
 
         // Zombi animasyonu ve sesi
@@ -90,10 +91,10 @@ public class CinematicAndElevator : MonoBehaviour
         if (zombieSound != null)
             AudioSource.PlayClipAtPoint(zombieSound, alphaZombie.transform.position);
 
-        // Kamera 3 pan hareketi (2 saniye)
+        // Kamera 3 hareketi (pan)
         float elapsedTime = 0.0f;
         Vector3 initialPosition = cinematicCam3.transform.position;
-        Vector3 targetPosition = initialPosition + new Vector3(0, 0, -3); // Daha kısa mesafe istersen azalt
+        Vector3 targetPosition = initialPosition + new Vector3(0, 0, -3); // Kısa mesafe
 
         while (elapsedTime < camera3PanDuration)
         {
@@ -104,12 +105,12 @@ public class CinematicAndElevator : MonoBehaviour
 
         alphaZombie.GetComponent<Animator>().SetBool("İşaret", false);
 
-        // Kamera 3 bittikten sonra 2 saniye siyah ekran
+        // Kamera 3 sonrası siyah ekran
         blackScreen.SetActive(true);
         yield return new WaitForSeconds(2f);
         blackScreen.SetActive(false);
 
-        // Her şey kapanır, kontrol geri gelir
+        // Kontrol geri gelir
         cinematicCam3.gameObject.SetActive(false);
         gameplayCanvas.gameObject.SetActive(true);
         mainCam.gameObject.SetActive(true);
@@ -139,7 +140,14 @@ public class CinematicAndElevator : MonoBehaviour
     {
         blackScreen.SetActive(true);
         yield return new WaitForSeconds(2.0f);
+
+        // Oyuncuyu taşı
         player.position = spawnPoint.position;
+
+        // Kadın karakter de yanına spawnlansın (1.5 birim sağa)
+        if (womanCharacter != null)
+            womanCharacter.position = spawnPoint.position + new Vector3(1.5f, 0, 0);
+
         blackScreen.SetActive(false);
     }
 }
