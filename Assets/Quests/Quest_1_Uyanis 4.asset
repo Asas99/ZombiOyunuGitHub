@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Quest_1_Uyanis 4
   m_EditorClassIdentifier: 
   questID: 10
-  questName: "\xC7antay\u0131 doldur"
-  description: "Kasaba veya  Market yerlerini ke\u015Ffet loot topla hayatta kalabilmek
-    i\xE7in"
+  questName: Fill the bag
+  description: Explore towns or markets and collect loot to survive.
   defaultStatus: 1

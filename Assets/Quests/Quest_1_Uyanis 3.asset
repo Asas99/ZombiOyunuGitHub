@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Quest_1_Uyanis 3
   m_EditorClassIdentifier: 
   questID: 9
-  questName: Savunma
-  description: "\"B\" tu\u015Funa basarak b\u0131\xE7a\u011F\u0131n\u0131 \xE7\u0131kar\u0131p
-    sol click ile zombiyi \xF6ld\xFCr.."
+  questName: Defend
+  description: Press the "B" key to take out your knife and kill the zombie with
+    left click.
   defaultStatus: 1

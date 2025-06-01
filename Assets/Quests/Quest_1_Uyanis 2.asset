@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Quest_1_Uyanis 2
   m_EditorClassIdentifier: 
   questID: 8
-  questName: "Ya\u015Famak i\xE7in"
-  description: "Gerekli e\u015Fyalar\u0131 topla ve silah\u0131 al, yemekleri ve
-    suyu i\xE7mek i\xE7in \"T\" tu\u015Fu ile envanteri a\xE7\u0131p yiyece\u011Fin
-    veya suyun \xFCzerine t\u0131klay\u0131p ihtiyac\u0131n\u0131 gidebilirsin."
+  questName: For Survive
+  description: Collect the necessary items and get the weapon, to eat food and drink
+    water you can open the inventory with the "T" key and click on the food or water
+    to meet your needs.
   defaultStatus: 1

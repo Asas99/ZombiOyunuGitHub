@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   questID: 7
-  questName: "Yeni Bir G\xFCn"
-  description: "Yak\u0131nlarda bir Radyo Bul"
+  questName: New Day
+  description: Find a Radio Nearby
   defaultStatus: 1

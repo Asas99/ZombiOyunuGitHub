@@ -5,15 +5,15 @@ using TMPro;
 
 public class TaskManager : MonoBehaviour
 {
-    [Header("Görev Sistemi")]
+    [Header("Task System")]
     public TextMeshProUGUI taskText;
 
-    [Header("Diyalog")]
+    [Header("Dialogue")]
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
     public AudioSource radioDialogueAudio;
 
-    [Header("Radyoya Yaklaþma")]
+    [Header("Radio Proximity")]
     public Transform player;
     public Transform radio;
     public float detectDistance = 4f;
@@ -28,20 +28,19 @@ public class TaskManager : MonoBehaviour
 
         Debug.Log($"[TASKMANAGER] CurrentScene: {currentScene}, PreviousScene: {previousScene}");
 
-        // SADECE sahne 0'dan sahne 2'ye geçildiyse çalýþsýn
+        // ONLY continue if transitioned from scene 0 to scene 2
         if (!(previousScene == 0 && currentScene == 2))
         {
-            Debug.Log("[TASKMANAGER] Koþul saðlanmadý, tüm görev objeleri pasif yapýlýyor.");
+            Debug.Log("[TASKMANAGER] Condition not met, deactivating all task objects.");
 
-            // UI'larý da görünmez yap
             if (taskText != null) taskText.gameObject.SetActive(false);
             if (dialogueBox != null) dialogueBox.SetActive(false);
             this.enabled = false;
             return;
         }
 
-        // Görev baþladý
-        if (taskText != null) taskText.text = "Görev: Radyoyu bul";
+        // Task started
+        if (taskText != null) taskText.text = "Task: Find the radio";
         if (dialogueBox != null) dialogueBox.SetActive(false);
     }
 
@@ -63,17 +62,17 @@ public class TaskManager : MonoBehaviour
         radioDialogueAudio.Play();
 
         yield return new WaitForSeconds(1f);
-        dialogueText.text = "Doktor Brooks: Hey, oradaki! Yalnýz deðilsin.";
+        dialogueText.text = "Dr. Brooks: Hey, you there! You're not alone.";
         yield return new WaitForSeconds(2.5f);
-        dialogueText.text += "\nBeni bul, yardýma ihtiyacým var.";
+        dialogueText.text += "\nFind me, I need help.";
         yield return new WaitForSeconds(2f);
-        dialogueText.text += "\nYer altý üssünü bulmak zorundasýn...";
+        dialogueText.text += "\nYou have to find the underground base...";
         yield return new WaitForSeconds(2.5f);
-        dialogueText.text += "\nBu iþi sonlandýrabiliriz... yer altý üssü... hasta...";
+        dialogueText.text += "\nWe can end this... the underground base... patient...";
         yield return new WaitForSeconds(3f);
 
         dialogueBox.SetActive(false);
         taskText.gameObject.SetActive(true);
-        taskText.text = "Görev: Dýþarý çýk ve sinyalin devamý için yakýnlarda yeni bir radyo bul";
+        taskText.text = "Task: Get outside and find another radio nearby to follow the signal";
     }
 }
