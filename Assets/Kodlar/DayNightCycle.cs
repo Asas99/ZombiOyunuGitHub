@@ -20,6 +20,10 @@ public class DayNightCycle : MonoBehaviour
     private int currentDay = 0;
     private bool hasTriggeredNewDay = false;
 
+    [Header("Audio")]
+    public AudioSource dayAudioSource;
+    public AudioSource nightAudioSource;
+
     // Yeni gün başladığında tetiklenecek event
     public delegate void NewDayDelegate(int dayCount);
     public static event NewDayDelegate OnNewDay;
@@ -43,6 +47,7 @@ public class DayNightCycle : MonoBehaviour
         }
 
         SetupGradients();
+        HandleAudio(); // Başlangıçta doğru sesi çal
     }
 
     void Update()
@@ -65,6 +70,7 @@ public class DayNightCycle : MonoBehaviour
         PlayerPrefs.SetFloat("SavedTime", time);
 
         UpdateLighting();
+        HandleAudio();
     }
 
     void SetupGradients()
@@ -133,6 +139,29 @@ public class DayNightCycle : MonoBehaviour
         directionalLight.color = sunColor.Evaluate(time);
         RenderSettings.ambientLight = ambientGradient.Evaluate(time);
         RenderSettings.fogColor = fogGradient.Evaluate(time);
+    }
+
+    void HandleAudio()
+    {
+        // Gece 0.8 - 1.0 veya 0.0 - 0.1 arası
+        bool isNight = (time >= 0.8f || time <= 0.1f);
+
+        if (isNight)
+        {
+            if (!nightAudioSource.isPlaying)
+                nightAudioSource.Play();
+
+            if (dayAudioSource.isPlaying)
+                dayAudioSource.Stop();
+        }
+        else
+        {
+            if (!dayAudioSource.isPlaying)
+                dayAudioSource.Play();
+
+            if (nightAudioSource.isPlaying)
+                nightAudioSource.Stop();
+        }
     }
 
     public float GetCurrentTime() => time;
