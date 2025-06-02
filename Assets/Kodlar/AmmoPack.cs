@@ -20,16 +20,21 @@ public class AmmoPack : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             CollectAmmo();
+            gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + " " + CompatibleWeapons[0].gameObject.name +" ammo taken");
         }
     }
 
     public void CollectAmmo()
     {
-        for (int i = 0; i < gameObject.GetComponent<AmmoPack>().CompatibleWeapons.Length; i++)
-        {
-            gameObject.GetComponent<AmmoPack>().CompatibleWeapons[i].GetComponent<WeaponInfo>().CurrentAmmo += gameObject.GetComponent<AmmoPack>().AmmoCount;
-        }
+        //for (int i = 0; i < gameObject.GetComponent<AmmoPack>().CompatibleWeapons.Length; i++)
+        //{
+        //    gameObject.GetComponent<AmmoPack>().CompatibleWeapons[i].GetComponent<WeaponInfo>().CurrentAmmo += gameObject.GetComponent<AmmoPack>().AmmoCount;
+        //}
         //playerInventory.ItemInfos[16].Quantity++;
+        foreach (var weapon in CompatibleWeapons)
+        {
+            weapon.GetComponent<WeaponInfo>().CurrentAmmo += AmmoCount;
+        }
         //gameObject.GetComponent<AmmoPack>().CollectAmmo();
         AnimatorManager.SetAllAnimatorBools(animator, "Take item");
         gameObject.GetComponent<MeshRenderer>().enabled = false;

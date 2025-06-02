@@ -230,6 +230,7 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[10].Quantity++;
                     gameObject.GetComponent<AmmoPack>().CollectAmmo();
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + "colt ammo taken");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Text.GetComponent<MeshRenderer>().enabled = false;
@@ -241,6 +242,7 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[11].Quantity++;
                     gameObject.GetComponent<AmmoPack>().CollectAmmo();
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + "ak47 ammo taken");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Text.GetComponent<MeshRenderer>().enabled = false;
@@ -252,6 +254,7 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[12].Quantity++;
                     gameObject.GetComponent<AmmoPack>().CollectAmmo();
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + "krag ammo taken");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Text.GetComponent<MeshRenderer>().enabled = false;
@@ -263,6 +266,7 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[13].Quantity++;
                     gameObject.GetComponent<AmmoPack>().CollectAmmo();
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + "remington ammo taken");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Text.GetComponent<MeshRenderer>().enabled = false;
@@ -274,6 +278,7 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[14].Quantity++;
                     gameObject.GetComponent<AmmoPack>().CollectAmmo();
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + "revolver ammo taken");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Text.GetComponent<MeshRenderer>().enabled = false;
@@ -285,6 +290,7 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[15].Quantity++;
                     gameObject.GetComponent<AmmoPack>().CollectAmmo();
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + "winchester ammo taken");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Text.GetComponent<MeshRenderer>().enabled = false;
@@ -296,6 +302,7 @@ public class CollectItems : MonoBehaviour
                     playerInventory.ItemInfos[16].Quantity++;
                     gameObject.GetComponent<AmmoPack>().CollectAmmo();
                     AnimatorManager.SetAllAnimatorBools(animator, "Take item");
+                    gameObject.GetComponent<AmmoTextManager>().DisplayText(gameObject.GetComponent<AmmoPack>().AmmoCount + "springfield ammo taken");
                     gameObject.GetComponent<MeshRenderer>().enabled = false;
                     gameObject.GetComponent<MeshCollider>().enabled = false;
                     Text.GetComponent<MeshRenderer>().enabled = false;

@@ -55,10 +55,11 @@ public class WeaponEquipManager : MonoBehaviour
             foreach (var Weapon in Weapons)
             {
                 if (selectedTag == Weapon.GetComponent<WeaponInfo>().Tag)
-                {      
+                {
+                    CurrentAmmo = Weapon.GetComponent<WeaponInfo>().CurrentAmmo;
                     Weapon.GetComponent<WeaponInfo>().CurrentAmmo--;
                     Weapon.GetComponent<WeaponInfo>().AmmoInCharger--;
-                    Weapon.GetComponent<WeaponInfo>().CurrentAmmo = CurrentAmmo;
+                    //Weapon.GetComponent<WeaponInfo>().CurrentAmmo = CurrentAmmo;
 
                 }
             }
