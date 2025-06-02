@@ -150,8 +150,6 @@ public class ZombieManager : MonoBehaviour
                 else {
                     zombieanimator.PlayAttack(animator);
                 }
-
-
             }
             else
             {
