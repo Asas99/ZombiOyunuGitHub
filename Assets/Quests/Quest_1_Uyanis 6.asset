@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b361b6537899e6642928be08a60bd3d3, type: 3}
   m_Name: Quest_1_Uyanis 6
   m_EditorClassIdentifier: 
-  questID: 12
+  questID: 13
   questName: Enter the base
   description: Go in base
   defaultStatus: 1

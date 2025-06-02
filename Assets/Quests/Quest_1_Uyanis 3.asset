@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b361b6537899e6642928be08a60bd3d3, type: 3}
   m_Name: Quest_1_Uyanis 3
   m_EditorClassIdentifier: 
-  questID: 9
+  questID: 10
   questName: Defend
   description: Press the "B" key to take out your knife and kill the zombie with
     left click.

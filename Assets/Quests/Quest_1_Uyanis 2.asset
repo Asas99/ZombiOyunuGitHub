@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b361b6537899e6642928be08a60bd3d3, type: 3}
   m_Name: Quest_1_Uyanis 2
   m_EditorClassIdentifier: 
-  questID: 8
+  questID: 9
   questName: For Survive
   description: Collect the necessary items and get the weapon, to eat food and drink
     water you can open the inventory with the "T" key and click on the food or water

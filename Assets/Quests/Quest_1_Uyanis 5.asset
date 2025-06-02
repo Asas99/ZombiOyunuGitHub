@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b361b6537899e6642928be08a60bd3d3, type: 3}
   m_Name: Quest_1_Uyanis 5
   m_EditorClassIdentifier: 
-  questID: 11
+  questID: 12
   questName: Base Road
   description: Find the base
   defaultStatus: 1

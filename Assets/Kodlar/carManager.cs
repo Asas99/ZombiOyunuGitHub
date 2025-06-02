@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class carManager : MonoBehaviour
 {
@@ -18,17 +20,73 @@ public class carManager : MonoBehaviour
 
     [Header("Yakıt Sistemi")]
     public float MaxFuel = 100f;
-    public float CurrentFuel = 100f; // Inspector'dan ayarlanabilir
+    public float CurrentFuel = 100f;
     public float OneFuelWorth = 25f;
     public float FuelComsumption = 1f;
-    public Button fuelButton;
+    public TextMesh fuelText;
     public Slider fuelSlider;
 
+    [Header("Ses Sistemi")]
+    public AudioSource engineAudioSource;
+    public AudioClip enterCarSound;
+    public AudioClip drivingLoopSound;
+
+    [Header("Stop Lambaları")]
+    public Light[] rearStopLights;
+
     private Rigidbody rb;
+    private bool isEngineReady = false;
+
+    private float saveInterval = 1f;
+    private float lastSaveTime = 0f;
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        if (fuelSlider != null)
+        {
+            fuelSlider.minValue = 0;
+            fuelSlider.maxValue = 1;
+            fuelSlider.gameObject.SetActive(false);
+        }
+    }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        if (engineAudioSource != null)
+        {
+            engineAudioSource.loop = true;
+            engineAudioSource.playOnAwake = false;
+        }
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (PlayerPrefs.HasKey("CarPosX"))
+        {
+            float x = PlayerPrefs.GetFloat("CarPosX");
+            float y = PlayerPrefs.GetFloat("CarPosY");
+            float z = PlayerPrefs.GetFloat("CarPosZ");
+            StartCoroutine(SetPositionNextFrame(new Vector3(x, y, z)));
+        }
+    }
+
+    IEnumerator SetPositionNextFrame(Vector3 pos)
+    {
+        yield return null;
+        transform.position = pos;
+        Debug.Log("Araba konumu sahne yüklendikten sonra ayarlandı: " + pos);
     }
 
     void Update()
@@ -47,6 +105,13 @@ public class carManager : MonoBehaviour
             player.SetActive(false);
             CarCam.gameObject.SetActive(true);
             player.transform.position = gameObject.transform.position + Offset;
+
+            // Arabayı sürerken konumu düzenli olarak kaydet
+            if (Time.time - lastSaveTime > saveInterval)
+            {
+                SaveCarPosition();
+                lastSaveTime = Time.time;
+            }
         }
         else
         {
@@ -54,18 +119,41 @@ public class carManager : MonoBehaviour
             CarCam.gameObject.SetActive(false);
         }
 
+        if (fuelSlider != null)
+            fuelSlider.gameObject.SetActive(IsDriving);
+
         UpdateFuelUI();
+
+        if (Input.GetKey(KeyCode.S) && IsDriving)
+            SetRearLights(true);
+        else
+            SetRearLights(false);
+
+        bool isNear = Dist < MaxDist;
+        bool hasFuelCan = GameManager.Instance.HasItem(ItemType.FuelCan);
+
+        if (CurrentFuel <= 0 && isNear && hasFuelCan && Input.GetKeyDown(KeyCode.F))
+        {
+            if (GameManager.Instance.RemoveItem(ItemType.FuelCan))
+            {
+                CurrentFuel = MaxFuel;
+                if (fuelText != null)
+                    fuelText.text = "";
+            }
+        }
+
+        if (CurrentFuel <= 0f && engineAudioSource.isPlaying)
+        {
+            engineAudioSource.Stop();
+        }
     }
 
     void FixedUpdate()
     {
-        if (!IsDriving) return;
+        if (!IsDriving || !isEngineReady) return;
 
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-
-        if (x != 0)
-            transform.Rotate(Vector3.forward, x * TurnSpeed * Time.fixedDeltaTime);
 
         if (y != 0 && CurrentFuel > 0)
         {
@@ -84,39 +172,38 @@ public class carManager : MonoBehaviour
             Vector3 movement = forward * -y * Speed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + movement);
         }
+
+        if (y != 0 && x != 0)
+        {
+            float direction = y <= 0 ? 1f : -1f;
+            transform.Rotate(Vector3.forward, x * TurnSpeed * Time.fixedDeltaTime * direction);
+        }
+
+        if (engineAudioSource != null && isEngineReady)
+        {
+            if ((y != 0 || x != 0) && !engineAudioSource.isPlaying && CurrentFuel > 0)
+                engineAudioSource.Play();
+            else if (y == 0 && x == 0 && engineAudioSource.isPlaying)
+                engineAudioSource.Stop();
+        }
     }
 
     void UpdateFuelUI()
     {
         if (fuelSlider != null)
-        {
-            fuelSlider.minValue = 0;
-            fuelSlider.maxValue = MaxFuel;
-            fuelSlider.value = CurrentFuel;
-            fuelSlider.gameObject.SetActive(IsDriving); // Sadece sürerken göster
-        }
+            fuelSlider.value = CurrentFuel / MaxFuel;
 
-        bool isNear = Dist < MaxDist;
-        bool hasFuelCan = GameManager.Instance.HasItem(ItemType.FuelCan);
-
-        if (CurrentFuel <= 0 && isNear && hasFuelCan)
+        if (fuelText != null)
         {
-            fuelButton.gameObject.SetActive(true);
-            fuelButton.onClick.RemoveAllListeners();
-            fuelButton.onClick.AddListener(Refuel);
-        }
-        else
-        {
-            fuelButton.gameObject.SetActive(false);
-        }
-    }
-
-    void Refuel()
-    {
-        if (GameManager.Instance.RemoveItem(ItemType.FuelCan))
-        {
-            CurrentFuel = MaxFuel;
-            fuelButton.gameObject.SetActive(false);
+            if (CurrentFuel <= 0 && Dist < MaxDist && GameManager.Instance.HasItem(ItemType.FuelCan))
+            {
+                fuelText.gameObject.SetActive(true);
+                fuelText.text = "Press F and fueling";
+            }
+            else
+            {
+                fuelText.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -125,6 +212,27 @@ public class carManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && Dist < MaxDist)
         {
             IsDriving = true;
+            isEngineReady = false;
+
+            if (engineAudioSource != null && enterCarSound != null)
+            {
+                engineAudioSource.PlayOneShot(enterCarSound);
+                Invoke(nameof(EnableEngine), enterCarSound.length);
+            }
+            else
+            {
+                EnableEngine();
+            }
+        }
+    }
+
+    void EnableEngine()
+    {
+        isEngineReady = true;
+
+        if (engineAudioSource != null && drivingLoopSound != null)
+        {
+            engineAudioSource.clip = drivingLoopSound;
         }
     }
 
@@ -134,7 +242,21 @@ public class carManager : MonoBehaviour
         {
             player.transform.position = transform.position + Offset;
             IsDriving = false;
+            isEngineReady = false;
+
+            if (engineAudioSource != null)
+                engineAudioSource.Stop();
         }
+    }
+
+    public void SaveCarPosition()
+    {
+        PlayerPrefs.SetFloat("CarPosX", transform.position.x);
+        PlayerPrefs.SetFloat("CarPosY", transform.position.y);
+        PlayerPrefs.SetFloat("CarPosZ", transform.position.z);
+        PlayerPrefs.Save();
+
+        Debug.Log("Araba konumu kaydedildi: " + transform.position);
     }
 
     public void Drive()
@@ -142,7 +264,7 @@ public class carManager : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        if (y != 0 && CurrentFuel > 0)
+        if (y != 0 && CurrentFuel > 0 && isEngineReady)
         {
             CurrentFuel -= FuelComsumption * Time.deltaTime;
             Speed += Accel * -y * Time.deltaTime;
@@ -160,10 +282,22 @@ public class carManager : MonoBehaviour
             rb.MovePosition(transform.position + movement);
         }
 
-        if (x != 0)
+        if (y != 0 && x != 0)
         {
             float direction = y <= 0 ? 1f : -1f;
             transform.Rotate(Vector3.forward, x * TurnSpeed * Time.deltaTime * direction);
+        }
+    }
+
+    void SetRearLights(bool state)
+    {
+        if (rearStopLights != null)
+        {
+            foreach (var light in rearStopLights)
+            {
+                if (light != null)
+                    light.enabled = state;
+            }
         }
     }
 }

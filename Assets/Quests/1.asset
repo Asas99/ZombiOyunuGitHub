@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b361b6537899e6642928be08a60bd3d3, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  questID: 7
+  questID: 8
   questName: New Day
   description: Find a Radio Nearby
   defaultStatus: 1

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -21,33 +21,45 @@ public class EnterHouse : MonoBehaviour
         if (exitButton != null) exitButton.SetActive(false);
         if (sleepButton != null) sleepButton.SetActive(false);
 
-        // DayNightCycle sahnedeyse bul
         dayNightCycle = Object.FindFirstObjectByType<DayNightCycle>();
 
-        // Eve gir butonu
         if (enterButton != null)
         {
             enterButton.GetComponent<Button>().onClick.AddListener(() =>
             {
+                SaveCarPositionIfExists(); // âœ… Araba konumunu kaydet
                 SaveCurrentTime();
                 SceneManager.LoadScene(2);
             });
         }
 
-        // Evden çýk butonu
         if (exitButton != null)
         {
             exitButton.GetComponent<Button>().onClick.AddListener(() =>
             {
+                SaveCarPositionIfExists(); // âœ… Araba konumunu kaydet
                 SaveCurrentTime();
                 SceneManager.LoadScene(1);
             });
         }
 
-        // Uyu butonu
         if (sleepButton != null)
         {
             sleepButton.GetComponent<Button>().onClick.AddListener(SleepAndExit);
+        }
+    }
+
+    void SaveCarPositionIfExists()
+    {
+        GameObject car = GameObject.FindWithTag("Car");
+        if (car != null)
+        {
+            carManager manager = car.GetComponent<carManager>();
+            if (manager != null)
+            {
+                manager.SaveCarPosition();
+                Debug.Log("Araba konumu sahne geÃ§iÅŸi Ã¶ncesi kaydedildi.");
+            }
         }
     }
 
@@ -64,7 +76,6 @@ public class EnterHouse : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInsideTrigger = false;
-
             if (enterButton != null) enterButton.SetActive(false);
             if (exitButton != null) exitButton.SetActive(false);
         }
@@ -78,17 +89,15 @@ public class EnterHouse : MonoBehaviour
             float time = dayNightCycle.GetCurrentTime();
             bool isNight = time >= 0.75f && time <= 1.0f;
 
-            Debug.Log("Yataða uzaklýk: " + distanceToBed.ToString("F2"));
-            Debug.Log("Zaman: " + time.ToString("F2") + " | Gece mi? " + isNight);
-
             sleepButton.SetActive(distanceToBed < sleepDistance && isNight);
         }
     }
 
     void SleepAndExit()
     {
-        PlayerPrefs.SetInt("WakeUp", 1); // Sabah baþlat
-        PlayerPrefs.SetFloat("SavedTime", 0.2f); // Sabah zamaný
+        SaveCarPositionIfExists(); // âœ… Araba konumunu kaydet
+        PlayerPrefs.SetInt("WakeUp", 1);
+        PlayerPrefs.SetFloat("SavedTime", 0.2f);
         SceneManager.LoadScene(1);
     }
 

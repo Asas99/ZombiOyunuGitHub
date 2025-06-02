@@ -7,7 +7,7 @@ public class DecalSpawner : MonoBehaviour
     public int count = 100;
     public Vector2 areaSize = new Vector2(50f, 50f);
     public float maxRayHeight = 100f;
-    public string[] validTags = { "Road", "City" }; // sadece bu tag'lere decal yerleþir
+    public string[] validTags = { "Road", "City" };
 
     void Start()
     {
@@ -29,6 +29,13 @@ public class DecalSpawner : MonoBehaviour
 
                     GameObject decal = Instantiate(decalPrefab, hit.point + hit.normal * 0.05f, rotation);
                     decal.transform.localScale = Vector3.one * Random.Range(0.5f, 1.2f);
+
+                    // DecalProjector bileþenini kontrol et ve aktif hale getir
+                    DecalProjector projector = decal.GetComponent<DecalProjector>();
+                    if (projector != null)
+                    {
+                        projector.enabled = true;
+                    }
                 }
             }
         }
