@@ -37,9 +37,6 @@ public class carManager : MonoBehaviour
     private Rigidbody rb;
     private bool isEngineReady = false;
 
-    private float saveInterval = 1f;
-    private float lastSaveTime = 0f;
-
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -84,7 +81,7 @@ public class carManager : MonoBehaviour
 
     IEnumerator SetPositionNextFrame(Vector3 pos)
     {
-        yield return null;
+        yield return null; // bir frame bekle
         transform.position = pos;
         Debug.Log("Araba konumu sahne yüklendikten sonra ayarlandı: " + pos);
     }
@@ -105,13 +102,6 @@ public class carManager : MonoBehaviour
             player.SetActive(false);
             CarCam.gameObject.SetActive(true);
             player.transform.position = gameObject.transform.position + Offset;
-
-            // Arabayı sürerken konumu düzenli olarak kaydet
-            if (Time.time - lastSaveTime > saveInterval)
-            {
-                SaveCarPosition();
-                lastSaveTime = Time.time;
-            }
         }
         else
         {
@@ -146,6 +136,8 @@ public class carManager : MonoBehaviour
         {
             engineAudioSource.Stop();
         }
+
+        // Konumu sürekli değil, sadece sahne geçişi öncesi çağrılmalı
     }
 
     void FixedUpdate()
