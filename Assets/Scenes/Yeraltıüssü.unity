@@ -1135,7 +1135,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Can:'
+  m_Text: 'Health:'
 --- !u!222 &111210166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2179,7 +2179,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Su:'
+  m_Text: 'Thirst:'
 --- !u!222 &203450220
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4403,7 +4403,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Yemek:'
+  m_Text: 'Hunger:'
 --- !u!222 &450733006
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13086,9 +13086,9 @@ MonoBehaviour:
   dialogues:
   - You are nearing the end, go down the elevator in the middle and turn off the
     power providers in the bowls, destroy them.. and kill the alpha zombie.
-  cinematicDuration: 3
+  cinematicDuration: 5
   interactionDistance: 4
-  camera3PanDuration: 10
+  camera3PanDuration: 6
   camera1Sound: {fileID: 8300000, guid: a2d93c9518321f047b7d7cbbdfb3ebf3, type: 3}
   zombieSound: {fileID: 8300000, guid: 3701989092fa164489718992a2f88735, type: 3}
 --- !u!114 &1276477191
