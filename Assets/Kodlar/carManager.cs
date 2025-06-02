@@ -26,6 +26,10 @@ public class carManager : MonoBehaviour
     public TextMesh fuelText;
     public Slider fuelSlider;
 
+    [Header("Dış Ses Sistemleri")]
+    public AudioSource outsideAudioSource1;  // Örneğin gece sesi
+    public AudioSource outsideAudioSource2;  // Örneğin gündüz sesi
+
     [Header("Ses Sistemi")]
     public AudioSource engineAudioSource;
     public AudioClip enterCarSound;
@@ -88,6 +92,14 @@ public class carManager : MonoBehaviour
 
     void Update()
     {
+        float outsideVolume = IsDriving ? 0.1f : 1.0f;
+
+        if (outsideAudioSource1 != null)
+            outsideAudioSource1.volume = outsideVolume;
+
+        if (outsideAudioSource2 != null)
+            outsideAudioSource2.volume = outsideVolume; 
+
         Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed);
         if (CurrentFuel < 0) CurrentFuel = 0;
         if (Speed != 0) Speed = Mathf.MoveTowards(Speed, 0, NaturalDecel);
