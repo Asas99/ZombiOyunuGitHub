@@ -41,6 +41,7 @@ TagManager:
   - top
   - Car
   - Lake
+  - Cinematic
   layers:
   - Default
   - TransparentFX
