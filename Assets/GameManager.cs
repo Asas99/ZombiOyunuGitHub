@@ -6,6 +6,9 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public AudioClip inventoryToggleClip;
+    public AudioSource audioSource;
+
 
     public GameObject inventoryPanel;
     public GameObject optionsPanel;
@@ -27,7 +30,14 @@ public class GameManager : MonoBehaviour
     private GameObject currentSlot;
     public int maxItemCount = 20;
 
-    void Awake() => Instance = this;
+    
+    void Awake()
+    {
+
+        Instance = this;
+        audioSource = GetComponent<AudioSource>();
+    }
+
 
     void Start()
     {
@@ -43,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             bool isActive = !inventoryPanel.activeSelf;
@@ -54,6 +65,8 @@ public class GameManager : MonoBehaviour
             // Oyuncunun silahı varsa ateş etmesini engellemek için cursor'u da aktif edebilirsin:
             Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = isActive;
+            if (inventoryToggleClip != null)
+                audioSource.PlayOneShot(inventoryToggleClip);
         }
 
         if (Time.timeScale != 0) // Oyun durduysa crafting kontrol etme
