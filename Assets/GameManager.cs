@@ -62,9 +62,10 @@ public class GameManager : MonoBehaviour
 
             Time.timeScale = isActive ? 0 : 1;
 
-            // Oyuncunun silahı varsa ateş etmesini engellemek için cursor'u da aktif edebilirsin:
-            Cursor.lockState = isActive ? CursorLockMode.None : CursorLockMode.Locked;
-            Cursor.visible = isActive;
+            // Cursor her zaman görünür ve serbest kalacak
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             if (inventoryToggleClip != null)
                 audioSource.PlayOneShot(inventoryToggleClip);
         }
