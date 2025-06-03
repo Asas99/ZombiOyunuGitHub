@@ -36,7 +36,7 @@ public class SwitchWeaponInHand : MonoBehaviour
             {
                 if (weapon.tag != weaponEquipManager.selectedTag)
                 {
-                    print(weapon.gameObject.name + "IsDeactivated");
+                    //print(weapon.gameObject.name + "IsDeactivated");
                     weapon.SetActive(false);
                 }
             }

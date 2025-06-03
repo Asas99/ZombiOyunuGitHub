@@ -4,7 +4,7 @@ using UnityEngine;
 public static class AnimatorManager
 {
     /// <summary>
-    /// T�m animat�r de�i�kenlerini false yapar.
+    /// Tüm animatör değişkenlerini false yapar.
     /// </summary>
     public static void SetAllAnimatorBools(Animator animator)
     {
@@ -18,9 +18,9 @@ public static class AnimatorManager
     }
 
     /// <summary>
-    /// Belirtilen animator de�i�keni d���nda t�m de�i�kenleri false yapar.
+    /// Belirtilen animator değişkeni dışında tüm değişkenleri false yapar.
     /// </summary>
-    /// <param name="excludeBool">True yap�lacak de�i�ken.</param>
+    /// <param name="excludeBool">True yapılacak değişken.</param>
     public static void SetAllAnimatorBools(Animator animator, string excludeBool = null)
     {
         foreach (AnimatorControllerParameter param in animator.parameters)
@@ -38,9 +38,9 @@ public static class AnimatorManager
     }
 
     /// <summary>
-    /// Belirtilen animator de�i�kenleri d���nda t�m de�i�kenleri false yapar.
+    /// Belirtilen animator değişkenleri dışında tüm değişkenleri false yapar.
     /// </summary>
-    /// <param name="excludeBools">True yap�lacak de�i�kenler.</param>
+    /// <param name="excludeBools">True yapılacak değişkenler.</param>
     public static void SetAllAnimatorBools(Animator animator, params string[] excludeBools)
     {
         foreach (AnimatorControllerParameter param in animator.parameters)
