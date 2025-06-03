@@ -38,6 +38,7 @@ public class PlayerStats : MonoBehaviour
         hungerSlider.value = savedHunger;
         thirstSlider.value = savedThirst;
         healthSlider.value = savedHealth;
+        isDead = false; // Sahne yenilendiğinde ölümü sıfırla
     }
 
     void Update()
@@ -125,11 +126,16 @@ public class PlayerStats : MonoBehaviour
 
         Debug.Log("Karakter öldü!");
 
-        // Statları sıfırla
+        // Statları tam dolu yap
         ResetStats();
 
-        // Ölümden sonra sahneyi yeniden yükle (isteğe bağlı 3 saniye sonra)
-        StartCoroutine(ReloadSceneAfterDelay(3f));
+        // Sliderları anında tam dolu yap (opsiyonel ama kesinlik için)
+        hungerSlider.value = savedHunger;
+        thirstSlider.value = savedThirst;
+        healthSlider.value = savedHealth;
+
+        // Ölümden sonra sahneyi yeniden yükle (3 saniye sonra)
+        StartCoroutine(ReloadSceneAfterDelay(1f));
     }
 
     IEnumerator ReloadSceneAfterDelay(float delay)
@@ -155,8 +161,8 @@ public class PlayerStats : MonoBehaviour
 
     public void ResetStats()
     {
-        savedHunger = 100;
-        savedThirst = 100;
-        savedHealth = 100;
+        savedHunger = 100f;
+        savedThirst = 100f;
+        savedHealth = 100f;
     }
 }
