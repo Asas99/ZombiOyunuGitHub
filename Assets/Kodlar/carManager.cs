@@ -92,7 +92,7 @@ public class carManager : MonoBehaviour
 
     void Update()
     {
-        float outsideVolume = IsDriving ? 0.1f : 1.0f;
+        float outsideVolume = IsDriving ? 0.1f : 0.7f;
 
         if (outsideAudioSource1 != null)
             outsideAudioSource1.volume = outsideVolume;
