@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class NurseAI : MonoBehaviour
@@ -11,53 +10,90 @@ public class NurseAI : MonoBehaviour
     public Animator animator;
     [SerializeField] private Transform targetZombie;
 
-    public Transform firePoint; // Ateþ noktasý (silahýn ucu)
-    public float fireRate = 1f; // Ateþ etme süresi
-    public float fireRange = 20f; // Maksimum menzil
+    public Transform firePoint;
+    public float fireRate = 1f;
+    public float fireRange = 20f;
     private float nextFireTime = 0f;
+
+    [Header("Ses ve Efektler")]
+    public AudioSource gunAudioSource;
+    public AudioClip gunShotClip;
+    public ParticleSystem muzzleFlash;
+
+    [Header("Takip Ayarlarý")]
+    [SerializeField] private float followDistance = 5f;
+    [SerializeField] private float rotationSpeed = 5f;
+
+    private bool isShooting = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+
+        if (gunAudioSource != null && gunShotClip != null)
+        {
+            gunAudioSource.clip = gunShotClip;
+        }
     }
 
     void Update()
     {
-        if (player != null)
-        {
-            FindNearestVisibleZombie();
+        if (player == null) return;
 
-            if (targetZombie != null)
+        FindNearestVisibleZombie();
+
+        if (targetZombie != null)
+        {
+            float distanceToZombie = Vector3.Distance(transform.position, targetZombie.position);
+
+            if (distanceToZombie > agent.stoppingDistance)
             {
                 agent.SetDestination(targetZombie.position);
-                AimAtTarget();
-
-                if (Time.time >= nextFireTime)
-                {
-                    FireWeapon(); // Ateþ et
-                    nextFireTime = Time.time + 1f / fireRate;
-                }
+                if (!isShooting) animator.SetBool("Walk", true);
             }
             else
             {
-                MoveTowardsPlayer();
+                agent.ResetPath();
+                animator.SetBool("Walk", false);
             }
-        }
-    }
 
-    void MoveTowardsPlayer()
-    {
-        float distance = Vector3.Distance(new Vector3(player.position.x, transform.position.y, player.position.z), transform.position);
+            AimAtTarget();
 
-        if (distance > agent.stoppingDistance)
-        {
-            animator.SetBool("Walk", true);
-            agent.SetDestination(new Vector3(player.position.x, transform.position.y, player.position.z));
+            if (Time.time >= nextFireTime && !isShooting)
+            {
+                StartCoroutine(FireWeapon());
+                nextFireTime = Time.time + 1f / fireRate;
+            }
         }
         else
         {
+            FollowAndFacePlayer();
+        }
+    }
+
+    void FollowAndFacePlayer()
+    {
+        float distance = Vector3.Distance(player.position, transform.position);
+
+        if (distance > followDistance)
+        {
+            agent.SetDestination(player.position);
+            animator.SetBool("Walk", true);
+        }
+        else
+        {
+            agent.ResetPath();
             animator.SetBool("Walk", false);
+        }
+
+        // Hemþire oyuncuya bakar
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+        if (direction.magnitude > 0.1f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
     }
 
@@ -98,12 +134,17 @@ public class NurseAI : MonoBehaviour
         {
             Vector3 direction = targetZombie.position - transform.position;
             direction.y = 0;
-            transform.rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
         }
     }
 
-    void FireWeapon()
+    IEnumerator FireWeapon()
     {
+        isShooting = true;
+        animator.SetBool("Shoot", true);
+        animator.SetBool("Walk", false);
+        yield return new WaitForSeconds(0.1f); // küçük gecikme
+
         if (targetZombie != null)
         {
             Vector3 direction = targetZombie.position - firePoint.position;
@@ -113,18 +154,21 @@ public class NurseAI : MonoBehaviour
                 if (hit.transform.CompareTag("zombi"))
                 {
                     Debug.Log("Zombiye isabet etti!");
-                    hit.transform.gameObject.GetComponent<ZombieManager>().Health = -1; // Zombiyi yok et
-                    animator.SetBool("Shoot",true); // Ateþ animasyonunu tetikle
-                }
-                else
-                {
-                    Debug.Log("Arada bir engel var, ateþ edilmiyor!");
+                    ZombieManager zm = hit.transform.GetComponent<ZombieManager>();
+                    if (zm != null)
+                    {
+                        zm.Health = -1; // yerine zm.TakeDamage(100); önerilir
+                    }
+
+                    if (muzzleFlash != null) muzzleFlash.Play();
+                    if (gunAudioSource != null && gunShotClip != null)
+                        gunAudioSource.PlayOneShot(gunShotClip);
                 }
             }
         }
-        else
-        {
-            animator.SetBool("Shoot", false);
-        }
+
+        yield return new WaitForSeconds(0.4f);
+        animator.SetBool("Shoot", false);
+        isShooting = false;
     }
 }
