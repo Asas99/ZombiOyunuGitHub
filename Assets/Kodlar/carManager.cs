@@ -10,6 +10,9 @@ public class carManager : MonoBehaviour
     public GameObject player;
     public bool IsDriving;
     public float MaxDist;
+    [Header("Karakter Sesleri")]
+    public AudioSource playerFootstepAudioSource;
+
     [SerializeField] private float Dist;
     public Vector3 Offset;
     public float Accel;
@@ -114,11 +117,15 @@ public class carManager : MonoBehaviour
             player.SetActive(false);
             CarCam.gameObject.SetActive(true);
             player.transform.position = gameObject.transform.position + Offset;
+            if (playerFootstepAudioSource != null)
+                playerFootstepAudioSource.Pause();
         }
         else
         {
             player.SetActive(true);
             CarCam.gameObject.SetActive(false);
+            if (playerFootstepAudioSource != null)
+                playerFootstepAudioSource.UnPause();
         }
 
         if (fuelSlider != null)
