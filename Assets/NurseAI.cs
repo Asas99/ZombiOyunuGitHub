@@ -110,8 +110,12 @@ public class NurseAI : MonoBehaviour
 
             if (distanceToZombie < closestDistance && IsZombieVisible(zombieTransform))
             {
-                closestDistance = distanceToZombie;
-                closestZombie = zombieTransform;
+                if(zombie.GetComponent<ZombieManager>().Health > 0)
+                {
+                    closestDistance = distanceToZombie;
+                    closestZombie = zombieTransform;
+                }
+
             }
         }
 
