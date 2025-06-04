@@ -19,6 +19,9 @@ public class DoorPushSimple : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         originalRotation = doorTransform.localEulerAngles;
         characterStartPos = characterTransform.position;
         InvokeRepeating("StartPush", 1f, pushInterval);
