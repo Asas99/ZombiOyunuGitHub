@@ -20656,7 +20656,7 @@ MonoBehaviour:
   cinematicCanvas: {fileID: 1251208634}
   dialogueText: {fileID: 2058624383}
   promptText: {fileID: 2009175432}
-  blackScreen: {fileID: 0}
+  blackScreen: {fileID: 1993484618}
   spawnPoint: {fileID: 74583249}
   player: {fileID: 921485327}
   womanCharacter: {fileID: 2064750708}
