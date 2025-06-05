@@ -9,6 +9,7 @@ public class AmmoTextManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Text = GameObject.Find("mermi alýndý text").GetComponent<Text>();
         Text.color = new Color(1, 1, 1, 0);
     }
 
