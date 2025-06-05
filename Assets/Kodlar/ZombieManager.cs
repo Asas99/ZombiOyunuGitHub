@@ -20,6 +20,7 @@ public class ZombieManager : MonoBehaviour
     public float Health;
     [Header("Oyun objesini yok etme")]
     public float DestroyCounter;
+    public float HearDistance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -140,6 +141,14 @@ public class ZombieManager : MonoBehaviour
 
         if (Health > 0)
         {
+            if (!CanSeeTarget())
+            {
+                if(gameObject.GetComponent<ZombieManager>().HearDistance > Vector3.Distance(gameObject.transform.position, TargetObj.transform.position))
+                {
+                    transform.LookAt(Target);
+                    MoveTowardsPlayer();
+                }
+            }
             if (CanSeeTarget())
             {
                 if (gameObject.GetComponent<NavMeshAgent>().stoppingDistance < Vector3.Distance(gameObject.transform.position, TargetObj.transform.position))
