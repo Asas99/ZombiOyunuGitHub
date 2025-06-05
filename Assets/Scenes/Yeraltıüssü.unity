@@ -3168,6 +3168,9 @@ MonoBehaviour:
   targetTags:
   - Road
   - City
+  decalPrefabs: []
+  decalsPerObject: 1
+  maxRayHeight: 10
 --- !u!4 &268967739
 Transform:
   m_ObjectHideFlags: 0
@@ -10634,10 +10637,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2852486752996079512, guid: 87ccd0ded419a4b3aa25b672110f5cb7,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.022293465
+      objectReference: {fileID: 0}
     - target: {fileID: 7929443010630127849, guid: 87ccd0ded419a4b3aa25b672110f5cb7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.18
+      value: -2.32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -20682,7 +20690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fb7461ee55dce43ab935ee2ac1c2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questID: 13
+  questID: 14
   completeQuest: 1
 --- !u!1 &1313836372 stripped
 GameObject:
@@ -21198,8 +21206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fb7461ee55dce43ab935ee2ac1c2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questID: 15
-  completeQuest: 0
+  questID: 16
+  completeQuest: 1
 --- !u!65 &1372410537
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24528,7 +24536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fb7461ee55dce43ab935ee2ac1c2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questID: 14
+  questID: 15
   completeQuest: 1
 --- !u!65 &1703251197
 BoxCollider:
