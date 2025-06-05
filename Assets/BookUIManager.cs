@@ -2,19 +2,43 @@ using UnityEngine;
 
 public class BookUIManager : MonoBehaviour
 {
-    public GameObject infoPanel;
-    public AudioClip toggleSound;
+    public GameObject rulesPanel;
+    public GameObject taskPanel;
+
+    public AudioClip uiSound;
     public AudioSource audioSource;
 
-    public void ShowInfo()
+    void Start()
     {
-        infoPanel.SetActive(true);
-        audioSource.Play();
+        audioSource = GetComponent<AudioSource>();
+        CloseAllPanels();
     }
 
-    public void HideInfo()
+    public void ShowRulesPanel()
     {
-        infoPanel.SetActive(false);
-        audioSource.Play();
+        CloseAllPanels();
+        rulesPanel.SetActive(true);
+        PlayUISound();
+    }
+
+    public void ShowTaskPanel()
+    {
+        CloseAllPanels();
+        taskPanel.SetActive(true);
+        PlayUISound();
+    }
+
+    public void CloseAllPanels()
+    {
+        rulesPanel.SetActive(false);
+        taskPanel.SetActive(false);
+    }
+
+    private void PlayUISound()
+    {
+        if (uiSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(uiSound);
+        }
     }
 }
