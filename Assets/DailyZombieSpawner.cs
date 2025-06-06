@@ -15,10 +15,19 @@ public class DailyZombieSpawner : MonoBehaviour
 
     private Transform playerTransform;
     private List<GameObject> spawnedZombies = new List<GameObject>();
+    private bool firstSpawnDone = false;
 
     void OnEnable()
     {
         DayNightCycle.OnNewDay += SpawnForNewDay;
+
+        // Baþlangýçta DayNightCycle varsa mevcut günle spawn et
+        DayNightCycle dayNightCycle = Object.FindFirstObjectByType<DayNightCycle>();
+        if (dayNightCycle != null && !firstSpawnDone)
+        {
+            SpawnForNewDay(dayNightCycle.GetCurrentDay());
+            firstSpawnDone = true;
+        }
     }
 
     void OnDisable()
