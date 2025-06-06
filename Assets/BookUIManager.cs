@@ -19,6 +19,7 @@ public class BookUIManager : MonoBehaviour
         CloseAllPanels();
         rulesPanel.SetActive(true);
         PlayUISound();
+        PauseGame();
     }
 
     public void ShowTaskPanel()
@@ -26,12 +27,14 @@ public class BookUIManager : MonoBehaviour
         CloseAllPanels();
         taskPanel.SetActive(true);
         PlayUISound();
+        PauseGame();
     }
 
     public void CloseAllPanels()
     {
         rulesPanel.SetActive(false);
         taskPanel.SetActive(false);
+        ResumeGame();
     }
 
     private void PlayUISound()
@@ -40,5 +43,15 @@ public class BookUIManager : MonoBehaviour
         {
             audioSource.PlayOneShot(uiSound);
         }
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 }
