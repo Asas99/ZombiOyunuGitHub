@@ -212,8 +212,9 @@ MonoBehaviour:
   viewRadius: 18.75
   viewAngle: 142
   zombieanimator: {fileID: 1852779207103316704}
-  Health: 1
+  Health: 10
   DestroyCounter: 5
+  HearDistance: 0
 --- !u!114 &1852779207103316704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3c9883b805e74448e650a4e8118813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 10
+  detectionRange: 15
   zombiSesi: {fileID: 8300000, guid: 23fd50ef932646645914905b55dd4856, type: 3}
 --- !u!1 &6323690192932399885
 GameObject:
